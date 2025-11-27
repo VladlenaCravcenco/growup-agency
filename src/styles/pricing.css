@@ -15,7 +15,8 @@
 }
 
 .pricing-tabs {
-  display: inline-flex;
+    display: block;
+  width: max-content;
   border-radius: 999px;
   background: #ffffff;
   box-shadow: var(--shadow-soft);

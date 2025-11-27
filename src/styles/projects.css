@@ -16,7 +16,8 @@
 }
 
 .projects-tabs {
-  display: inline-flex;
+  display: block;
+  width: max-content;
   gap: 4px;
   padding: 4px;
   margin: 0 auto 32px;
