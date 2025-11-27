@@ -9,7 +9,7 @@ export const Header = component$(() => {
         <nav class="header__nav">
           <a href="/pricing" class="header__link">Цены</a>
           <a href="/#consult" class="header__link">Консультация</a>
-          <a href="/portfolio" class="header__link">Портфолио</a>
+          <a href="/projects" class="header__link">Портфолио</a>
           <a href="/#contacts" class="header__link">Контакты</a>
         </nav>
 
