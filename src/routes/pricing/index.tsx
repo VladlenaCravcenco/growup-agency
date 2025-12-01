@@ -397,6 +397,7 @@ export default component$(() => {
                 type="text"
                 name="name"
                 placeholder="Ваше имя"
+                required
               />
               <input
                 class="cta__input"
