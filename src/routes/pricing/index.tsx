@@ -1,5 +1,6 @@
 import { component$, useSignal, QRL } from '@builder.io/qwik';
-
+import { PricingFormat } from '../../components/sections/pricing/PricingFormat';
+import { GlobalDiscount } from '~/components/discount/GlobalDiscount';
 
 import '../../styles/pricing.css';
 
@@ -12,7 +13,7 @@ type Tier = {
   highlighted?: boolean;
 };
 
-type CategoryId = 'ads' | 'smm' | 'branding';
+type CategoryId = 'ads' | 'smm' | 'branding' | 'web';
 
 type Category = {
   id: CategoryId;
@@ -184,12 +185,60 @@ const PRICING: Category[] = [
       },
     ],
   },
+  {
+    id: 'web',
+    title: 'WEB developing',
+    subtitle: 'выбери свой план',
+    heading: 'WEB',
+    tiers: [
+      {
+        id: 'web-1',
+        name: 'Тариф 1',
+        price: '400€/мес',
+        oldPrice: '400€/мес',
+        features: [
+          'Разработка логотипа',
+          'Подбор фирменных шрифтов',
+          'Подбор фирменных цветов',
+        ],
+      },
+      {
+        id: 'web-2',
+        name: 'Тариф 2',
+        price: '1050€/мес',
+        oldPrice: '1050€/мес',
+        highlighted: true,
+        features: [
+          'Разработка концепции бренда',
+          'Разработка логотипа',
+          'Разработка брендбука',
+          'Рекомендации по интеграции логотипа в дизайн',
+          'Подбор шрифтов и цветов',
+          'Визуализации на носителях (визитки, форма и т.д.)',
+        ],
+      },
+      {
+        id: 'web-3',
+        name: 'Тариф 3',
+        price: '1200€/мес',
+        oldPrice: '1200€/мес',
+        features: [
+          'Разработка концепции бренда',
+          'Полный брендбук',
+          'Рекомендации по интеграции во все каналы',
+          'Подбор шрифтов и цветов',
+          'Визуализации на всех носителях',
+          'Дизайн под печать',
+        ],
+      },
+    ],
+  },
 ];
 
 export default component$(() => {
   const activeCategory = useSignal<CategoryId>('ads');
   const showTypeModal = useSignal(false);
-  const showDiscountModal = useSignal(false);
+
 
   const currentCategory = () =>
     PRICING.find((c) => c.id === activeCategory.value) ?? PRICING[0];
@@ -261,7 +310,10 @@ export default component$(() => {
                     class="plan-card__btn-gift"
                     type="button"
                     aria-label="Скидка 50% на первый заказ"
-                    onClick$={() => (showDiscountModal.value = true)}
+                    onClick$={() => {
+                      if (typeof window === 'undefined') return;
+                      (window as any).__growupOpenDiscount?.();
+                    }}
                   >
                     🎁
                   </button>
@@ -271,6 +323,8 @@ export default component$(() => {
           </div>
         </div>
       </section>
+
+      <PricingFormat />
 
       {/* FAQ + CTA повторно, простая версия */}
       <section class="faq faq--secondary">
@@ -357,10 +411,9 @@ export default component$(() => {
       {/* Модалка: “Выбери свой тип продвижения” */}
       {showTypeModal.value && <TypeModal onClose$={() => (showTypeModal.value = false)} />}
 
-      {/* Модалка: “50% для твоего первого заказа” */}
-      {showDiscountModal.value && (
-        <DiscountModal onClose$={() => (showDiscountModal.value = false)} />
-      )}
+
+
+      <GlobalDiscount />
     </main>
   );
 });

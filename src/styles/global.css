@@ -14,7 +14,7 @@
   --radius-sm: 12px;
   --shadow-soft: 0 20px 40px rgba(6, 17, 55, 0.06);
   --shadow-card: 0 18px 35px rgba(0, 0, 0, 0.06);
-  --container-width: 1180px;
+  --container-width: 1400px;
 }
 
 /* Можно подключить шрифт через <link> в index.html / root.tsx */
@@ -68,6 +68,7 @@ button {
 .services__head,
 .services__grid,
 .clients__inner,
+.home-container,
 .process__inner,
 .faq__inner,
 .cta__inner {
@@ -161,7 +162,7 @@ button {
 .section-subtitle {
   font-size: 16px;
   color: var(--color-text-muted);
-  max-width: 520px;
+ 
 }
 
 .section-subtitle--center {

@@ -140,6 +140,94 @@
   transform: translateY(-1px);
 }
 
+/* ======== FORMAT SECTION ======== */
+
+.pricing-format {
+  padding: 80px 0 72px;
+}
+
+.pricing-format__inner {
+  max-width: var(--container-width, 1200px);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.pricing-format__header {
+  max-width: 640px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.pricing-format__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/* карточка шага */
+
+.format-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 22px 20px 22px;
+  box-shadow: var(--shadow-soft, 0 18px 45px rgba(15, 23, 42, 0.06));
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.format-card__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: #000;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.format-card__title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.format-card__text {
+  font-size: 14px;
+  color: var(--color-text-muted, #666);
+}
+
+.format-card__list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 14px;
+  color: var(--color-text-muted, #555);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* адаптив */
+
+@media (max-width: 1024px) {
+  .pricing-format__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-format {
+    padding: 56px 0 56px;
+  }
+
+  .pricing-format__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ====== FAQ на странице цен ====== */
 
 .faq--secondary {

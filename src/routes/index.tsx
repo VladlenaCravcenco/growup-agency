@@ -3,6 +3,7 @@ import { HomeHero } from '../components/sections/home/HomeHero';
 import { HomeStats } from '../components/sections/home/HomeStats';
 import { HomeServices } from '../components/sections/home/HomeServices';
 import { HomeClients } from '../components/sections/home/HomeClients';
+import { HomeTeam } from '../components/sections/home/HomeTeam';
 import { HomeProcess } from '../components/sections/home/HomeProcess';
 import { HomeFAQ } from '../components/sections/home/HomeFAQ';
 import { HomeCTA } from '../components/sections/home/HomeCTA';
@@ -15,6 +16,7 @@ export default component$(() => {
       <HomeStats />
       <HomeServices />
       <HomeClients />
+      <HomeTeam />
       <HomeProcess />
       <HomeFAQ />
       <HomeCTA />

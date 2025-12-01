@@ -26,10 +26,20 @@ export const HomeServices = component$(() => {
       bullets: [
         'Айдентика и соцсети',
         'Креативы для рекламы',
+        'Брендбуки и Логобуки',
+      ],
+    },
+    {
+      tag: 'web',
+      title: 'Web development',
+      bullets: [
+        'корпоративный сайт',
+        'seo',
         'Лендинги и посадочные страницы',
       ],
     },
   ];
+
 
   return (
     <section class="services" id="services">
@@ -52,7 +62,7 @@ export const HomeServices = component$(() => {
                 </li>
               ))}
             </ul>
-            <a href="#pricing" class="services__link">
+            <a href="/pricing#format" class="services__link">
               Подробнее о формате работы
             </a>
           </article>
