@@ -2,16 +2,83 @@ import {
   component$,
   useSignal,
   useVisibleTask$,
-  $
+  $,
 } from '@builder.io/qwik';
 
 const WEBHOOK_URL =
   'https://hook.eu1.make.com/2e67noqsch8igp0kb6jsna02fnlpxf97';
 
+/**
+ * Маски телефонов по коду страны
+ */
+const PHONE_MASKS: Record<string, string> = {
+  '+373': '+373 (XX) XXX-XXX',    // Молдова
+  '+40': '+40 (XXX) XXX-XXX',     // Румыния
+  '+380': '+380 (XX) XXX-XX-XX',  // Украина
+};
+
+/**
+ * Накладываем маску на цифры (без кода страны)
+ */
+function applyMaskToLocalDigits(localDigits: string, mask: string): string {
+  let i = 0;
+  let res = '';
+
+  for (const ch of mask) {
+    if (ch === 'X') {
+      res += localDigits[i] ?? '';
+      i++;
+    } else {
+      res += ch;
+    }
+  }
+
+  return res;
+}
+
+/**
+ * Подготовка телефона:
+ * - чистим ввод
+ * - определяем код страны
+ * - накладываем нужную маску
+ * Возвращаем:
+ *   view — то, что показываем в инпуте
+ *   raw  — только цифры (для отправки в Notion)
+ */
+function formatPhone(value: string): { view: string; raw: string } {
+  // оставляем только цифры и плюс
+  let v = value.replace(/[^\d+]/g, '');
+
+  // если начали без "+", добавим
+  if (v && v[0] !== '+') v = '+' + v;
+
+  // только цифры (без плюса)
+  const digitsOnly = v.replace(/\D/g, '');
+
+  // определяем код страны
+  let code = '';
+  if (digitsOnly.startsWith('373')) code = '+373';
+  else if (digitsOnly.startsWith('40')) code = '+40';
+  else if (digitsOnly.startsWith('380')) code = '+380';
+
+  let view = v;
+
+  if (code) {
+    const mask = PHONE_MASKS[code];
+    const codeDigitsLen = code.replace('+', '').length;
+    const localDigits = digitsOnly.slice(codeDigitsLen); // цифры после кода
+    view = applyMaskToLocalDigits(localDigits, mask);
+  }
+
+  return { view, raw: digitsOnly };
+}
+
 export const GlobalDiscount = component$(() => {
   const show = useSignal(false);
   const sending = useSignal(false);
   const sent = useSignal(false);
+  const phoneRaw = useSignal('');   // только цифры
+  const phoneView = useSignal('');  // отформатированная строка
 
   // ОТКРЫТЬ попап
   const open$ = $(() => {
@@ -29,7 +96,7 @@ export const GlobalDiscount = component$(() => {
     }
   });
 
-  // Таймер + подарочек
+  // Таймер + реакция на "подарочек"
   useVisibleTask$(() => {
     if (typeof window === 'undefined') return;
 
@@ -39,7 +106,7 @@ export const GlobalDiscount = component$(() => {
     if (!closed) {
       timerId = window.setTimeout(() => {
         open$();
-      }, 2000); // потом можно вернуть 15_000
+      }, 15000); // можно временно ставить 2000 для теста
     }
 
     const handler = () => open$();
@@ -59,8 +126,10 @@ export const GlobalDiscount = component$(() => {
 
     const formData = new FormData(form);
     const name = String(formData.get('name') ?? '').trim();
-    const phone = String(formData.get('phone') ?? '').trim();
     const service = String(formData.get('service') ?? '').trim();
+
+    // Берём именно "сырые" цифры, а не маску
+    const phone = phoneRaw.value.trim();
 
     if (!name || !phone) {
       sending.value = false;
@@ -72,26 +141,42 @@ export const GlobalDiscount = component$(() => {
       page = window.location.pathname;
     }
 
-    await fetch(WEBHOOK_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name,
-        phone,
-        service,
-        source: 'discount_popup',
-        discount: '50%',
-        page,
-        comment: 'Скидка 50% на первый заказ',
-      }),
-    }).catch(() => {});
+    try {
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          phone,
+          service,
+          source: 'discount_popup',
+          discount: '50%',
+          page,
+          comment: 'Скидка 50% на первый заказ',
+        }),
+      });
+      sent.value = true;
+      form.reset();
+      phoneView.value = '';
+      phoneRaw.value = '';
+      close$();
+    } catch (e) {
+      console.error('Discount form send error', e);
+    } finally {
+      sending.value = false;
+    }
+  });
 
-    sending.value = false;
-    sent.value = true;
-    form.reset();
-    close$();
+  // Обработчик ввода телефона
+  const handlePhoneInput$ = $((event: Event) => {
+    const input = event.target as HTMLInputElement;
+    const { view, raw } = formatPhone(input.value);
+
+    input.value = view;
+    phoneView.value = view;
+    phoneRaw.value = raw;
   });
 
   return (
@@ -114,10 +199,7 @@ export const GlobalDiscount = component$(() => {
             >
               <label class="modal-form__field">
                 <span class="modal-form__label">Услуга</span>
-                <select
-                  class="modal-form__select"
-                  name="service"
-                >
+                <select class="modal-form__select" name="service">
                   <option value="Paid Ads">Платная реклама</option>
                   <option value="SMM">Social Media Marketing</option>
                   <option value="Branding">Branding</option>
@@ -132,6 +214,7 @@ export const GlobalDiscount = component$(() => {
                   type="text"
                   name="name"
                   placeholder="Введите имя"
+                  required
                 />
               </label>
 
@@ -141,7 +224,9 @@ export const GlobalDiscount = component$(() => {
                   class="modal-form__input"
                   type="tel"
                   name="phone"
-                  placeholder="+373 (__) ___-____"
+                  placeholder="+373 (__) ___-___"
+                  value={phoneView.value}
+                  onInput$={handlePhoneInput$}
                 />
               </label>
 
