@@ -10,17 +10,17 @@ const TEAM: TeamMember[] = [
   {
     name: 'Aliona Rusu',
     role: 'Founder & Performance Lead',
-    photo: 'src/media/team/aliona.jpg',
+    photo: '/media/team/aliona.jpg',
   },
   {
     name: 'Vladlena Cravcenco',
     role: 'Web & Product Designer',
-    photo: 'src/media/team/vladlena.jpg',
+    photo: '/media/team/vladlena.jpg',
   },
   {
     name: 'Victoria',
     role: 'SMM / Content',
-    photo: 'src/media/team/victoria.jpg',
+    photo: '/media/team/victoria.jpg',
   },
   // добавишь остальных, как нужно
 ];
