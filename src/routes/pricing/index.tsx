@@ -311,8 +311,14 @@ export default component$(() => {
                     type="button"
                     aria-label="Скидка 50% на первый заказ"
                     onClick$={() => {
-                      if (typeof window === 'undefined') return;
-                      (window as any).__growupOpenDiscount?.();
+                      if (typeof window !== 'undefined') {
+                        window.dispatchEvent(
+                          new CustomEvent('growup-open-discount', {
+                            detail: { source: 'popup_gift' },
+                          }),
+                        );
+                        window.localStorage.removeItem('growup_discount_closed');
+                      }
                     }}
                   >
                     🎁
