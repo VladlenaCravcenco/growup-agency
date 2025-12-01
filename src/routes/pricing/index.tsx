@@ -245,6 +245,8 @@ export default component$(() => {
 
   return (
     <main class="page page--pricing">
+      <PricingFormat />
+
       <section class="pricing">
         <div class="pricing__inner">
           {/* Табы */}
@@ -330,7 +332,7 @@ export default component$(() => {
         </div>
       </section>
 
-      <PricingFormat />
+
 
       {/* FAQ + CTA повторно, простая версия */}
       <section class="faq faq--secondary">
