@@ -463,6 +463,7 @@ export const TypeModal = component$<ModalProps>(({ onClose$ }) => {
               type="text"
               name="name"
               placeholder="Введите имя"
+              required
             />
           </label>
 
@@ -505,6 +506,7 @@ export const DiscountModal = component$<ModalProps>(({ onClose$ }) => {
               type="text"
               name="name"
               placeholder="Введите имя"
+              required
             />
           </label>
 
