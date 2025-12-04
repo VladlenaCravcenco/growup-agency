@@ -1,6 +1,6 @@
 import { component$, useSignal, QRL } from '@builder.io/qwik';
 import { PricingFormat } from '../../components/sections/pricing/PricingFormat';
-import { GlobalDiscount } from '~/components/discount/GlobalDiscount';
+
 
 import '../../styles/pricing.css';
 
@@ -422,7 +422,7 @@ export default component$(() => {
 
 
 
-      <GlobalDiscount />
+    
     </main>
   );
 });
@@ -486,53 +486,3 @@ export const TypeModal = component$<ModalProps>(({ onClose$ }) => {
   );
 });
 
-export const DiscountModal = component$<ModalProps>(({ onClose$ }) => {
-  return (
-    <div class="modal">
-      <div class="modal__backdrop" onClick$={onClose$} />
-      <div class="modal__card modal__card--narrow">
-        <button class="modal__close" type="button" onClick$={onClose$}>
-          ✕
-        </button>
-
-        <div class="discount-headline">50%</div>
-        <p class="discount-subtitle">Для твоего первого заказа!</p>
-
-        <form class="modal-form" preventdefault:submit>
-          <label class="modal-form__field">
-            <span class="modal-form__label">Ваше имя</span>
-            <input
-              class="modal-form__input"
-              type="text"
-              name="name"
-              placeholder="Введите имя"
-              required
-            />
-          </label>
-
-          <label class="modal-form__field">
-            <span class="modal-form__label">Телефон</span>
-            <input
-              class="modal-form__input"
-              type="tel"
-              name="phone"
-              placeholder="+373 (__) ___-____"
-            />
-          </label>
-
-          <button class="btn btn--primary modal-form__submit" type="submit">
-            Забрать скидку
-          </button>
-        </form>
-
-        <button
-          type="button"
-          class="discount-link"
-          onClick$={onClose$}
-        >
-          мне не нужна скидка
-        </button>
-      </div>
-    </div>
-  );
-});
