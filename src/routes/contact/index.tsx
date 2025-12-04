@@ -70,7 +70,7 @@ export default component$(() => {
 
       sent.value = true;
       form.reset();
-    } catch (e) {
+    } catch {
       error.value = 'Что-то пошло не так при отправке. Попробуйте ещё раз.';
     } finally {
       sending.value = false;
@@ -216,7 +216,7 @@ export default component$(() => {
 
               {/* Услуга */}
               <div class="contact-form__field">
-                <label class="contact-form__label" htmlFor="service">
+                <label class="contact-form__label" for="service">
                   Какой формат работы вас интересует?*
                 </label>
                 <select
@@ -239,7 +239,7 @@ export default component$(() => {
 
               {/* Бюджет */}
               <div class="contact-form__field">
-                <label class="contact-form__label" htmlFor="budget">
+                <label class="contact-form__label" for="budget">
                   Примерный бюджет в месяц / на проект*
                 </label>
                 <select
@@ -262,7 +262,7 @@ export default component$(() => {
 
               {/* Цель */}
               <div class="contact-form__field">
-                <label class="contact-form__label" htmlFor="goal">
+                <label class="contact-form__label" for="goal">
                   Какой результат хотите получить?*
                 </label>
                 <textarea
@@ -277,7 +277,7 @@ export default component$(() => {
 
               {/* Сайт (опционально) */}
               <div class="contact-form__field contact-form__field--half">
-                <label class="contact-form__label" htmlFor="website">
+                <label class="contact-form__label" for="website">
                   Ваш сайт (если есть)
                 </label>
                 <input
@@ -291,7 +291,7 @@ export default component$(() => {
 
               {/* Когда стартовать (опционально) */}
               <div class="contact-form__field contact-form__field--half">
-                <label class="contact-form__label" htmlFor="startWhen">
+                <label class="contact-form__label" for="startWhen">
                   Когда планируете старт?
                 </label>
                 <select
@@ -311,7 +311,7 @@ export default component$(() => {
 
               {/* Комментарий (опционально) */}
               <div class="contact-form__field">
-                <label class="contact-form__label" htmlFor="comment">
+                <label class="contact-form__label" for="comment">
                   Комментарий (по желанию)
                 </label>
                 <textarea
