@@ -19,6 +19,7 @@ export default component$(() => {
     const formData = new FormData(form);
 
     const name = String(formData.get('name') ?? '').trim();
+    const phone = String(formData.get('phone') ?? '').trim();    
     const email = String(formData.get('email') ?? '').trim();
     const niche = String(formData.get('niche') ?? '').trim();
     const service = String(formData.get('service') ?? '').trim();
@@ -30,7 +31,7 @@ export default component$(() => {
     const comment = String(formData.get('comment') ?? '').trim();
 
     // простая валидация обязательных
-    if (!name || !email || !niche || !service || !budget || !goal) {
+    if (!name || !phone || !email || !niche || !service || !budget || !goal) {
       error.value = 'Пожалуйста, заполните все обязательные поля.';
       sending.value = false;
       return;
@@ -53,6 +54,7 @@ export default component$(() => {
 
           // базовые поля
           name,
+          phone,
           email,
           niche,
           service,
@@ -167,6 +169,21 @@ export default component$(() => {
                 />
               </div>
 
+              {/* телефон */}
+              <div class="contact-form__field">
+                <label class="contact-form__label" for="phone">
+                  Ваш номер телефона*
+                </label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  required
+                  class="contact-form__input"
+                  placeholder="+373(00)000-000"
+                />
+              </div>
+
               {/* Email */}
               <div class="contact-form__field">
                 <label class="contact-form__label" for="email">
@@ -266,7 +283,7 @@ export default component$(() => {
                 <input
                   id="website"
                   name="website"
-                  type="url"
+                  type="text"
                   class="contact-form__input"
                   placeholder="https://"
                 />
