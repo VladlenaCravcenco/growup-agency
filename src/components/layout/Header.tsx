@@ -11,7 +11,7 @@ export const Header = component$(() => {
           <a href="/#consult" class="header__link">Консультация</a>
           <a href="/projects" class="header__link">Портфолио</a>
           <a href="/blog" class="header__link">Блог</a>
-          <a href="/#contacts" class="header__link">Контакты</a>
+          <a href="/contact" class="header__link">Контакты</a>
         </nav>
 
         <div class="header__lang">
