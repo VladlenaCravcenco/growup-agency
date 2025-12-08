@@ -28,6 +28,60 @@
   align-items: center;
 }
 
+/* общий контейнер для пункта меню */
+.header__nav-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* выпадающее меню услуг */
+.header__dropdown {
+  position: absolute;
+  top: 120%;
+  left: 0;
+  min-width: 220px;
+  padding: 10px 0;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+  z-index: 100;
+}
+
+/* ссылки внутри дропдауна */
+.header__dropdown-link {
+  display: block;
+  padding: 8px 16px;
+  font-size: 14px;
+  text-decoration: none;
+  color: #1e2a3a;
+  white-space: nowrap;
+}
+
+.header__dropdown-link:hover {
+  background: #f3f3f8;
+}
+
+/* показываем дропдаун только при hover на пункт "Услуги" */
+.header__nav-item--services:hover .header__dropdown {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* на мобильных hover всё равно не работает, поэтому просто скрываем дропдаун */
+@media (max-width: 768px) {
+  .header__nav-item--services .header__dropdown {
+    display: none;
+  }
+}
+
 .header__link {
   text-decoration: none;
   color: #1e2a3a;
@@ -69,11 +123,11 @@
 .lang__item:hover {
   background: #f3f3f3;
 }
-.header__burger{
-    display: none;
+.header__burger {
+  display: none;
 }
-.header__nav-mobile{
-    display: none;
+.header__nav-mobile {
+  display: none;
 }
 
 /* MOBILE */

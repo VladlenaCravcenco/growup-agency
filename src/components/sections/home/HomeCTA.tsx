@@ -59,7 +59,7 @@ export const HomeCTA = component$(() => {
       form.phone = '';
       form.email = '';
       target.reset();
-    } catch (e) {
+    } catch {
       form.error = 'Сервер недоступен. Попробуйте ещё раз позже.';
       form.sent = false;
     }

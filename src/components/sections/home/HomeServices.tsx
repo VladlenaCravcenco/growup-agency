@@ -5,6 +5,7 @@ export const HomeServices = component$(() => {
     {
       tag: 'Performance',
       title: 'Платная реклама',
+      link: '/services/performance-ads',
       bullets: [
         'Стратегия и медиаплан',
         'Запуск и оптимизация кампаний',
@@ -14,6 +15,7 @@ export const HomeServices = component$(() => {
     {
       tag: 'Social Media',
       title: 'SMM',
+      link: '/services/social-media-marketing',
       bullets: [
         'Контент-стратегия и визуал',
         'Ведение аккаунтов и сторис',
@@ -23,6 +25,7 @@ export const HomeServices = component$(() => {
     {
       tag: 'Branding & Creative',
       title: 'Дизайн',
+      link: '/services/design',
       bullets: [
         'Айдентика и соцсети',
         'Креативы для рекламы',
@@ -32,6 +35,7 @@ export const HomeServices = component$(() => {
     {
       tag: 'web',
       title: 'Web development',
+      link: '/services/web',
       bullets: [
         'корпоративный сайт',
         'seo',
@@ -62,7 +66,7 @@ export const HomeServices = component$(() => {
                 </li>
               ))}
             </ul>
-            <a href="/pricing#format" class="services__link">
+            <a href={service.link} class="services__link">
               Подробнее о формате работы
             </a>
           </article>

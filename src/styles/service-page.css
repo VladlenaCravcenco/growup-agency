@@ -1,0 +1,486 @@
+/* Общий фон и текст */
+.service-page {
+  background: var(--color-bg); /* мягкий теплый бежевый фон как на главной */
+  color: #111111;
+  max-width: 1400px;
+  margin: auto;
+}
+
+/* HERO */
+.service-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 64px;
+  padding: 120px 7vw 80px;
+  align-items: center;
+}
+
+/* светлый "НЛО" справа, как на рефе */
+.service-hero::after {
+  content: "";
+  position: absolute;
+  right: 7vw;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 460px;
+  height: 280px;
+  border-radius: 999px;
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      #ffffff 0%,
+      #ffffff 45%,
+      transparent 70%
+    ),
+    radial-gradient(
+      circle at 50% 80%,
+      rgba(154, 191, 255, 0.6) 0%,
+      transparent 70%
+    );
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* левая колонка с текстом */
+.service-hero__badge {
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #4b5563;
+  margin-bottom: 12px;
+}
+
+.service-hero__title {
+  font-size: clamp(40px, 4vw, 56px);
+  line-height: 1.1;
+  margin: 0 0 16px;
+  font-weight: 700;
+}
+
+.service-hero__title span {
+  color: inherit; /* тут без фиолетового акцента */
+}
+
+.service-hero__subtitle {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #2563eb; /* синий акцент ссылки/подзаголовка */
+}
+
+.service-hero__description {
+  max-width: 520px;
+  color: #4b5563;
+  margin-bottom: 32px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.service-hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* КНОПКИ в стиле рефа */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+/* чёрная основная, с мягкой тенью */
+.btn--primary {
+  background: #111111;
+  color: #ffffff;
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.25);
+}
+
+.btn--primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 22px 40px rgba(0, 0, 0, 0.28);
+}
+
+/* белая вторичная, как на скрине "Посмотреть кейсы" */
+.btn--ghost {
+  background: #ffffff;
+  color: #111111;
+  border-color: #e5e7eb;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+}
+
+.btn--ghost:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+/* если используешь hero картинку – пусть не перекрывается НЛО */
+.service-hero__image {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+}
+
+.service-hero__image img {
+  max-width: 420px;
+  width: 100%;
+  height: auto;
+}
+
+/* PROJECTS – светлые карточки, как плитки на светлом фоне */
+
+.service-projects {
+  padding: 32px 0 80px;
+  overflow: hidden;
+}
+
+.service-section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 7vw 24px;
+}
+
+.service-section-label {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #9ca3af;
+  margin-bottom: 6px;
+}
+
+.service-section-title {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.service-section-title span {
+  color: #2563eb;
+}
+
+.service-section-link {
+  font-size: 14px;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.service-section-link:hover {
+  text-decoration: underline;
+}
+
+.service-projects__marquee {
+  position: relative;
+  padding-left: 7vw;
+}
+
+.service-projects__track {
+  display: flex;
+  gap: 24px;
+  animation: projects-marquee 30s linear infinite;
+}
+
+.service-project-card {
+  min-width: 280px;
+  max-width: 280px;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 16px 18px 20px;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+}
+
+.service-project-card img {
+  width: 100%;
+  border-radius: 18px;
+  margin-bottom: 12px;
+}
+
+.service-project-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.service-project-card p {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.service-project-card__client {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+@keyframes projects-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* PROCESS – без тёмного градиента, просто светлый блок с таймлайном */
+
+.service-process {
+  padding: 80px 7vw;
+  background: #f6f3ef;
+}
+
+.service-process__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.service-process__timeline {
+  margin-top: 32px;
+  border-left: 1px solid #e5e7eb;
+}
+
+.service-process-step {
+  display: flex;
+  gap: 24px;
+  padding: 24px 0 24px 24px;
+  position: relative;
+}
+
+.service-process-step::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 24px;
+  width: 1px;
+  height: calc(100% - 24px);
+  background: linear-gradient(to bottom, #e5e7eb, transparent);
+}
+
+.service-process-step__indicator {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b7280;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+.service-process-step__content h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.service-process-step__content p {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* OFFERS – светлый стек без дерганий */
+
+.service-offers {
+  padding: 120px 7vw 260px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  /* можно оставить перспективу, но она уже почти не нужна */
+  perspective: 1200px;
+  perspective-origin: center top;
+}
+
+/* базовая карточка */
+.service-offer-card {
+  position: sticky;
+  top: 22vh; /* остановка чуть выше центра экрана */
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 40px;
+  padding: 34px 38px;
+
+  background: #fff;
+  border-radius: 32px;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.1);
+
+  margin-top: 60px;
+  margin-bottom: 60px;
+
+  /* НИКАКОГО scale/translateZ по умолчанию */
+  transform: translateY(0);
+  transition:
+    transform 0.35s ease-out,
+    box-shadow 0.35s ease-out;
+}
+
+
+
+/* Активная карточка – просто чуть "выше" и с более сильной тенью */
+.service-offer-card--current {
+  transform: translateY(0);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.18);
+}
+
+/* Уже прошедшие – слегка приподнимаются и "отодвигаются" вверх */
+.service-offer-card--stacked {
+  transform: translateY(-18px); /* видно край сверху */
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* последняя — без лишнего отступа снизу */
+.service-offer-card:last-child {
+  margin-bottom: 0;
+}
+
+/* ---- внутренние стили оставляем как есть ---- */
+
+.service-offer-card__text .service-section-label {
+  color: #818cf8;
+}
+
+.service-offer-card__subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 8px 0 16px;
+}
+
+.service-offer-card ul {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+}
+
+.service-offer-card li {
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.service-offer-card__media {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.service-offer-card__media img {
+  max-width: 360px;
+  width: 100%;
+  border-radius: 24px;
+}
+
+/* FAQ – светлый блок с аккордеоном */
+
+.service-faq {
+  padding: 80px 7vw 100px;
+}
+
+.service-faq__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 48px;
+  align-items: flex-start;
+}
+
+.service-faq__intro .service-section-label {
+  color: #9ca3af;
+}
+
+.service-faq__intro .service-section-title {
+  font-size: 26px;
+}
+
+.service-faq__list {
+  background: #ffffff;
+  border-radius: 28px;
+  box-shadow: 0 24px 50px rgba(15, 23, 42, 0.09);
+  padding: 24px 28px;
+}
+
+.faq-item {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 14px 0;
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item p {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* CTA БРИФ – лавандовый градиент как на новом сайте */
+
+.service-brief-cta {
+  padding: 60px 7vw 100px;
+}
+
+.service-brief-cta__inner {
+  background: linear-gradient(90deg, #b9a5ff, #9ec5ff);
+  border-radius: 40px;
+  padding: 32px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #111111;
+}
+
+.service-brief-cta__inner h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.service-brief-cta__inner p {
+  font-size: 14px;
+  color: #1f2933;
+  max-width: 420px;
+}
+
+.btn--light {
+  background: #ffffff;
+  color: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.16);
+}
+
+.btn--light:hover {
+  background: #f9fafb;
+}

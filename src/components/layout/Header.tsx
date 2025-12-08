@@ -18,6 +18,30 @@ export const Header = component$(() => {
 
         {/* DESKTOP NAVIGATION */}
         <nav class="header__nav header__nav--desktop">
+          <div class="header__nav-item header__nav-item--services">
+            {/* КЛИК → скролл к секции #services на главной */}
+            <a href="/#services" class="header__link">
+              Услуги
+            </a>
+
+            {/* HOVER → выпадающий список отдельных страниц услуг */}
+            <div class="header__dropdown">
+              <a href="/services/performance-ads" class="header__dropdown-link">
+                Платная реклама
+              </a>
+              <a href="/services/social-media-marketing" class="header__dropdown-link">
+                SMM / соцсети
+              </a>
+              <a href="/services/design" class="header__dropdown-link">
+                Дизайн и креатив
+              </a>
+              <a href="/services/web" class="header__dropdown-link">
+                Web-разработка
+              </a>
+            </div>
+          </div>
+
+          {/* Остальные пункты как были */}
           <a href="/pricing" class="header__link">Цены</a>
           <a href="/#consult" class="header__link">Консультация</a>
           <a href="/projects" class="header__link">Портфолио</a>
@@ -54,14 +78,38 @@ export const Header = component$(() => {
 
       {/* MOBILE MENU */}
       <nav class={`header__nav-mobile ${isMenuOpen.value ? 'header__nav-mobile--open' : ''}`}>
-        
+
         <button class="header__nav-mobile-close" onClick$={closeMenu$}>✕</button>
 
-        <a href="/pricing" class="header__mobile-link" onClick$={closeMenu$}>Цены</a>
-        <a href="/#consult" class="header__mobile-link" onClick$={closeMenu$}>Консультация</a>
-        <a href="/projects" class="header__mobile-link" onClick$={closeMenu$}>Портфолио</a>
-        <a href="/blog" class="header__mobile-link" onClick$={closeMenu$}>Блог</a>
-        <a href="/contact" class="header__mobile-link" onClick$={closeMenu$}>Контакты</a>
+        <div class="header__nav-item header__nav-item--services">
+          {/* КЛИК → скролл к секции #services на главной */}
+          <a href="/#services" class="header__link">
+            Услуги
+          </a>
+
+          {/* HOVER → выпадающий список отдельных страниц услуг */}
+          <div class="header__dropdown">
+            <a href="/services/performance" class="header__dropdown-link">
+              Платная реклама
+            </a>
+            <a href="/services/social-media-marketing" class="header__dropdown-link">
+              SMM / соцсети
+            </a>
+            <a href="/services/design" class="header__dropdown-link">
+              Дизайн и креатив
+            </a>
+            <a href="/services/web" class="header__dropdown-link">
+              Web-разработка
+            </a>
+          </div>
+        </div>
+
+        {/* Остальные пункты как были */}
+        <a href="/pricing" class="header__link">Цены</a>
+        <a href="/#consult" class="header__link">Консультация</a>
+        <a href="/projects" class="header__link">Портфолио</a>
+        <a href="/blog" class="header__link">Блог</a>
+        <a href="/contact" class="header__link">Контакты</a>
 
         {/* MOBILE LANGUAGE SWITCHER */}
         <div class="header__mobile-langs">
