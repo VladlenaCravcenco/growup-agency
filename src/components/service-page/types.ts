@@ -1,3 +1,4 @@
+
 export interface ServicePageData {
   badge: string;
   titleLine1: string;
@@ -43,6 +44,8 @@ export interface ServicePageData {
     imageAlt: string;
   }[];
 
+  
+
   faq: {
     titleLine1: string;
     titleLine2: string;
@@ -58,4 +61,12 @@ export interface ServicePageData {
     link: string;
     button: string;
   };
+}
+export interface ServiceOffer {
+  label: string;
+  title: string;
+  subtitle: string;
+  points: string[];
+  image: string;
+  imageAlt: string;
 }

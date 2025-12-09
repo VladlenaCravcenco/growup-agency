@@ -9,6 +9,11 @@ export const Header = component$(() => {
   const toggleMenu$ = $(() => (isMenuOpen.value = !isMenuOpen.value));
   const closeMenu$ = $(() => (isMenuOpen.value = false));
 
+  const isServicesOpen = useSignal(false);
+
+  const toggleServices$ = $(() => {
+    isServicesOpen.value = !isServicesOpen.value;
+  });
   return (
     <header class="header">
       <div class="header__inner">
@@ -77,39 +82,48 @@ export const Header = component$(() => {
       </div>
 
       {/* MOBILE MENU */}
-      <nav class={`header__nav-mobile ${isMenuOpen.value ? 'header__nav-mobile--open' : ''}`}>
+      <nav
+        class={`header__nav-mobile ${isMenuOpen.value ? 'header__nav-mobile--open' : ''
+          }`}
+      >
+        <button class="header__nav-mobile-close" onClick$={closeMenu$}>
+          ✕
+        </button>
 
-        <button class="header__nav-mobile-close" onClick$={closeMenu$}>✕</button>
+        {/* Услуги с тоглом */}
+        <div class="header__nav-item">
 
-        <div class="header__nav-item header__nav-item--services">
-          {/* КЛИК → скролл к секции #services на главной */}
-          <a href="/#services" class="header__link">
+          <button class="header__link header__link--toggle" onClick$={toggleServices$}>
             Услуги
-          </a>
+            <span class="header__link-arrow">{isServicesOpen.value ? '▴' : '▾'}</span>
+          </button>
 
-          {/* HOVER → выпадающий список отдельных страниц услуг */}
-          <div class="header__dropdown">
-            <a href="/services/performance" class="header__dropdown-link">
-              Платная реклама
-            </a>
-            <a href="/services/social-media-marketing" class="header__dropdown-link">
-              SMM / соцсети
-            </a>
-            <a href="/services/design" class="header__dropdown-link">
-              Дизайн и креатив
-            </a>
-            <a href="/services/web" class="header__dropdown-link">
-              Web-разработка
-            </a>
-          </div>
+          {isServicesOpen.value && (
+            <div class="header__dropdown--mobile">
+              <a href="/services/performance" class="header__dropdown-link">Платная реклама</a>
+              <a href="/services/social-media-marketing" class="header__dropdown-link">SMM / соцсети</a>
+              <a href="/services/design" class="header__dropdown-link">Дизайн и креатив</a>
+              <a href="/services/web" class="header__dropdown-link">Web-разработка</a>
+            </div>
+          )}
         </div>
 
         {/* Остальные пункты как были */}
-        <a href="/pricing" class="header__link">Цены</a>
-        <a href="/#consult" class="header__link">Консультация</a>
-        <a href="/projects" class="header__link">Портфолио</a>
-        <a href="/blog" class="header__link">Блог</a>
-        <a href="/contact" class="header__link">Контакты</a>
+        <a href="/pricing" class="header__link">
+          Цены
+        </a>
+        <a href="/#consult" class="header__link">
+          Консультация
+        </a>
+        <a href="/projects" class="header__link">
+          Портфолио
+        </a>
+        <a href="/blog" class="header__link">
+          Блог
+        </a>
+        <a href="/contact" class="header__link">
+          Контакты
+        </a>
 
         {/* MOBILE LANGUAGE SWITCHER */}
         <div class="header__mobile-langs">
@@ -120,14 +134,19 @@ export const Header = component$(() => {
 
             {isLangOpen.value && (
               <div class="lang__dropdown lang__dropdown--mobile">
-                <a class="lang__item" href="/">RU</a>
-                <a class="lang__item" href="/en">EN</a>
-                <a class="lang__item" href="/ro">RO</a>
+                <a class="lang__item" href="/">
+                  RU
+                </a>
+                <a class="lang__item" href="/en">
+                  EN
+                </a>
+                <a class="lang__item" href="/ro">
+                  RO
+                </a>
               </div>
             )}
           </div>
         </div>
-
       </nav>
     </header>
   );

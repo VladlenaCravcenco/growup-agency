@@ -31,7 +31,6 @@
 /* общий контейнер для пункта меню */
 .header__nav-item {
   position: relative;
-  display: inline-flex;
   align-items: center;
 }
 
@@ -53,11 +52,42 @@
     transform 0.18s ease;
   z-index: 100;
 }
+/* Кнопка-строка (как обычный пункт меню) */
+.header__link--toggle {
+  width: 100%;
+  padding: 16px 0;
+  font-size: 22px;
+  color: #1e293b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  background: transparent;
+}
+
+/* Стрелка справа */
+.header__link-arrow {
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+/* Мобильный список услуг */
+.header__dropdown--mobile {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  gap: 14px;
+}
+
+.header__dropdown--mobile .header__dropdown-link {
+  font-size: 18px;
+  color: #2563eb;
+}
 
 /* ссылки внутри дропдауна */
 .header__dropdown-link {
   display: block;
-  padding: 8px 16px;
+  padding: 10px 0;
   font-size: 14px;
   text-decoration: none;
   color: #1e2a3a;

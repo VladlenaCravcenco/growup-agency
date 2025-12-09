@@ -2,6 +2,7 @@
 import { component$, useStylesScoped$, useVisibleTask$ } from '@builder.io/qwik';
 import styles from '~/styles/service-page.css?inline';
 import type { ServicePageData } from '~/components/service-page/types';
+import { ServiceOffersStack } from './ServiceOffersStack';
 
 interface ServicePageProps {
   data: ServicePageData;
@@ -129,62 +130,39 @@ export const ServicePage = component$<ServicePageProps>(({ data }) => {
 
       {/* 3. Process */}
       <section class="service-process" id="process">
-        <div class="service-process__header">
-          <p class="service-section-label">{data.process.label}</p>
-          <h2 class="service-section-title">
-            {data.process.titleLine1}{' '}
-            <span>{data.process.titleLine2}</span>
-          </h2>
-          <a href={data.projects.allLink} class="service-section-link">
-            View all projects ↗
-          </a>
-        </div>
+        <div class="service-process__inner">
+          {/* ЛЕВАЯ КОЛОНКА: заголовок */}
+          <header class="service-process__header">
+            <p class="service-section-label">{data.process.label}</p>
+            <h2 class="service-section-title">
+              {data.process.titleLine1}{' '}
+              <span>{data.process.titleLine2}</span>
+            </h2>
 
-        <div class="service-process__timeline">
-          {data.process.steps.map((step, index) => (
-            <div class="service-process-step" key={step.title}>
-              <div class="service-process-step__indicator">
-                {(index + 1).toString().padStart(2, '0')}
-              </div>
-              <div class="service-process-step__content">
-                <h3>{step.title}</h3>
-                <p>{step.text}</p>
-              </div>
-            </div>
-          ))}
+            <a href={data.projects.allLink} class="service-section-link">
+              View all projects ↗
+            </a>
+          </header>
+
+          {/* ПРАВАЯ КОЛОНКА: линия + кружочки + текст шагов */}
+          <div class="service-process__timeline">
+            {data.process.steps.map((step, index) => (
+              <article class="service-process-step" key={step.title}>
+                <div class="service-process-step__indicator">
+                  {String(index + 1).padStart(2, '0')}
+                </div>
+
+                <div class="service-process-step__content">
+                  <h3 class="service-process-step__title">{step.title}</h3>
+                  <p class="service-process-step__text">{step.text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* 4. Stacked offers */}
-      <section class="service-offers" id="offers">
-        {data.offers.map((offer, index) => (
-          <article
-            key={offer.title}
-            data-index={index}
-            class={
-              'service-offer-card' +
-              (index === 0 ? ' service-offer-card--top' : '')
-            }
-            style={{ zIndex: String(index + 1) }}
-          >
-            <div class="service-offer-card__text">
-              <p class="service-section-label">{offer.label}</p>
-              <h2 class="service-section-title">{offer.title}</h2>
-              <p class="service-offer-card__subtitle">{offer.subtitle}</p>
-
-              <ul>
-                {offer.points.map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div class="service-offer-card__media">
-              <img src={offer.image} alt={offer.imageAlt} loading="lazy" />
-            </div>
-          </article>
-        ))}
-      </section>
+      <ServiceOffersStack offers={data.offers} />
 
       {/* 5. FAQ */}
       <section class="service-faq" id="faq">
