@@ -101,7 +101,7 @@ export const Header = component$(() => {
           {isServicesOpen.value && (
             <div class="header__dropdown--mobile">
               <a href="/services/performance" class="header__dropdown-link">Платная реклама</a>
-              <a href="/services/social-media-marketing" class="header__dropdown-link">SMM / соцсети</a>
+              <a href="/services/socialmm" class="header__dropdown-link">SMM / соцсети</a>
               <a href="/services/design" class="header__dropdown-link">Дизайн и креатив</a>
               <a href="/services/web" class="header__dropdown-link">Web-разработка</a>
             </div>

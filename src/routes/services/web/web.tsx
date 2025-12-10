@@ -1,156 +1,171 @@
-// src/content/services/socialMediaService.ts
+// src/content/services/webService.ts
 import type { ServicePageData } from '~/components/service-page/types';
 
 export const web: ServicePageData = {
-  badge: 'web',
-  titleLine1: 'web',
-  titleLine2: 'Turning Scrolls Into Sales',
-  subtitle: 'Data-driven social media campaigns tailored to your brand.',
+  badge: 'Web-разработка и SEO',
+  titleLine1: 'Сайт, который выглядит дорого',
+  titleLine2: 'и реально приводит клиентов',
+  subtitle:
+    'Разрабатываем сайты на коде (Qwik / React) с нормальной структурой, скоростью и SEO, а не просто “лендинг на конструкторе”.',
   description:
-    'We build and manage social media strategies that turn attention into measurable growth. From content and creatives to ads and analytics — you get a partner who runs the entire social media engine, so you can focus on the business.',
-  heroImage: '/images/services/smm-hero.png',
-  heroImageAlt: 'Social media marketing illustration',
+    'Помогаем бизнесу собрать сайт, который можно развивать дальше: с продуманной структурой, адаптивом, скоростью, аналитикой и SEO-основой. От первого экрана и логики блоков до подключения форм, метрик и многоязычности — всё в одном проекте.',
+  heroImage: '/images/services/web-hero.png',
+  heroImageAlt: 'Дизайн и разработка современного сайта',
 
-  ctaPrimary: 'Discuss my project',
-  ctaSecondary: 'See social media cases',
-  ctaSecondaryLink: '/projects?filter=social-media',
+  ctaPrimary: 'Обсудить сайт под ваш бизнес',
+  ctaSecondary: 'Посмотреть веб-кейсы',
+  ctaSecondaryLink: '/projects?filter=web',
 
   projects: {
-    label: 'Our social media success stories',
-    title: 'Brands that grew with our social media strategies',
-    allLink: '/projects?filter=social-media',
+    label: 'Примеры сайтов и структур',
+    title: 'Сайты, которые мы собрали под задачи клиентов',
+    allLink: '/projects?filter=web',
     items: [
       {
-        slug: 'real-estate-leads',
-        title: 'Aarav Realty',
-        tagline: 'Real estate lead generation via Instagram & Facebook Ads',
-        client: 'Aarav Realty',
-        image: '/images/projects/aarav-realty.jpg',
+        slug: 'translation-agency-seo',
+        title: 'Сайт бюро переводов',
+        tagline:
+          'Многостраничный сайт с SEO-структурой, блогом и заявками из органики и рекламы',
+        client: 'Translation Agency',
+        image: '/images/projects/web-translation-agency.jpg',
       },
       {
-        slug: 'consultancy-awareness',
-        title: 'Beqube Consultancy',
-        tagline: 'Awareness & trust-building campaigns for finance consultancy',
-        client: 'Beqube Consultancy',
-        image: '/images/projects/beqube-consultancy.jpg',
+        slug: 'expert-landing',
+        title: 'Лендинг эксперта / автора',
+        tagline:
+          'Продающий лендинг для книги и консультаций с оплатой онлайн и трекингом заявок',
+        client: 'Эксперт / Author',
+        image: '/images/projects/web-expert-landing.jpg',
+      },
+      {
+        slug: 'services-company',
+        title: 'Сервисная компания',
+        tagline:
+          'Структурированный сайт под несколько направлений услуг, кейсы и заявки с формы',
+        client: 'Service Company',
+        image: '/images/projects/web-services-company.jpg',
       },
     ],
   },
 
   process: {
-    label: 'Our process',
-    titleLine1: 'Building your',
-    titleLine2: 'digital presence',
+    label: 'Как мы делаем сайты',
+    titleLine1: 'От структуры и прототипа',
+    titleLine2: 'до запуска и SEO-основы',
     steps: [
       {
-        title: 'Brand understanding',
-        text: 'We analyze your brand, audience and offers to set clear goals and positioning for social media.',
+        title: 'Бриф и понимание задачи',
+        text: 'Собираем вводные: ниша, услуги, целевая аудитория, конкуренты, желаемые сценарии на сайте. Фиксируем, какую роль сайт должен закрывать в бизнесе.',
       },
       {
-        title: 'Content strategy & calendar',
-        text: 'We define content pillars, posting frequency and format mix for each platform.',
+        title: 'Структура и прототип',
+        text: 'Продумываем карту сайта и блоки: какие страницы нужны, в какой логике идут аргументы, где показываем кейсы, отзывы и офферы. Собираем прототип без “лишнего воздуха”.',
       },
       {
-        title: 'Creative production',
-        text: 'We create visuals, carousels, reels and stories that align with your brand and stop the scroll.',
+        title: 'Дизайн под бренд',
+        text: 'На основе прототипа делаем дизайн: первый экран, стили для блоков, кнопки, типографика, мобильная версия. Сайт выглядит как продолжение бренда, а не “шаблон”.',
       },
       {
-        title: 'Campaign setup & management',
-        text: 'We launch, test and optimize campaigns across Meta, LinkedIn and other platforms.',
+        title: 'Разработка и подключение CMS',
+        text: 'Верстаем на Qwik/React, подключаем админку (Sanity / WordPress / другая CMS), настраиваем формы, интеграции, базовые микрореагции и анимации.',
       },
       {
-        title: 'Analytics & optimisation',
-        text: 'We track performance, report in simple language and scale what works.',
+        title: 'SEO-основа и запуск',
+        text: 'Настраиваем мета-теги, заголовки, человекопонятные URL, скорость загрузки, аналитику и цели. Даём инструкции по дальнейшему наполнению и росту сайта.',
       },
     ],
   },
 
   offers: [
     {
-      label: 'Our offerings',
-      title: 'Instagram, Facebook & LinkedIn strategies',
-      subtitle: 'Grow your presence where it matters most with platform-specific strategies.',
+      label: 'Лендинги',
+      title: 'Продающие лендинги под одну задачу',
+      subtitle:
+        'Подходит для запуска конкретного продукта, книги, курса или одной основной услуги.',
       points: [
-        'Platform-focused growth with audience segmentation',
-        'Consistent posting calendars aligned with your sales cycles',
-        'Content boosting and ad support for higher reach',
-        'Hashtag and trend integration without cringe',
+        'Структура лендинга под вашу воронку и оффер',
+        'Первый экран, который сразу объясняет, чем вы полезны',
+        'Блоки с выгодами, социальным доказательством и призывами к действию',
+        'Подключение форм, мессенджеров и базовой аналитики',
       ],
-      image: '/images/services/smm-strategy.jpg',
-      imageAlt: 'Person working on digital marketing strategy',
+      image: '/images/services/web-landing.jpg',
+      imageAlt: 'Продающий лендинг на ноутбуке',
     },
     {
-      label: 'Content creation',
-      title: 'Content creation services',
-      subtitle: 'Scroll-stopping visuals and stories that connect with your audience.',
+      label: 'Многостраничные сайты',
+      title: 'Корпоративные и сервисные сайты',
+      subtitle:
+        'Если у вас несколько направлений, языков или типов клиентов — нужна продуманная структура, а не один лендинг.',
       points: [
-        'Branded reel and short-form video production',
-        'Carousel design and caption writing',
-        'Storytelling-focused visual concepts',
-        'Tone of voice aligned with your niche',
+        'Карта сайта: главная, услуги, кейсы, блог, контакты и др.',
+        'Логика навигации, чтобы человек быстро находил нужный раздел',
+        'Мультиязычность (RU/RO/EN и др.) без хаоса в структуре',
+        'Возможность развивать сайт: добавлять разделы, статьи, кейсы',
       ],
-      image: '/images/services/smm-content.jpg',
-      imageAlt: 'Content creation behind the scenes',
+      image: '/images/services/web-multypage.jpg',
+      imageAlt: 'Многостраничный сайт компании',
     },
     {
-      label: 'Influencer & partnerships',
-      title: 'Influencer collaboration and partnerships',
-      subtitle: 'Build credibility and reach through authentic creator collaborations.',
+      label: 'SEO-структура и контент',
+      title: 'SEO-основа сайта с понятной логикой',
+      subtitle:
+        'Чтобы сайт был не только красивым, но и понятным поисковикам — и людям, которые приходят из поиска.',
       points: [
-        'Influencer research and outreach',
-        'Contract and deliverables planning',
-        'Performance tracking of influencer posts',
-        'Integration with paid campaigns',
+        'Подбор базовых ключевых запросов под страницы',
+        'Структура заголовков (H1–H3), URL и мета-тегов',
+        'Рекомендации по текстам без “SEO-воды” и переспама',
+        'Настройка чётких title/description для выдачи',
       ],
-      image: '/images/services/smm-influencers.jpg',
-      imageAlt: 'People collaborating on influencer marketing',
+      image: '/images/services/web-seo.jpg',
+      imageAlt: 'SEO-структура сайта',
     },
     {
-      label: 'Analytics',
-      title: 'Monthly analytics & reporting',
-      subtitle: 'Turn data into clear decisions and next steps.',
+      label: 'Техника и скорость',
+      title: 'Техническая оптимизация и сопровождение',
+      subtitle:
+        'Если сайт уже есть, но грузится медленно, “сыпется” на мобилке или плохо отслеживаются заявки.',
       points: [
-        'Platform performance dashboards',
-        'Follower growth and engagement metrics',
-        'Ad ROI tracking and optimisation',
-        'Data-backed strategy updates every month',
+        'Аудит скорости и технических ошибок',
+        'Исправление критических проблем вёрстки и адаптива',
+        'Подключение/перенастройка Google Analytics, пикселей, целей',
+        'Доработки и поддержка сайта после запуска',
       ],
-      image: '/images/services/smm-analytics.jpg',
-      imageAlt: 'Marketing analytics dashboard',
+      image: '/images/services/web-tech.jpg',
+      imageAlt: 'Оптимизация скорости и технических параметров сайта',
     },
   ],
 
   faq: {
-    titleLine1: 'Social media marketing',
-    titleLine2: 'FAQs',
+    titleLine1: 'Сайты и SEO',
+    titleLine2: '— ответы на частые вопросы',
     items: [
       {
-        question: 'How much does social media marketing cost?',
+        question: 'Сколько стоит разработка сайта?',
         answer:
-          'Pricing depends on the number of platforms, posting frequency, content volume and ad budget. We discuss your goals first and then suggest a realistic monthly package.',
+          'Стоимость зависит от типа сайта (лендинг, многостраничный, мини-портал), количества страниц, объёма дизайна и интеграций. После брифа мы предложим несколько вариантов по глубине и бюджету.',
       },
       {
-        question: 'Which social media platforms are best for my business?',
+        question: 'Чем ваш сайт отличается от конструктора?',
         answer:
-          'We look at your industry, audience and sales process, then choose 1–3 focus platforms instead of trying to be everywhere.',
+          'Мы не собираем на шаблонах. Структура, дизайн и логика блоков делаются под ваш продукт и сценарии клиентов. Плюс — скорость, SEO, нормальная кодовая база и возможность масштабировать проект без “потолка конструктора”.',
       },
       {
-        question: 'How long does it take to see results?',
+        question: 'Вы занимаетесь только разработкой или также текстами и SEO?',
         answer:
-          'Brand awareness and engagement usually grow within 1–3 months. Performance campaigns can bring first leads or sales within 2–4 weeks, depending on your offer.',
+          'Мы можем как работать с готовыми текстами, так и помочь со структурой, правками под SEO и логикой подачи. На старте обсуждаем, что у вас уже есть, и что лучше доверить нам.',
       },
       {
-        question: 'Do you create content or just manage posting?',
+        question: 'Что будет после запуска сайта?',
         answer:
-          'We can fully take over content creation or work with your in-house team if you already have designers and copywriters.',
+          'После релиза вы получаете доступы, инструкцию по базовому наполнению и, при необходимости, можем договориться о сопровождении: техподдержка, доработки, новые разделы и регулярный SEO-апдейт.',
       },
     ],
   },
 
   brief: {
-    title: 'Ready to grow through social media?',
-    text: 'Fill in a short brief so we can prepare a clear growth plan and budget for your brand.',
+    title: 'Нужен сайт, который не стыдно показывать клиентам?',
+    text: 'Заполните короткий бриф — мы предложим структуру, формат сайта, примерные сроки и бюджет. Без навязанной “лишней” функциональности.',
     link: '/brief',
-    button: 'Fill out the brief',
+    button: 'Заполнить бриф на сайт и SEO',
   },
 };

@@ -1,156 +1,163 @@
-// src/content/services/socialMediaService.ts
+// src/content/services/performanceService.ts
 import type { ServicePageData } from '~/components/service-page/types';
 
 export const performanceads: ServicePageData = {
-  badge: 'performance-ads',
-  titleLine1: 'performance-ads',
-  titleLine2: 'Turning Scrolls Into Sales',
-  subtitle: 'Data-driven social media campaigns tailored to your brand.',
+  badge: 'Платная реклама',
+  titleLine1: 'Реклама, которая даёт',
+  titleLine2: 'заявки, а не просто показы',
+  subtitle:
+    'Настраиваем и ведём кампании в Meta, Google и других платформах так, чтобы вы понимали, сколько стоит заявка и что с этим делать дальше.',
   description:
-    'We build and manage social media strategies that turn attention into measurable growth. From content and creatives to ads and analytics — you get a partner who runs the entire social media engine, so you can focus on the business.',
-  heroImage: '/images/services/smm-hero.png',
-  heroImageAlt: 'Social media marketing illustration',
+    'Помогаем бизнесу получать стабильный поток лидов через платную рекламу. Строим воронку: от оффера и креативов до аналитики и оптимизации. Без “слить бюджет и надеяться”, а с понятными цифрами и точками роста.',
+  heroImage: '/images/services/performance-hero.png',
+  heroImageAlt: 'Настройка платной рекламы и аналитика на экране',
 
-  ctaPrimary: 'Discuss my project',
-  ctaSecondary: 'See social media cases',
-  ctaSecondaryLink: '/projects?filter=social-media',
+  ctaPrimary: 'Обсудить запуск рекламы',
+  ctaSecondary: 'Посмотреть рекламные кейсы',
+  ctaSecondaryLink: '/projects?filter=performance',
 
   projects: {
-    label: 'Our social media success stories',
-    title: 'Brands that grew with our social media strategies',
-    allLink: '/projects?filter=social-media',
+    label: 'Наши кейсы по платной рекламе',
+    title: 'Кому мы уже помогаем получать заявки из рекламы',
+    allLink: '/projects?filter=performance',
     items: [
       {
-        slug: 'real-estate-leads',
-        title: 'Aarav Realty',
-        tagline: 'Real estate lead generation via Instagram & Facebook Ads',
-        client: 'Aarav Realty',
-        image: '/images/projects/aarav-realty.jpg',
+        slug: 'real-estate-leads-ads',
+        title: 'Недвижимость — лиды из Meta Ads',
+        tagline:
+          'Настроили воронку и лид-формы: стабилизировали поток заявок по предсказуемой цене',
+        client: 'Real Estate Agency',
+        image: '/images/projects/performance-real-estate.jpg',
       },
       {
-        slug: 'consultancy-awareness',
-        title: 'Beqube Consultancy',
-        tagline: 'Awareness & trust-building campaigns for finance consultancy',
-        client: 'Beqube Consultancy',
-        image: '/images/projects/beqube-consultancy.jpg',
+        slug: 'services-google-ads',
+        title: 'Онлайн-сервис — заявки из Google Ads',
+        tagline:
+          'Поисковые кампании + ретаргетинг: вывели кампании из “слитого бюджета” в прибыль',
+        client: 'Online Service',
+        image: '/images/projects/performance-google-services.jpg',
       },
     ],
   },
 
   process: {
-    label: 'Our process',
-    titleLine1: 'Building your',
-    titleLine2: 'digital presence',
+    label: 'Как мы запускаем рекламу',
+    titleLine1: 'От оффера и гипотез',
+    titleLine2: 'до стабильных кампаний',
     steps: [
       {
-        title: 'Brand understanding',
-        text: 'We analyze your brand, audience and offers to set clear goals and positioning for social media.',
+        title: 'Анализ и постановка целей',
+        text: 'Разбираемся в продукте, марже, прошлом опыте и целевой аудитории. Фиксируем цели: заявки, лиды, продажи, брони и т.д.',
       },
       {
-        title: 'Content strategy & calendar',
-        text: 'We define content pillars, posting frequency and format mix for each platform.',
+        title: 'Оффер и стратегия',
+        text: 'Формируем понятное предложение для клиента и карту кампаний: какие площадки, форматы и этапы воронки используем.',
       },
       {
-        title: 'Creative production',
-        text: 'We create visuals, carousels, reels and stories that align with your brand and stop the scroll.',
+        title: 'Подготовка креативов и запуск',
+        text: 'Готовим креативы и тексты, настраиваем пиксели и события, собираем кампании, проверяем связки и запускаем первый спринт.',
       },
       {
-        title: 'Campaign setup & management',
-        text: 'We launch, test and optimize campaigns across Meta, LinkedIn and other platforms.',
+        title: 'Оптимизация и A/B-тесты',
+        text: 'Регулярно отключаем слабые связки, усиливаем рабочие, тестируем офферы, аудитории, форматы и посадочные.',
       },
       {
-        title: 'Analytics & optimisation',
-        text: 'We track performance, report in simple language and scale what works.',
+        title: 'Масштабирование и отчёты',
+        text: 'Когда видим устойчивый результат, увеличиваем бюджет аккуратно и даём понятные отчёты “по-человечески”, без сложных терминов.',
       },
     ],
   },
 
   offers: [
     {
-      label: 'Our offerings',
-      title: 'Instagram, Facebook & LinkedIn strategies',
-      subtitle: 'Grow your presence where it matters most with platform-specific strategies.',
+      label: 'Meta / соцсети',
+      title: 'Лиды из Instagram и Facebook',
+      subtitle:
+        'Подходит, если основной трафик и заявки вы хотите получать из соцсетей через рекламные кампании.',
       points: [
-        'Platform-focused growth with audience segmentation',
-        'Consistent posting calendars aligned with your sales cycles',
-        'Content boosting and ad support for higher reach',
-        'Hashtag and trend integration without cringe',
+        'Настройка кампаний в Meta Ads (Facebook/Instagram)',
+        'Лид-формы или переходы на сайт / мессенджер',
+        'Тестирование креативов, аудиторий и форматов',
+        'Регулярная оптимизация и отчёты по стоимости лида',
       ],
-      image: '/images/services/smm-strategy.jpg',
-      imageAlt: 'Person working on digital marketing strategy',
+      image: '/images/services/performance-meta.jpg',
+      imageAlt: 'Креативы для рекламы в соцсетях',
     },
     {
-      label: 'Content creation',
-      title: 'Content creation services',
-      subtitle: 'Scroll-stopping visuals and stories that connect with your audience.',
+      label: 'Поиск и намерение',
+      title: 'Трафик и заявки из Google Ads',
+      subtitle:
+        'Когда ваши клиенты прямо сейчас ищут услугу в поиске, задача — просто перехватить этот спрос.',
       points: [
-        'Branded reel and short-form video production',
-        'Carousel design and caption writing',
-        'Storytelling-focused visual concepts',
-        'Tone of voice aligned with your niche',
+        'Поисковые кампании по горячим и тёплым запросам',
+        'Раздельные кампании по брендам, конкурентам и общим запросам',
+        'Ретаргетинг по тем, кто уже был на сайте',
+        'Связка с аналитикой: какие кампании реально приводят лиды',
       ],
-      image: '/images/services/smm-content.jpg',
-      imageAlt: 'Content creation behind the scenes',
+      image: '/images/services/performance-google.jpg',
+      imageAlt: 'Google Ads кампании на ноутбуке',
     },
     {
-      label: 'Influencer & partnerships',
-      title: 'Influencer collaboration and partnerships',
-      subtitle: 'Build credibility and reach through authentic creator collaborations.',
+      label: 'Ретаргетинг',
+      title: 'Дожим тёплой аудитории',
+      subtitle:
+        'Не все покупают с первого касания. Ретаргетинг помогает мягко догреть тех, кто уже видел вас или был на сайте.',
       points: [
-        'Influencer research and outreach',
-        'Contract and deliverables planning',
-        'Performance tracking of influencer posts',
-        'Integration with paid campaigns',
+        'Сценарии ретаргетинга: брошенные заявки, просмотр страниц, вовлечённость',
+        'Креативы под “дожим”: ответы на возражения, социальное доказательство, акции',
+        'Логика частоты показов, чтобы не “выжигать” аудиторию',
+        'Связка с e-mail / мессенджерами, если они у вас есть',
       ],
-      image: '/images/services/smm-influencers.jpg',
-      imageAlt: 'People collaborating on influencer marketing',
+      image: '/images/services/performance-retargeting.jpg',
+      imageAlt: 'Ретаргетинговые цепочки на диаграмме',
     },
     {
-      label: 'Analytics',
-      title: 'Monthly analytics & reporting',
-      subtitle: 'Turn data into clear decisions and next steps.',
+      label: 'Аудит и сопровождение',
+      title: 'Аудит рекламы и сопровождение',
+      subtitle:
+        'Если реклама уже запущена, но результат не устраивает или вы вообще не понимаете, что там происходит.',
       points: [
-        'Platform performance dashboards',
-        'Follower growth and engagement metrics',
-        'Ad ROI tracking and optimisation',
-        'Data-backed strategy updates every month',
+        'Подробный аудит действующих кампаний и структуры аккаунта',
+        'Разбор ошибок в аналитике, трекинге и атрибуции',
+        'Список конкретных правок: что выключить, что переразбить, что протестировать',
+        'Возможность передать нам дальнейшее ведение кампаний',
       ],
-      image: '/images/services/smm-analytics.jpg',
-      imageAlt: 'Marketing analytics dashboard',
+      image: '/images/services/performance-audit.jpg',
+      imageAlt: 'Маркетолог анализирует рекламные кампании',
     },
   ],
 
   faq: {
-    titleLine1: 'Social media marketing',
-    titleLine2: 'FAQs',
+    titleLine1: 'Платная реклама',
+    titleLine2: '— частые вопросы',
     items: [
       {
-        question: 'How much does social media marketing cost?',
+        question: 'Какой нужен минимальный бюджет на рекламу?',
         answer:
-          'Pricing depends on the number of platforms, posting frequency, content volume and ad budget. We discuss your goals first and then suggest a realistic monthly package.',
+          'Минимальный бюджет зависит от ниши и стоимости лида. В среднем имеет смысл стартовать от суммы, которая позволяет собрать хотя бы 50–100 кликов или 20–30 лидов на тест. На брифе мы честно скажем, есть ли смысл запускаться с вашим бюджетом.',
       },
       {
-        question: 'Which social media platforms are best for my business?',
+        question: 'Вы даёте гарантию по количеству заявок?',
         answer:
-          'We look at your industry, audience and sales process, then choose 1–3 focus platforms instead of trying to be everywhere.',
+          'Мы не обещаем “N заявок за 3 дня”, потому что на результат влияет продукт, сайт, конкуренция и сезонность. Вместо пустых обещаний — прозрачная аналитика, понятные гипотезы и план, что делать, если связка не зашла.',
       },
       {
-        question: 'How long does it take to see results?',
+        question: 'Нужен ли обязательно сайт для рекламы?',
         answer:
-          'Brand awareness and engagement usually grow within 1–3 months. Performance campaigns can bring first leads or sales within 2–4 weeks, depending on your offer.',
+          'Идеально — когда есть нормальный лендинг или страница на сайте. Но в некоторых нишах можно стартовать с лид-форм или заявок в мессенджеры. Мы предложим вариант под вашу ситуацию.',
       },
       {
-        question: 'Do you create content or just manage posting?',
+        question: 'Что входит в ведение, кроме запуска?',
         answer:
-          'We can fully take over content creation or work with your in-house team if you already have designers and copywriters.',
+          'Ведение включает регулярный мониторинг, оптимизацию, тесты гипотез, работу с креативами и отчётность. Мы не “забываем” кампании после запуска и не ограничиваемся только технической настройкой.',
       },
     ],
   },
 
   brief: {
-    title: 'Ready to grow through social media?',
-    text: 'Fill in a short brief so we can prepare a clear growth plan and budget for your brand.',
+    title: 'Хотите понять, сколько может стоить заявка в вашей нише?',
+    text: 'Заполните короткий бриф — мы проанализируем ваш продукт, предложим гипотезы по рекламным связкам и примерный бюджет для старта.',
     link: '/brief',
-    button: 'Fill out the brief',
+    button: 'Заполнить бриф на рекламу',
   },
 };
