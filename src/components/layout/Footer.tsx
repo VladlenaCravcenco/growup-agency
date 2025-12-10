@@ -79,7 +79,7 @@ export const Footer = component$(() => {
 
               {/* Instagram */}
               <a
-                href="https://instagram.com/"
+                href="https://www.instagram.com/growupagency/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -105,7 +105,7 @@ export const Footer = component$(() => {
 
               {/* TikTok */}
               <a
-                href="https://tiktok.com/"
+                href="https://www.tiktok.com/@growupagencyy?is_from_webapp=1&sender_device=pc"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="TikTok"

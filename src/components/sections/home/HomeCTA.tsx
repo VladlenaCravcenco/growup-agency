@@ -11,6 +11,7 @@ export const HomeCTA = component$(() => {
 
   const handleSubmit = $(async (event: Event) => {
     event.preventDefault();
+    console.log('SUBMIT WORKS');
 
     const target = event.target as HTMLFormElement;
     const formData = new FormData(target);
@@ -33,33 +34,34 @@ export const HomeCTA = component$(() => {
 
     try {
       form.error = '';
+      form.sent = false;
+
       const res = await fetch('/api/consultation', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name,
-          phone,
-          email,
-          page,
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, email, page }),
       });
 
-      if (!res.ok) {
-        const data = await res.json().catch(() => null);
+      const data = await res.json().catch(() => null);
+      console.log('Consultation response:', { status: res.status, data });
+
+      // ожидаем формат { ok: true } или { ok: false, error: '...' }
+      if (!res.ok || !data?.ok) {
         form.error =
-          (data as any)?.error || 'Ошибка при отправке. Попробуйте ещё раз.';
+          data?.error ||
+          'Ошибка при отправке. Попробуйте ещё раз или напишите нам напрямую.';
         form.sent = false;
         return;
       }
 
+      // всё прошло успешно
       form.sent = true;
       form.name = '';
       form.phone = '';
       form.email = '';
       target.reset();
-    } catch {
+    } catch (e) {
+      console.error('Consultation fetch error:', e);
       form.error = 'Сервер недоступен. Попробуйте ещё раз позже.';
       form.sent = false;
     }
@@ -75,7 +77,11 @@ export const HomeCTA = component$(() => {
           Заполните форму, и мы предложим стратегию под ваши задачи и бюджет.
         </p>
 
-        <form class="cta__form" onSubmit$={handleSubmit}>
+        <form
+          class="cta__form"
+          preventdefault:submit
+          onSubmit$={handleSubmit}
+        >
           <div class="cta__fields">
             <input
               class="cta__input"
