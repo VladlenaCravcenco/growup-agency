@@ -31,20 +31,20 @@ export const Footer = component$(() => {
         <div class="footer__col footer__col--contact">
           <h4 class="footer__heading">Свяжитесь с нами</h4>
 
-          <div class="footer__contact-row">
+          {/* <div class="footer__contact-row">
             <span class="footer__contact-label">Телефон</span>
             <a href="tel:+37300000000" class="footer__contact-value">
               +373&nbsp;00&nbsp;000&nbsp;000
             </a>
-          </div>
+          </div> */}
 
           <div class="footer__contact-row">
             <span class="footer__contact-label">Email</span>
             <a
-              href="mailto:hello@growup.agency"
+              href="mailto:growupagency.org@gmail.com"
               class="footer__contact-value"
             >
-              hello@growup.agency
+              growupagency.org@gmail.com
             </a>
           </div>
 
