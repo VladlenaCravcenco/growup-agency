@@ -1,6 +1,9 @@
 import { component$, useSignal } from '@builder.io/qwik';
 import { Link } from '@builder.io/qwik-city';
 import '../../styles/projects.css';
+import { HomeClients } from '../../components/sections/home/HomeClients'
+
+import { HomeCTA } from '../../components/sections/home/HomeCTA'
 
 export type CategoryId = 'ads' | 'smm' | 'branding';
 
@@ -136,56 +139,8 @@ export default component$(() => {
         </div>
       </section>
 
-      {/* Нам доверяют */}
-      <section class="trust">
-        <div class="trust__inner">
-          <h2 class="section-title section-title--center">Нам доверяют</h2>
-          <p class="section-subtitle section-subtitle--center">
-            Работали с брендами из красоты, спорта, food, доставки и не только.
-          </p>
-
-          <div class="trust-logos">
-            <span class="trust-logo">Aqua Terra</span>
-            <span class="trust-logo">Hanna</span>
-            <span class="trust-logo">Ciao Bella</span>
-            <span class="trust-logo">Lash Store</span>
-            <span class="trust-logo">Moft</span>
-            <span class="trust-logo">Straus</span>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section class="cta cta--projects">
-        <div class="cta__inner">
-          <h2 class="section-title section-title--center">
-            Хотите похожий результат?
-          </h2>
-          <p class="section-subtitle section-subtitle--center">
-            Расскажите о своём проекте — предложим формат работы и бюджет.
-          </p>
-
-          <form class="cta__form" preventdefault:submit>
-            <div class="cta__fields">
-              <input
-                class="cta__input"
-                type="text"
-                name="name"
-                placeholder="Ваше имя"
-              />
-              <input
-                class="cta__input"
-                type="tel"
-                name="phone"
-                placeholder="+373 (__) ___-____"
-              />
-            </div>
-            <button class="btn btn--primary" type="submit">
-              Обсудить проект
-            </button>
-          </form>
-        </div>
-      </section>
+     <HomeClients />
+      <HomeCTA />
     </main>
   );
 });

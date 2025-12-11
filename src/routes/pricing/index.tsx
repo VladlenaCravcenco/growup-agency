@@ -1,5 +1,6 @@
 import { component$, useSignal, QRL } from '@builder.io/qwik';
 import { PricingFormat } from '../../components/sections/pricing/PricingFormat';
+import { HomeCTA } from '../../components/sections/home/HomeCTA'
 
 
 import '../../styles/pricing.css';
@@ -394,41 +395,7 @@ export default component$(() => {
         </div>
       </section>
 
-      <section class="cta cta--pricing">
-        <div class="cta__inner">
-          <h2 class="section-title section-title--center">
-            Готовы обсудить задачу?
-          </h2>
-          <p class="section-subtitle section-subtitle--center">
-            Оставьте контакты — вернёмся с предложением в течение 24 часов.
-          </p>
-
-          <form class="cta__form" preventdefault:submit>
-            <div class="cta__fields">
-              <input
-                class="cta__input"
-                type="text"
-                name="name"
-                placeholder="Ваше имя"
-                required
-              />
-              <input
-                class="cta__input"
-                type="tel"
-                name="phone"
-                placeholder="+373 (__) ___-____"
-              />
-            </div>
-            <button class="btn btn--primary" type="submit">
-              Отправить заявку
-            </button>
-          </form>
-
-          <p class="cta__note">
-            Нажимая на кнопку, вы соглашаетесь с обработкой персональных данных.
-          </p>
-        </div>
-      </section>
+      <HomeCTA />
 
       {/* Модалка: “Выбери свой тип продвижения” */}
       {showTypeModal.value && <TypeModal onClose$={() => (showTypeModal.value = false)} />}

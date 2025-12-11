@@ -1,3 +1,251 @@
+.page--projects {
+  background: #f7f5f2;
+}
+
+.page--project {
+  background: #f4f2ef;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.section-title--center {
+  text-align: center;
+}
+
+.section-subtitle {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  margin: 8px 0 0;
+  color: #555;
+}
+
+.section-subtitle--center {
+  text-align: center;
+}
+
+/* ===============================
+   СТРАНИЦА СО СПИСКОМ ПРОЕКТОВ
+================================= */
+
+.projects {
+  padding: 72px 0 64px;
+}
+
+.projects__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Табы категорий */
+
+.projects-tabs {
+    display: block;
+  width: max-content;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: var(--shadow-soft);
+  padding: 4px;
+  margin: 0 auto 32px;
+  gap: 4px;
+}
+
+/* белая "пилюля"-контейнер */
+.projects-tabs::before,
+.projects-tabs::after {
+  content: '';
+}
+
+
+.projects-tabs__btn {
+   border: none;
+  border-radius: 999px;
+  padding: 9px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--color-text-muted);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+
+.projects-tabs__btn:hover {
+  transform: translateY(-1px);
+  
+}
+
+.projects-tabs__btn--active {
+  background: var(--color-dark);
+  color: #ffffff;
+}
+
+/* Заголовок */
+
+.projects-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* Сетка проектов */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.project-card {
+  background: #ffffff;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.project-card__link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-card__image-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.project-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.project-card__body {
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.project-card__client {
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #9ca3af;
+}
+
+.project-card__title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.project-card__subtitle {
+  font-size: 0.92rem;
+  color: #4b5563;
+  margin: 0;
+}
+
+.project-card__more {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #111827;
+}
+
+/* hover карточки */
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+}
+
+.project-card:hover .project-card__image {
+  transform: scale(1.04);
+}
+
+/* Блок "Нам доверяют" */
+
+.trust {
+  padding: 40px 0 52px;
+}
+
+.trust__inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.trust-logos {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.trust-logo {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  font-size: 0.85rem;
+  color: #4b5563;
+  background: #ffffffcc;
+}
+
+/* CTA под списком проектов */
+
+.cta {
+  padding: 60px 0 80px;
+}
+
+
+.cta__inner {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 20px;
+}
+
+
+
+.cta__fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin: 24px 0 16px;
+}
+
+.cta__input {
+  min-width: 260px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  font-size: 0.95rem;
+}
+
+.btn.btn--primary {
+  border-radius: 999px;
+  padding: 10px 24px;
+  font-size: 0.95rem;
+}
+
+
+
+
+
+
+
+
 /* ФОН СТРАНИЦЫ */
 .page--project {
   background: #f4f2ef; /* тёплый светлый фон как на макете */

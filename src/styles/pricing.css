@@ -35,7 +35,10 @@
   color: var(--color-text-muted);
   transition: background 0.15s ease, color 0.15s ease;
 }
-
+.pricing-tabs__btn:hover {
+  transform: translateY(-1px);
+  
+}
 .pricing-tabs__btn--active {
   background: var(--color-dark);
   color: #ffffff;
