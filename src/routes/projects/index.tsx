@@ -1,11 +1,12 @@
 import { component$, useSignal } from '@builder.io/qwik';
-import { Link } from '@builder.io/qwik-city';
+import { Link, routeLoader$ } from '@builder.io/qwik-city';
 import '../../styles/projects.css';
+import { sanityClient } from '~/sanity/client';
 import { HomeClients } from '../../components/sections/home/HomeClients'
 
 import { HomeCTA } from '../../components/sections/home/HomeCTA'
 
-export type CategoryId = 'ads' | 'smm' | 'branding';
+export type CategoryId = 'ads' | 'smm' | 'branding' | 'web';
 
 export type Project = {
   slug: string;
@@ -16,71 +17,44 @@ export type Project = {
   client: string;
 };
 
-export const PROJECTS: Project[] = [
-  {
-    slug: 'aqua-terra-ads',
-    category: 'ads',
-    title: 'Aqua Terra Fitness',
-    subtitle: 'Перфоманс-реклама для сети фитнес-клубов',
-    cover: '/media/projects/aqua-terra-cover.jpg',
-    client: 'Aqua Terra',
-  },
-  {
-    slug: 'ciao-bella-ads',
-    category: 'ads',
-    title: 'Ciao Bella Pinsa',
-    subtitle: 'Продвижение доставки в социальных сетях',
-    cover: '/media/projects/ciao-bella-cover.jpg',
-    client: 'Ciao Bella',
-  },
-  {
-    slug: 'hanna-smm',
-    category: 'smm',
-    title: 'Hanna Aesthetic Center',
-    subtitle: 'SMM-стратегия и контент для клиники эстетики',
-    cover: '/media/projects/hanna-cover.jpg',
-    client: 'Hanna Aesthetic Center',
-  },
-  {
-    slug: 'lash-store-smm',
-    category: 'smm',
-    title: 'Lash Store',
-    subtitle: 'Визуальный стиль и продажи через Stories',
-    cover: '/media/projects/lash-store-cover.jpg',
-    client: 'Lash Store',
-  },
-  {
-    slug: 'straus-branding',
-    category: 'branding',
-    title: 'Straus Delivery',
-    subtitle: 'Ребрендинг сервиса доставки',
-    cover: '/media/projects/straus-cover.jpg',
-    client: 'Straus',
-  },
-  {
-    slug: 'moft-branding',
-    category: 'branding',
-    title: 'Moft',
-    subtitle: 'Айдентика для косметологического бренда',
-    cover: '/media/projects/moft-cover.jpg',
-    client: 'Moft',
-  },
-];
+
+export const useProjects = routeLoader$<Project[]>(async () => {
+  const projects = await sanityClient.fetch<Project[]>(
+    `*[_type == "project"] | order(_createdAt desc){
+      "slug": slug.current,
+      // категория: ads / smm / branding / web
+      category,
+      // заголовок кейса
+      title,
+      // подзаголовок можно брать из heroSubtitle
+      "subtitle": heroSubtitle,
+      // клиент
+      client,
+      // обложка: можно одну и ту же картинку использовать и в hero, и в сетке
+      "cover": cover.asset->url
+    }`
+  );
+
+  return projects || [];
+});
+
 
 const CATEGORIES: { id: CategoryId | 'all'; label: string }[] = [
   { id: 'all', label: 'Все проекты' },
   { id: 'ads', label: 'Paid Ads' },
   { id: 'smm', label: 'SMM' },
   { id: 'branding', label: 'Branding' },
+  { id: 'web', label: 'WEB' },
 ];
 
 export default component$(() => {
   const activeCategory = useSignal<CategoryId | 'all'>('all');
+  const projects = useProjects().value;
 
   const filteredProjects = () =>
     activeCategory.value === 'all'
-      ? PROJECTS
-      : PROJECTS.filter((p) => p.category === activeCategory.value);
+      ? projects
+      : projects.filter((p) => p.category === activeCategory.value);
 
   return (
     <main class="page page--projects">
@@ -96,7 +70,7 @@ export default component$(() => {
                   'projects-tabs__btn--active':
                     activeCategory.value === cat.id,
                 }}
-                onClick$={() => (activeCategory.value = cat.id)}
+                onClick$={() => (activeCategory.value = cat.id as CategoryId | 'all')}
               >
                 {cat.label}
               </button>
@@ -117,19 +91,32 @@ export default component$(() => {
           <div class="projects-grid">
             {filteredProjects().map((project) => (
               <article key={project.slug} class="project-card">
-                <Link href={`/projects/${project.slug}`} class="project-card__link">
+                <Link
+                  href={`/projects/${project.slug}`}
+                  class="project-card__link"
+                >
                   <div class="project-card__image-wrap">
-                    <img
-                      src={project.cover}
-                      alt={project.title}
-                      class="project-card__image"
-                      loading="lazy"
-                    />
+                    {project.cover ? (
+                      <img
+                        src={project.cover}
+                        alt={project.title}
+                        class="project-card__image"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div class="project-card__image-placeholder" />
+                    )}
                   </div>
                   <div class="project-card__body">
-                    <div class="project-card__client">{project.client}</div>
+                    {project.client && (
+                      <div class="project-card__client">{project.client}</div>
+                    )}
                     <h2 class="project-card__title">{project.title}</h2>
-                    <p class="project-card__subtitle">{project.subtitle}</p>
+                    {project.subtitle && (
+                      <p class="project-card__subtitle">
+                        {project.subtitle}
+                      </p>
+                    )}
                     <span class="project-card__more">Смотреть кейс →</span>
                   </div>
                 </Link>
@@ -139,7 +126,7 @@ export default component$(() => {
         </div>
       </section>
 
-     <HomeClients />
+      <HomeClients />
       <HomeCTA />
     </main>
   );

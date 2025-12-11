@@ -44,38 +44,55 @@
 /* Табы категорий */
 
 .projects-tabs {
-    display: block;
-  width: max-content;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
   border-radius: 999px;
   background: #ffffff;
   box-shadow: var(--shadow-soft);
-  padding: 4px;
+  padding: 4px 6px;
+
+  max-width: fit-content;
   margin: 0 auto 32px;
-  gap: 4px;
+
+  /* горизонтальный скролл */
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+
+  scroll-snap-type: x proximity; /* чтобы табы “прилипали” при скролле */
+}
+
+/* прячем скроллбар */
+.projects-tabs::-webkit-scrollbar {
+  display: none;
+}
+.projects-tabs {
+  scrollbar-width: none;
 }
 
 /* белая "пилюля"-контейнер */
 .projects-tabs::before,
 .projects-tabs::after {
-  content: '';
+  content: "";
 }
 
-
 .projects-tabs__btn {
-   border: none;
+  border: none;
   border-radius: 999px;
   padding: 9px 20px;
   font-size: 14px;
   cursor: pointer;
   background: transparent;
   color: var(--color-text-muted);
-  transition: background 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
 }
-
 
 .projects-tabs__btn:hover {
   transform: translateY(-1px);
-  
 }
 
 .projects-tabs__btn--active {
@@ -103,7 +120,9 @@
   border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
-  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
 }
 
 .project-card__link {
@@ -207,15 +226,12 @@
   padding: 60px 0 80px;
 }
 
-
 .cta__inner {
   max-width: 720px;
   margin: 0 auto;
   text-align: center;
   padding: 0 20px;
 }
-
-
 
 .cta__fields {
   display: flex;
@@ -238,13 +254,6 @@
   padding: 10px 24px;
   font-size: 0.95rem;
 }
-
-
-
-
-
-
-
 
 /* ФОН СТРАНИЦЫ */
 .page--project {
@@ -365,18 +374,35 @@
   }
 }
 
-/* Правая серая "фотка" */
+/* Контейнер вокруг карточки */
 .project-hero__image-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Серая бенто-плашка */
+.project-hero__image-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #e9e7e4;
+  border-radius: 40px; /* как у остальных бенто-блоков */
+  overflow: hidden;
+
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.project-hero__image-placeholder {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  border-radius: 32px;
-  background: #dedcd7;
+/* Картинка внутри */
+.project-hero__image {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain; /* НИЧЕГО НЕ ОБРЕЗАЕТ */
+  display: block;
 }
 
 /* ========== СЕКЦИИ ========== */
@@ -420,6 +446,54 @@
 .project-section__media--left {
   border-radius: 32px;
   background: #dedcd7;
+}
+
+.project-section__media {
+  flex: 1;
+  background: #e9e7e4;
+  border-radius: 40px;
+  padding: 0;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 520px; /* фиксированная геометрия как у бенто-блока */
+}
+
+/* Само фото */
+.project-section__image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* НИЧЕГО не режет */
+  display: block;
+}
+
+.project-section__gallery {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.project-section__gallery-item {
+  background: #e9e7e4;
+  border-radius: 32px;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  aspect-ratio: 1 / 1; /* квадратные мини-блоки */
+}
+
+.project-section__gallery-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 /* Результаты: слева белая, справа серая */
@@ -515,11 +589,14 @@
 
   .project-hero__meta {
     grid-template-columns: 1fr;
+     display: grid;
+    gap: 20px;
   }
 
   .project-section--solution .project-section__content,
   .project-section--results .project-section__content {
     grid-template-columns: 1fr;
+  
   }
 
   .project-section--solution .project-section__text,
@@ -530,9 +607,46 @@
   .project-section--goals {
     padding: 24px 20px;
   }
+  .project-hero__image-placeholder {
+    border-radius: 28px;
+    max-width: 360px;
+    margin: 0 auto;
+    width: 100%;
+    min-height: auto;
+  }
 
   .project-section__gallery--below {
     grid-template-columns: 1fr 1fr;
+  }
+  .project-section__media {
+    min-height: 360px;
+    border-radius: 28px;
+  }
+
+  .project-section__gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .project-section__gallery-item {
+    border-radius: 20px;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .project-card__body {
+    padding: 12px 12px 14px;
+  }
+
+  .project-card__title {
+    font-size: 0.98rem;
+  }
+
+  .project-card__subtitle {
+    font-size: 0.86rem;
   }
 }
 
@@ -548,4 +662,10 @@
   .project-section__gallery--below {
     grid-template-columns: 1fr;
   }
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+ 
 }
