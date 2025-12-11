@@ -1,308 +1,303 @@
-.page--projects,
+/* ФОН СТРАНИЦЫ */
 .page--project {
-  background: var(--color-bg);
+  background: #f4f2ef; /* тёплый светлый фон как на макете */
 }
 
-/* ====== Табы ====== */
-
-.projects {
-  padding: 64px 0 40px;
-}
-
-.projects__inner {
-  max-width: var(--container-width);
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-.projects-tabs {
-  display: block;
-  width: max-content;
-  gap: 4px;
-  padding: 4px;
-  margin: 0 auto 32px;
-  border-radius: 999px;
-  background: #ffffff;
-  box-shadow: var(--shadow-soft);
-}
-
-.projects-tabs__btn {
-  border: none;
-  border-radius: 999px;
-  padding: 9px 18px;
-  font-size: 14px;
-  cursor: pointer;
-  background: transparent;
-  color: var(--color-text-muted);
-  transition: background 0.15s ease, color 0.15s ease;
-}
-
-.projects-tabs__btn--active {
-  background: var(--color-dark);
-  color: #ffffff;
-}
-
-.projects-header {
-  text-align: center;
-  margin-bottom: 28px;
-}
-
-/* ====== Сетка проектов ====== */
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
-}
-
-.project-card {
-  border-radius: 28px;
-  background: #ffffff;
-  box-shadow: var(--shadow-soft);
-  overflow: hidden;
-}
-
-.project-card__link {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  color: inherit;
-  text-decoration: none;
-}
-
-.project-card__image-wrap {
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-}
-
-.project-card__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.2s ease;
-}
-
-.project-card__body {
-  padding: 18px 20px 20px;
-}
-
-.project-card__client {
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-text-muted);
-  margin-bottom: 4px;
-}
-
-.project-card__title {
-  font-size: 18px;
-  margin-bottom: 4px;
-}
-
-.project-card__subtitle {
-  font-size: 14px;
-  color: var(--color-text-muted);
-  margin-bottom: 8px;
-}
-
-.project-card__more {
-  font-size: 13px;
-  text-decoration: underline;
-}
-
-.project-card__link:hover .project-card__image {
-  transform: scale(1.03);
-}
-
-/* ====== Нам доверяют ====== */
-
-.trust {
-  padding: 32px 0 16px;
-}
-
-.trust__inner {
-  max-width: var(--container-width);
-  margin: 0 auto;
-  padding: 0 24px;
-  text-align: center;
-}
-
-.trust-logos {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 18px 32px;
-  margin-top: 24px;
-}
-
-.trust-logo {
-  font-size: 16px;
-  opacity: 0.7;
-}
-
-/* ====== CTA проектов ====== */
-
-.cta--projects {
-  padding-top: 24px;
-}
-
-.cta--project {
-  padding-top: 24px;
-}
-
-/* ====== Страница одного проекта ====== */
-
-.project {
-  padding: 56px 0 24px;
-}
-
+/* Контейнер страницы */
 .project__inner {
-  max-width: var(--container-width);
+  max-width: 1120px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 40px 20px 80px;
 }
 
+/* Ссылка "← Все проекты" */
 .project__back-link {
-  font-size: 14px;
-  text-decoration: none;
-  color: var(--color-text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.9rem;
+  margin-bottom: 24px;
+  color: #4b4b4b;
 }
 
-.project__back-link:hover {
-  text-decoration: underline;
-}
+/* ========== HERO ========== */
 
 .project-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: 36px;
-  margin-top: 24px;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 40px;
+  padding: 32px 32px;
+  border-radius: 32px;
   align-items: center;
 }
 
+.project-hero__text {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
 .project-hero__title {
-  font-size: 32px;
-  margin-bottom: 8px;
+  font-size: 2.1rem;
+  line-height: 1.2;
+  font-weight: 700;
+  margin: 0;
+  text-transform: lowercase; /* если хочешь эффект как на макете "заголовок" */
 }
 
 .project-hero__subtitle {
-  font-size: 16px;
-  margin-bottom: 20px;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333;
 }
 
+/* "задача" */
+.project-hero__task {
+  margin-top: 4px;
+}
+
+.project-hero__task-label {
+  display: block;
+  font-size: 0.85rem;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+.project-hero__task-text {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+/* Мета-блок */
+
 .project-hero__meta {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  font-size: 14px;
+  display: flex;
+  gap: 0 20px;
+  justify-content: space-between;
+  margin-top: 28px;
+  max-width: 620px;
+
+  background: #ffffff;
+  border-radius: 30px;
+  padding: 18px 32px;
+}
+
+.project-hero__meta div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .project-hero__meta dt {
-  font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-text-muted);
+  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  color: #c3c3c3;
 }
 
 .project-hero__meta dd {
-  margin: 4px 0 0;
+  margin: 0;
+  font-size: 0.9rem;
+  color: #222;
+  white-space: nowrap;
 }
 
+/* адаптив таблетки на мобилке */
+@media (max-width: 768px) {
+  .project-hero__meta {
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+    border-radius: 24px;
+    padding: 16px 20px;
+  }
+}
+
+/* Правая серая "фотка" */
 .project-hero__image-wrap {
-  border-radius: 28px;
-  overflow: hidden;
-  box-shadow: var(--shadow-soft);
-  background: #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.project-hero__image {
+.project-hero__image-placeholder {
   width: 100%;
-  display: block;
-  object-fit: cover;
+  aspect-ratio: 4 / 5;
+  border-radius: 32px;
+  background: #dedcd7;
 }
 
-/* ====== Секции с описанием ====== */
+/* ========== СЕКЦИИ ========== */
 
 .project-layout {
-  margin-top: 40px;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 60px;
+  margin-top: 60px;
 }
 
-.project-section {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-  gap: 28px;
-  align-items: start;
-}
-
-.project-section--with-image:nth-child(even) {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
-}
-
+/* Общие */
 .project-section__title {
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: 12px;
 }
 
 .project-section__body {
-  font-size: 15px;
-  color: var(--color-text-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+  white-space: pre-line;
+  color: #222;
 }
 
-.project-section__image-wrap {
-  border-radius: 24px;
+/* Блок "Маркетинговая задача и цели" — одна белая карточка */
+.project-section--goals {
+  background: #ffffff;
+  border-radius: 32px;
+  padding: 32px 32px;
+}
+
+/* Реализация: слева серый блок, справа белая карточка */
+.project-section--solution .project-section__content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+.project-section__media--left {
+  border-radius: 32px;
+  background: #dedcd7;
+}
+
+/* Результаты: слева белая, справа серая */
+.project-section--results .project-section__content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+.project-section--solution .project-section__text,
+.project-section--results .project-section__text {
+  background: #ffffff;
+  border-radius: 32px;
+  padding: 32px 32px;
+}
+
+.project-section__media--right {
+  border-radius: 32px;
+  background: #dedcd7;
+}
+
+/* Доп. галерея под блоком */
+.project-section__gallery--below {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.project-section__gallery-item {
+  background: #dedcd7;
+  border-radius: 22px;
   overflow: hidden;
-  background: #eee;
-  box-shadow: var(--shadow-soft);
 }
 
-.project-section__image {
-  width: 100%;
-  display: block;
-  object-fit: cover;
+/* ========== CTA ========== */
+
+.cta--project {
+  padding: 60px 0 80px;
 }
 
-/* ====== Адаптив ====== */
+.cta__inner {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
 
-@media (max-width: 1024px) {
-  .projects-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+.section-title--center {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
 
+.section-subtitle--center {
+  font-size: 0.98rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.cta__fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.cta__input {
+  min-width: 260px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid #d0d0d0;
+  font-size: 0.95rem;
+}
+
+.btn.btn--primary {
+  border-radius: 999px;
+  padding: 10px 24px;
+}
+
+/* ========== МОБИЛКА ========== */
+
+@media (max-width: 900px) {
   .project-hero {
     grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px 20px;
   }
 
   .project-hero__image-wrap {
-    max-width: 520px;
-    margin: 0 auto;
+    order: -1; /* если захочешь картинку сверху — можно поменять */
   }
 
   .project-hero__meta {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
+  }
+
+  .project-section--solution .project-section__content,
+  .project-section--results .project-section__content {
+    grid-template-columns: 1fr;
+  }
+
+  .project-section--solution .project-section__text,
+  .project-section--results .project-section__text {
+    padding: 24px 20px;
+  }
+
+  .project-section--goals {
+    padding: 24px 20px;
+  }
+
+  .project-section__gallery--below {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-@media (max-width: 768px) {
-  .projects {
-    padding-top: 40px;
+@media (max-width: 600px) {
+  .project__inner {
+    padding-inline: 16px;
   }
 
-  .projects-grid {
+  .project-hero__title {
+    font-size: 1.6rem;
+  }
+
+  .project-section__gallery--below {
     grid-template-columns: 1fr;
-  }
-
-  .project-section {
-    grid-template-columns: 1fr;
-  }
-
-  .project-hero__meta {
-    grid-template-columns: 1fr;
-  }
-
-  .project {
-    padding-top: 40px;
   }
 }
