@@ -1,5 +1,6 @@
 import { component$ } from '@builder.io/qwik';
 
+
 export const HomeHero = component$(() => {
   return (
     <section class="hero">

@@ -2,7 +2,7 @@ import { component$ } from '@builder.io/qwik';
 import { Link, routeLoader$ } from '@builder.io/qwik-city';
 import '../../../styles/projects.css';
 import { sanityClient } from '~/sanity/client';
-
+import { HomeCTA } from '~/components/sections/home/HomeCTA';
 /* -----------------------------
    TYPES
 ------------------------------ */
@@ -277,37 +277,7 @@ export default component$(() => {
         </div>
       </section>
 
-      {/* CTA под кейсом */}
-      <section class="cta cta--project">
-        <div class="cta__inner">
-          <h2 class="section-title section-title--center">
-            Хотите такой же результат для своего проекта?
-          </h2>
-          <p class="section-subtitle section-subtitle--center">
-            Напишите пару строк о задаче — вернусь с идеями и примерным бюджетом.
-          </p>
-
-          <form class="cta__form" preventdefault:submit>
-            <div class="cta__fields">
-              <input
-                class="cta__input"
-                type="text"
-                name="name"
-                placeholder="Как к вам обращаться"
-              />
-            <input
-                class="cta__input"
-                type="text"
-                name="project"
-                placeholder="Кратко опишите проект"
-              />
-            </div>
-            <button class="btn btn--primary" type="submit">
-              Обсудить проект
-            </button>
-          </form>
-        </div>
-      </section>
+      <HomeCTA />
     </main>
   );
 });
