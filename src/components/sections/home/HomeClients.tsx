@@ -64,7 +64,7 @@ export const HomeClients = component$(() => {
 
         <div class="clients__marquee clients__marquee--top">
           <div class="clients__track">
-            {[...top, ...top].map((c, i) => {
+            {[...top, ...top, ...top, ...top].map((c, i) => {
               const Tag: any = c.href ? 'a' : 'div';
               return (
                 <Tag
@@ -82,7 +82,7 @@ export const HomeClients = component$(() => {
 
         <div class="clients__marquee clients__marquee--bottom">
           <div class="clients__track clients__track--reverse">
-            {[...bottom, ...bottom].map((c, i) => {
+            {[...bottom, ...bottom, ...bottom, ...bottom].map((c, i) => {
               const Tag: any = c.href ? 'a' : 'div';
               return (
                 <Tag
