@@ -27,20 +27,16 @@ export const HomeClients = component$(() => {
   const cursor = document.getElementById('cursor-cta');
   if (!cursor) return;
 
-  let active = false;
-
   const move = (e: MouseEvent) => {
     cursor.style.left = `${e.clientX}px`;
     cursor.style.top = `${e.clientY}px`;
   };
 
   const onEnter = () => {
-    active = true;
     cursor.classList.add('is-visible');
   };
 
   const onLeave = () => {
-    active = false;
     cursor.classList.remove('is-visible');
   };
 
