@@ -166,37 +166,7 @@
   color: var(--color-accent);
 }
 
-/* ====== CLIENTS ====== */
 
-.clients {
-  padding: 60px 0 40px;
-}
-
-.clients__inner {
-  text-align: center;
-}
-
-.clients__grid {
-  margin-top: 32px;
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 26px 32px;
-  align-items: center;
-  justify-items: center;
-}
-
-.clients__item {
-  padding: 10px 12px;
-  border-radius: 10px;
-  background: #ffffff;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.04);
-  min-width: 140px;
-}
-
-.clients__name {
-  font-size: 14px;
-  opacity: 0.8;
-}
 
 /* ========== TEAM ========== */
 

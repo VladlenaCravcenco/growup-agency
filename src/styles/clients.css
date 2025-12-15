@@ -1,0 +1,158 @@
+.clients {
+  padding: 70px 0;
+}
+
+.clients__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 7vw;
+}
+
+.clients__marquee {
+  position: relative;
+  overflow: hidden; /* обрезаем ленту */
+  margin-top: 60px;
+
+  /* Плавное исчезновение по краям (важно!) */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 12%,
+    #000 88%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 12%,
+    #000 88%,
+    transparent 100%
+  );
+}
+
+.clients__marquee:hover .clients__track {
+  animation-play-state: paused;
+}
+
+a.clients__item {
+  cursor: default;
+}
+
+.clients__item {
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+  opacity: 0.9;
+  
+}
+
+.clients__marquee:hover a.clients__item:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+#cursor-cta {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+
+  background: #2563eb;
+  color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  pointer-events: none;
+  z-index: 9999;
+
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.6);
+  transition:
+    opacity .2s ease,
+    transform .2s ease;
+}
+
+#cursor-cta.is-visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.clients__item[href] {
+  cursor: none;
+}
+
+.clients__track {
+  display: flex;
+  align-items: center;
+  gap: 56px;
+  width: max-content; /* критично: чтобы ширина была по контенту */
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+
+  animation: clients-marquee 22s linear infinite;
+}
+
+.clients__track--reverse {
+  animation-direction: reverse;
+}
+
+.clients__item {
+  flex: 0 0 auto; /* не сжимать */
+  height: 70px; /* фикс высота — убирает “прыжки” */
+  display: flex;
+  align-items: center;
+}
+
+.clients__item img {
+  height: 100%;
+  width: auto;
+  max-width: 170px; /* чтобы не раздувало ряд */
+  object-fit: contain;
+  display: block; /* убирает baseline-дерганье */
+  filter: grayscale(1);
+  opacity: 0.7;
+}
+
+/* верхний ряд */
+.clients__marquee--top .clients__track {
+  animation-duration: 26s;
+}
+
+/* нижний ряд */
+.clients__marquee--bottom .clients__track {
+  animation-duration: 30s;
+  margin-top: 14px;
+}
+
+@keyframes clients-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(
+      -50%,
+      0,
+      0
+    ); /* потому что мы продублировали массив дважды */
+  }
+}
+
+/* если человек не хочет анимации */
+@media (prefers-reduced-motion: reduce) {
+  .clients__track {
+    animation: none;
+    transform: none;
+  }
+}
+
+@media (hover: none) {
+  #cursor-cta {
+    display: none;
+  }
+}
