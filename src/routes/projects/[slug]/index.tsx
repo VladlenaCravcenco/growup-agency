@@ -27,7 +27,7 @@ type ProjectPageData = {
   heroSubtitle?: string;
   task?: string;
   client?: string;
-  role?: string;
+  categories?: string;
   period?: string;
   cover?: string;
   sections: ProjectSection[];
@@ -44,7 +44,7 @@ const DEMO_PROJECT: ProjectPageData = {
     'Кейс музыкальной группы Not an idol: тур по шести городам Германии с акцентом на русскоязычную и румыноязычную аудиторию.',
   task: 'Продать все билеты на тур в шести городах Германии за ограниченный срок, работая с новой аудиторией.',
   client: 'Not an idol',
-  role: 'Стратегия, креатив, performance-маркетинг',
+  categories: 'Стратегия, креатив, performance-маркетинг',
   period: '30 дней',
   cover: '',
   sections: [],
@@ -127,8 +127,8 @@ export default component$(() => {
                   <dd>{data.client}</dd>
                 </div>
                 <div>
-                  <dt>Роль команды</dt>
-                  <dd>{data.role}</dd>
+                  <dt>Категория</dt>
+                  <dd>{data.categories}</dd>
                 </div>
                 <div>
                   <dt>Период</dt>

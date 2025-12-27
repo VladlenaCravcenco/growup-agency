@@ -10,7 +10,7 @@ export type CategoryId = 'ads' | 'smm' | 'branding' | 'web';
 
 export type Project = {
   slug: string;
-  category: CategoryId;
+  categories: CategoryId[];
   title: string;
   subtitle: string;
   cover: string;
@@ -22,21 +22,16 @@ export const useProjects = routeLoader$<Project[]>(async () => {
   const projects = await sanityClient.fetch<Project[]>(
     `*[_type == "project"] | order(_createdAt desc){
       "slug": slug.current,
-      // категория: ads / smm / branding / web
-      category,
-      // заголовок кейса
+      "categories": coalesce(categories, []),
       title,
-      // подзаголовок можно брать из heroSubtitle
       "subtitle": heroSubtitle,
-      // клиент
       client,
-      // обложка: можно одну и ту же картинку использовать и в hero, и в сетке
       "cover": cover.asset->url
     }`
   );
-
   return projects || [];
 });
+
 
 
 const CATEGORIES: { id: CategoryId | 'all'; label: string }[] = [
@@ -51,10 +46,11 @@ export default component$(() => {
   const activeCategory = useSignal<CategoryId | 'all'>('all');
   const projects = useProjects().value;
 
-  const filteredProjects = () =>
-    activeCategory.value === 'all'
-      ? projects
-      : projects.filter((p) => p.category === activeCategory.value);
+ const filteredProjects = () =>
+  activeCategory.value === 'all'
+    ? projects
+    : projects.filter((p) => p.categories?.includes(activeCategory.value as CategoryId));
+
 
   return (
     <main class="page page--projects">

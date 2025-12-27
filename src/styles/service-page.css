@@ -12,35 +12,10 @@
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   gap: 64px;
-  padding: 120px 7vw 80px;
+  padding: 120px 0vw 80px;
   align-items: center;
 }
 
-/* светлый "НЛО" справа, как на рефе */
-.service-hero::after {
-  content: "";
-  position: absolute;
-  right: 7vw;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 460px;
-  height: 280px;
-  border-radius: 999px;
-  background:
-    radial-gradient(
-      circle at 50% 40%,
-      #ffffff 0%,
-      #ffffff 45%,
-      transparent 70%
-    ),
-    radial-gradient(
-      circle at 50% 80%,
-      rgba(154, 191, 255, 0.6) 0%,
-      transparent 70%
-    );
-  opacity: 0.9;
-  pointer-events: none;
-}
 
 /* левая колонка с текстом */
 .service-hero__badge {
@@ -90,8 +65,8 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 13px 26px;
-  border-radius: 999px;
+  padding: 24px 26px;
+  border-radius: 20px;
   font-size: 14px;
   font-weight: 500;
   border: 1px solid transparent;
@@ -132,12 +107,13 @@
 .service-hero__image {
   position: relative;
   display: flex;
+  border-radius: 20px;
   justify-content: center;
   z-index: 1;
 }
 
 .service-hero__image img {
-  max-width: 420px;
+border-radius: 20px;
   width: 100%;
   height: auto;
 }

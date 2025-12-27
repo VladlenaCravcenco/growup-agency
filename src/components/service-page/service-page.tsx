@@ -3,12 +3,21 @@ import { component$, useStylesScoped$, useVisibleTask$ } from '@builder.io/qwik'
 import styles from '~/styles/service-page.css?inline';
 import type { ServicePageData } from '~/components/service-page/types';
 import { ServiceOffersStack } from './ServiceOffersStack';
+import { Link } from '@builder.io/qwik-city';
 
+type SanityProject = {
+  slug: string;
+  title: string;
+  tagline?: string;
+  client?: string;
+  image?: string;
+};
 interface ServicePageProps {
   data: ServicePageData;
+  projectsFromSanity?: SanityProject[];
 }
 
-export const ServicePage = component$<ServicePageProps>(({ data }) => {
+export const ServicePage = component$<ServicePageProps>(({ data, projectsFromSanity }) => {
   useStylesScoped$(styles);
 
   // стек карточек: какая активная, какие уже "улетели назад"
@@ -58,6 +67,13 @@ export const ServicePage = component$<ServicePageProps>(({ data }) => {
     return () => observer.disconnect();
   });
 
+
+  const hasSanity = projectsFromSanity !== undefined; // важно: не length
+
+  const items = hasSanity
+    ? projectsFromSanity
+    : data.projects.items;
+
   return (
     <main class="service-page">
       {/* 1. Hero */}
@@ -95,37 +111,34 @@ export const ServicePage = component$<ServicePageProps>(({ data }) => {
           <p class="service-section-label">{data.projects.label}</p>
           <h2 class="service-section-title">{data.projects.title}</h2>
           <a href={data.projects.allLink} class="service-section-link">
-            View all projects ↗
+            Посмотреть все кейсы ↗
           </a>
         </div>
 
-        <div class="service-projects__marquee">
-          <div class="service-projects__track">
-            {data.projects.items.map((project) => (
-              <article class="service-project-card" key={project.slug}>
-                <img src={project.image} alt={project.title} loading="lazy" />
-                <h3>{project.title}</h3>
-                <p>{project.tagline}</p>
-                <p class="service-project-card__client">
-                  Client: {project.client}
-                </p>
-              </article>
-            ))}
-            {data.projects.items.map((project) => (
-              <article
-                class="service-project-card"
-                key={project.slug + '-dup'}
-              >
-                <img src={project.image} alt={project.title} loading="lazy" />
-                <h3>{project.title}</h3>
-                <p>{project.tagline}</p>
-                <p class="service-project-card__client">
-                  Client: {project.client}
-                </p>
-              </article>
-            ))}
+        {items.length === 0 ? (
+          <div class="service-projects__empty">Пока нет кейсов по этой услуге</div>
+        ) : (
+          <div class="service-projects__marquee">
+            <div class="service-projects__track">
+              {[...items, ...items].map((project, idx) => (
+                <article class="service-project-card" key={`${project.slug}-${idx}`}>
+                  <Link href={`/projects/${project.slug}`}>
+                    {project.image ? (
+                      <img src={project.image} alt={project.title} loading="lazy" />
+                    ) : (
+                      <div class="service-project-card__ph" />
+                    )}
+                    <h3>{project.title}</h3>
+                    {project.tagline && <p>{project.tagline}</p>}
+                    {project.client && (
+                      <p class="service-project-card__client">Client: {project.client}</p>
+                    )}
+                  </Link>
+                </article>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </section>
 
       {/* 3. Process */}

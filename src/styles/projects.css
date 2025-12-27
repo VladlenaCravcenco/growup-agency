@@ -244,13 +244,13 @@
 .cta__input {
   min-width: 260px;
   padding: 10px 14px;
-  border-radius: 999px;
+  border-radius: 20px;
   border: 1px solid #d1d5db;
   font-size: 0.95rem;
 }
 
 .btn.btn--primary {
-  border-radius: 999px;
+  border-radius: 20px;
   padding: 10px 24px;
   font-size: 0.95rem;
 }
@@ -588,13 +588,13 @@
 .cta__input {
   min-width: 260px;
   padding: 10px 14px;
-  border-radius: 999px;
+  border-radius: 20px;
   border: 1px solid #d0d0d0;
   font-size: 0.95rem;
 }
 
 .btn.btn--primary {
-  border-radius: 999px;
+  border-radius: 20px;
   padding: 10px 24px;
 }
 
