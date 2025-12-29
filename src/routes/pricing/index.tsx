@@ -433,6 +433,7 @@ export const TypeModal = component$<ModalProps>(({ onClose$ }) => {
               <option>Платная реклама</option>
               <option>Social Media Marketing</option>
               <option>Branding</option>
+              <option>Web разработка</option>
             </select>
           </label>
 

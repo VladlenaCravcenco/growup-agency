@@ -9,7 +9,9 @@ type ClientLogo = { src: string; alt: string, href?: string };
 
 export const HomeClients = component$(() => {
   const top: ClientLogo[] = [
-    { src: '/media/clients/hanna.png', alt: 'hanna' },
+    { src: '/media/clients/hanna.png', alt: 'hanna', href: '/projects/hanna-smm' },
+    { src: '/media/clients/fitness-one.png', alt: 'fitness-one', href: '/projects/fitness-one' },
+    { src: '/media/clients/not-an-idol.png', alt: 'not-an-idol', href: '/projects/not-an-idol' },
     { src: '/media/clients/lashstore.png', alt: 'lashstore' },
     { src: '/media/clients/ciao-bella.png', alt: 'ciao-bella' },
     { src: '/media/clients/aquaterra.png', alt: 'aquaterra' },
