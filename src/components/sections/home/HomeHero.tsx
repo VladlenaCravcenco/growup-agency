@@ -35,10 +35,10 @@ export const HomeHero = component$(() => {
           </p>
 
           <div class="hero__actions">
-            <a href="#consult" class="btn btn--primary">
+            <a href="/contact" class="btn btn--primary">
               Получить предложение
             </a>
-            <a href="/portfolio" class="btn btn--ghost">
+            <a href="/projects" class="btn btn--ghost">
               Посмотреть кейсы
             </a>
           </div>

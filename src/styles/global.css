@@ -177,8 +177,8 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 24px 26px;
-  border-radius: 20px;
+  padding: 24px 26px!important;
+  border-radius: 20px!important;
   border: none;
   font-size: 18px;
   font-weight: 500;
