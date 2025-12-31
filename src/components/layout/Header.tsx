@@ -50,8 +50,12 @@ export const Header = component$(() => {
           <a href="/pricing" class="header__link">Цены</a>
           <a href="/#consult" class="header__link">Консультация</a>
           <a href="/projects" class="header__link">Портфолио</a>
-          <a href="/blog" class="header__link">Блог</a>
+          {/* <a href="/blog" class="header__link">Блог</a> */}
           <a href="/contact" class="header__link">Контакты</a>
+
+          <a href="/contact" class="hero-btn">
+              Получить предложение
+            </a>
 
           {/* DESKTOP LANGUAGE SWITCHER */}
           <div class="lang">
@@ -118,12 +122,15 @@ export const Header = component$(() => {
         <a href="/projects" class="header__link">
           Портфолио
         </a>
-        <a href="/blog" class="header__link">
+        {/* <a href="/blog" class="header__link">
           Блог
-        </a>
+        </a> */}
         <a href="/contact" class="header__link">
           Контакты
         </a>
+        <a href="/contact" class="hero-btn">
+              Получить предложение
+            </a>
 
         {/* MOBILE LANGUAGE SWITCHER */}
         <div class="header__mobile-langs">

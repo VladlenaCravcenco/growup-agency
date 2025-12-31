@@ -284,4 +284,7 @@
   .contact-layout {
     padding-bottom: 72px;
   }
+  .contact-info{
+    display: none;
+  }
 }

@@ -117,10 +117,18 @@
   color: #1e2a3a;
   font-size: 16px;
 }
+.hero-btn{
+padding: 14px;
+background-color: #2563eb;
+color: #f3f3f3;
+border-radius: 15px;
+font-weight: 700;
+}
 
 /* LANGUAGE DROPDOWN */
 .lang {
   position: relative;
+  display: none;
 }
 
 .lang__button {

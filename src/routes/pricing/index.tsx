@@ -33,9 +33,9 @@ const PRICING: Category[] = [
     tiers: [
       {
         id: 'ads-1',
-        name: 'Тариф 1',
+        name: 'Starter',
         price: '400€/мес',
-        oldPrice: '400€/мес',
+        // oldPrice: '700€/мес',
         features: [
           'Анализ ситуации клиента (продукт/услуга, ниша)',
           'Анализ конкурентов',
@@ -49,9 +49,9 @@ const PRICING: Category[] = [
       },
       {
         id: 'ads-2',
-        name: 'Тариф 2',
+        name: 'Business',
         price: '580€/мес',
-        oldPrice: '580€/мес',
+        // oldPrice: '580€/мес',
         highlighted: true,
         features: [
           'Анализ ситуации клиента (продукт/услуга, ниша)',
@@ -67,9 +67,9 @@ const PRICING: Category[] = [
       },
       {
         id: 'ads-3',
-        name: 'Тариф 3',
+        name: 'Premium',
         price: '700€/мес',
-        oldPrice: '700€/мес',
+        // oldPrice: '700€/мес',
         features: [
           'Target Adv – глубокий анализ ситуации клиента',
           'Анализ конкурентов с таблицей показателей',
@@ -92,9 +92,9 @@ const PRICING: Category[] = [
     tiers: [
       {
         id: 'smm-1',
-        name: 'Тариф 1',
+        name: 'Starter',
         price: '350€/мес',
-        oldPrice: '350€/мес',
+        // oldPrice: '350€/мес',
         features: [
           'Анализ рабочего аккаунта',
           'Контент-план на 10 постов (7 фото, 3 видео)',
@@ -107,9 +107,9 @@ const PRICING: Category[] = [
       },
       {
         id: 'smm-2',
-        name: 'Тариф 2',
+        name: 'Business',
         price: '580€/мес',
-        oldPrice: '580€/мес',
+        // oldPrice: '580€/мес',
         highlighted: true,
         features: [
           'Анализ рабочего аккаунта',
@@ -123,9 +123,9 @@ const PRICING: Category[] = [
       },
       {
         id: 'smm-3',
-        name: 'Тариф 3',
+        name: 'Premium',
         price: '700€/мес',
-        oldPrice: '700€/мес',
+        // oldPrice: '700€/мес',
         features: [
           'Анализ рабочего аккаунта',
           'Контент-план на 15 постов (5 фото, 10 видео)',
@@ -146,9 +146,9 @@ const PRICING: Category[] = [
     tiers: [
       {
         id: 'brand-1',
-        name: 'Тариф 1',
-        price: '400€/мес',
-        oldPrice: '400€/мес',
+        name: 'Starter',
+        price: '400€',
+        // oldPrice: '700€',
         features: [
           'Разработка логотипа',
           'Подбор фирменных шрифтов',
@@ -157,9 +157,9 @@ const PRICING: Category[] = [
       },
       {
         id: 'brand-2',
-        name: 'Тариф 2',
-        price: '1050€/мес',
-        oldPrice: '1050€/мес',
+        name: 'Business',
+        price: '1050€',
+        // oldPrice: '1200€',
         highlighted: true,
         features: [
           'Разработка концепции бренда',
@@ -172,9 +172,9 @@ const PRICING: Category[] = [
       },
       {
         id: 'brand-3',
-        name: 'Тариф 3',
-        price: '1200€/мес',
-        oldPrice: '1200€/мес',
+        name: 'Premium',
+        price: '1200€',
+        // oldPrice: '1500€',
         features: [
           'Разработка концепции бренда',
           'Полный брендбук',
@@ -195,8 +195,8 @@ const PRICING: Category[] = [
       {
         id: 'web-1',
         name: 'Starter',
-        price: '350€/мес',
-        oldPrice: '400€/мес',
+        price: 'от 800€',
+        // oldPrice: '1200€',
         features: [
           'Разработка лендинга',
           'Анализ ниши (поверхностный)',
@@ -210,8 +210,8 @@ const PRICING: Category[] = [
       {
         id: 'web-2',
         name: 'Business',
-        price: '800€/мес',
-        oldPrice: '1050€/мес',
+        price: 'от 1500€',
+        // oldPrice: '2100€',
         highlighted: true,
         features: [
           '4–10 страниц',
@@ -229,8 +229,8 @@ const PRICING: Category[] = [
       {
         id: 'web-3',
         name: 'Premium',
-        price: '2000€/мес',
-        oldPrice: '2300€/мес',
+        price: 'от 3500€',
+        // oldPrice: '4800€',
         features: [
           'Дизайн-система + гайдлайн',
           'Глубокое UX-исследование',
@@ -325,7 +325,7 @@ export default component$(() => {
                   <button
                     class="plan-card__btn-gift"
                     type="button"
-                    aria-label="Скидка 50% на первый заказ"
+                    aria-label="Скидка 10% на первый заказ"
                     onClick$={() => {
                       if (typeof window !== 'undefined') {
                         window.dispatchEvent(

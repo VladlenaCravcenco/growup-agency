@@ -100,42 +100,40 @@ export default component$(() => {
             <div class="contact-info__block">
               <p class="contact-info__label">Email</p>
               <a
-                href="mailto:hello@growup.agency"
+                href="mailto:growupagency.org@gmail.com"
                 class="contact-info__link"
               >
-                hello@growup.agency
+                growupagency.org@gmail.com
               </a>
             </div>
 
             <div class="contact-info__block">
               <p class="contact-info__label">Телеграм</p>
               <a
-                href="https://t.me/your_agency"
+                href="https://t.me/alionars"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="contact-info__link"
               >
-                @your_agency
+                @alionars
               </a>
             </div>
 
             <div class="contact-info__block">
               <p class="contact-info__label">Instagram</p>
               <a
-                href="https://instagram.com/your_agency"
+                href="https://www.instagram.com/growupagency?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
                 target="_blank"
                 rel="noopener noreferrer"
                 class="contact-info__link"
               >
-                @your_agency
+                @growupagency
               </a>
             </div>
 
             <div class="contact-info__block">
-              <p class="contact-info__label">Офис</p>
               <p class="contact-info__text">
-                Кишинёв, центр <br />
-                Онлайн-встречи для клиентов из любой страны.
+                <b>Онлайн-встречи</b> для клиентов из любой страны.
               </p>
             </div>
           </aside>

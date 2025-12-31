@@ -39,7 +39,7 @@ export const onPost: RequestHandler = async ({ request, json }) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          chat_id: 7470082544,        // <-- здесь должен быть 7470082544
+          chat_id: 565615932,        
           text,
           parse_mode: 'HTML',
         }),
