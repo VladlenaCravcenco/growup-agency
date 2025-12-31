@@ -19,7 +19,7 @@ export default component$(() => {
     const formData = new FormData(form);
 
     const name = String(formData.get('name') ?? '').trim();
-    const phone = String(formData.get('phone') ?? '').trim();    
+    const phone = String(formData.get('phone') ?? '').trim();
     const email = String(formData.get('email') ?? '').trim();
     const niche = String(formData.get('niche') ?? '').trim();
     const service = String(formData.get('service') ?? '').trim();
@@ -30,7 +30,6 @@ export default component$(() => {
     const startWhen = String(formData.get('startWhen') ?? '').trim();
     const comment = String(formData.get('comment') ?? '').trim();
 
-    // простая валидация обязательных
     if (!name || !phone || !email || !niche || !service || !budget || !goal) {
       error.value = 'Пожалуйста, заполните все обязательные поля.';
       sending.value = false;
@@ -42,17 +41,18 @@ export default component$(() => {
       page = window.location.pathname;
     }
 
+    const eventId =
+      typeof crypto !== 'undefined' && 'randomUUID' in crypto
+        ? crypto.randomUUID()
+        : String(Date.now());
+
     try {
-      await fetch(WEBHOOK_URL, {
+      const res = await fetch(WEBHOOK_URL, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           source: 'contact_form',
           page,
-
-          // базовые поля
           name,
           phone,
           email,
@@ -60,23 +60,33 @@ export default component$(() => {
           service,
           budget,
           goal,
-
-          // доп. информация
           website,
           startWhen,
           comment,
+          eventId,
         }),
       });
 
+      if (!res.ok) {
+        const text = await res.text().catch(() => '');
+        throw new Error(`Webhook failed: ${res.status} ${text}`);
+      }
+
+      // ✅ Lead только после реального успеха
+      if (typeof window !== 'undefined' && (window as any).fbq) {
+        (window as any).fbq('track', 'Lead', { source: 'brief' }, { eventID: eventId });
+      }
+
       sent.value = true;
       form.reset();
-    } catch {
+    } catch (e) {
+      console.error(e);
       error.value = 'Что-то пошло не так при отправке. Попробуйте ещё раз.';
     } finally {
       sending.value = false;
     }
   });
-
+  
   return (
     <main class="page page--contact">
       {/* Хедер страницы */}
