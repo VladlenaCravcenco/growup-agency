@@ -5,8 +5,8 @@ import { HomeServices } from '../components/sections/home/HomeServices';
 import { HomeClients } from '../components/sections/home/HomeClients';
 import { HomeTeam } from '../components/sections/home/HomeTeam';
 import { HomeProcess } from '../components/sections/home/HomeProcess';
-import { HomeFAQ } from '../components/sections/home/HomeFAQ';
-import { HomeCTA } from '../components/sections/home/HomeCTA';
+import { HomeFaqCta } from '../components/sections/home/HomeFaqCta';
+
 import '../styles/home.css';
 
 export default component$(() => {
@@ -18,8 +18,7 @@ export default component$(() => {
       <HomeClients />
       <HomeTeam />
       <HomeProcess />
-      <HomeFAQ />
-      <HomeCTA />
+      <HomeFaqCta />
     </>
   );
 });

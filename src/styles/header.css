@@ -1,8 +1,3 @@
-/* Контейнер */
-.header {
-  background: #fbf8f3;
-  border-bottom: 1px solid #e2ddd7;
-}
 
 .header__inner {
   max-width: 1300px;

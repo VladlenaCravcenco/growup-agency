@@ -220,40 +220,6 @@
   background: #ffffffcc;
 }
 
-/* CTA под списком проектов */
-
-.cta {
-  padding: 60px 0 80px;
-}
-
-.cta__inner {
-  max-width: 720px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 0 20px;
-}
-
-.cta__fields {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-  margin: 24px 0 16px;
-}
-
-.cta__input {
-  min-width: 260px;
-  padding: 10px 14px;
-  border-radius: 20px;
-  border: 1px solid #d1d5db;
-  font-size: 0.95rem;
-}
-
-.btn.btn--primary {
-  border-radius: 20px;
-  padding: 10px 24px;
-  font-size: 0.95rem;
-}
 
 /* ФОН СТРАНИЦЫ */
 .page--project {
@@ -554,49 +520,6 @@
   overflow: hidden;
 }
 
-/* ========== CTA ========== */
-
-.cta--project {
-  padding: 60px 0 80px;
-}
-
-.cta__inner {
-  max-width: 720px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.section-title--center {
-  font-size: 1.6rem;
-  margin-bottom: 8px;
-}
-
-.section-subtitle--center {
-  font-size: 0.98rem;
-  color: #555;
-  margin-bottom: 20px;
-}
-
-.cta__fields {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-  margin-bottom: 16px;
-}
-
-.cta__input {
-  min-width: 260px;
-  padding: 10px 14px;
-  border-radius: 20px;
-  border: 1px solid #d0d0d0;
-  font-size: 0.95rem;
-}
-
-.btn.btn--primary {
-  border-radius: 20px;
-  padding: 10px 24px;
-}
 
 /* ========== МОБИЛКА ========== */
 

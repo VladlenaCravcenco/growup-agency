@@ -152,9 +152,9 @@ export const GlobalDiscount = component$(() => {
           phone,
           service,
           source: 'discount_popup',
-          discount: '50%',
+          discount: '10%',
           page,
-          comment: 'Скидка 50% на первый заказ',
+          comment: 'Скидка 10% на первый заказ',
         }),
       });
       sent.value = true;
@@ -189,7 +189,7 @@ export const GlobalDiscount = component$(() => {
               ✕
             </button>
 
-            <div class="discount-headline">50%</div>
+            <div class="discount-headline">10%</div>
             <p class="discount-subtitle">Для твоего первого заказа!</p>
 
             <form

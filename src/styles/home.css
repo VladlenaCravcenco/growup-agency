@@ -120,7 +120,7 @@
 /* ====== SERVICES ====== */
 
 .services {
-  padding: 60px 0;
+  padding: 100px 0;
 }
 
 .services__head {
@@ -139,6 +139,7 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 24px;
   margin-top: 24px;
+  height: 300px;
 }
 
 .services__card {
@@ -296,9 +297,7 @@
 
 /* ====== FAQ ====== */
 
-.faq {
-  padding: 60px 0;
-}
+
 
 .faq__list {
   margin-top: 20px;
@@ -350,9 +349,7 @@
 
 /* ====== CTA ====== */
 
-.cta {
-  padding: 70px 0 80px;
-}
+
 
 .cta__inner {
   text-align: center;
@@ -371,12 +368,13 @@
   gap: 12px;
   width: 100%;
   max-width: 640px;
+  flex-direction: column;
 }
 
 .cta__input {
   flex: 1;
-  padding: 14px 16px;
-  border-radius: 999px;
+  padding: 16px 16px;
+  border-radius: 14px;
   border: 1px solid var(--color-border);
   font-size: 14px;
   outline: none;
@@ -491,10 +489,12 @@
 
   .services__grid {
     grid-template-columns: 1fr;
+    height: fit-content;
   }
 
   .clients__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  
   }
 
   .process__item {

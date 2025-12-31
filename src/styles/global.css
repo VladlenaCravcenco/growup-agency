@@ -69,9 +69,8 @@ button {
 .services__grid,
 .clients__inner,
 .home-container,
-.process__inner,
-.faq__inner,
-.cta__inner {
+.process__inner
+ {
   width: 100%;
   max-width: var(--container-width);
   margin: 0 auto;
@@ -83,9 +82,9 @@ button {
 .header {
   position: sticky;
   top: 0;
-  z-index: 20;
-  backdrop-filter: blur(12px);
-  background: rgba(247, 245, 242, 0.88);
+  z-index: 999;
+  backdrop-filter: blur(3px);
+  background: rgba(247, 245, 242, 0.796);
   border-bottom: 1px solid rgba(255, 255, 255, 0.6);
 }
 
@@ -193,6 +192,7 @@ button {
   background: var(--color-dark);
   color: #ffffff;
   box-shadow: 0 18px 35px rgba(0, 0, 0, 0.22);
+
 }
 
 .btn--primary:hover {

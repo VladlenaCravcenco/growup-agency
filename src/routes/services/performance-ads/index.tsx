@@ -18,7 +18,7 @@ export const useServiceProjects = routeLoader$<SanityProject[]>(async () => {
   const category = 'ads'; // ✅ для этой услуги
 
   const projects = await sanityClient.fetch<SanityProject[]>(
-    `*[_type=="project" && category==$category && defined(slug.current)]
+    `*[_type=="project" && defined(slug.current) && $category in coalesce(categories, [])]
       | order(_createdAt desc)[0...10]{
         "slug": slug.current,
         title,

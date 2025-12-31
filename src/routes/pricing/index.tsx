@@ -1,6 +1,6 @@
 import { component$, useSignal, QRL } from '@builder.io/qwik';
 import { PricingFormat } from '../../components/sections/pricing/PricingFormat';
-import { HomeCTA } from '../../components/sections/home/HomeCTA'
+import { HomeFaqCta } from '../../components/sections/home/HomeFaqCta';
 
 
 import '../../styles/pricing.css';
@@ -348,54 +348,7 @@ export default component$(() => {
 
 
 
-      {/* FAQ + CTA повторно, простая версия */}
-      <section class="faq faq--secondary">
-        <div class="faq__inner">
-          <h2 class="section-title section-title--center">
-            Частые вопросы по тарифам
-          </h2>
-          <p class="section-subtitle section-subtitle--center">
-            Коротко о бюджете, сроках и формате работы.
-          </p>
-
-          <div class="faq__list">
-            <details class="faq__item">
-              <summary class="faq__question">
-                Как понять, какой тариф подходит именно нам?
-              </summary>
-              <div class="faq__answer">
-                Мы начнём с короткого созвона, разберёмся в вашем продукте и
-                целях. По итогу вы получите рекомендацию по тарифу и бюджету
-                без обязательств.
-              </div>
-            </details>
-
-            <details class="faq__item">
-              <summary class="faq__question">
-                Можно ли комбинировать тарифы по рекламе и SMM?
-              </summary>
-              <div class="faq__answer">
-                Да, мы часто собираем гибридные пакеты под конкретный бизнес.
-                На странице брифа вы сможете описать пожелания — мы соберём
-                персональное предложение.
-              </div>
-            </details>
-
-            <details class="faq__item">
-              <summary class="faq__question">
-                С каким минимальным бюджетом на рекламу вы работаете?
-              </summary>
-              <div class="faq__answer">
-                Обычно мы рекомендуем стартовать от 400–500€ в месяц на рекламные
-                кабинеты, чтобы видеть адекватную статистику и масштабировать
-                результат.
-              </div>
-            </details>
-          </div>
-        </div>
-      </section>
-
-      <HomeCTA />
+    <HomeFaqCta />
 
       {/* Модалка: “Выбери свой тип продвижения” */}
       {showTypeModal.value && <TypeModal onClose$={() => (showTypeModal.value = false)} />}

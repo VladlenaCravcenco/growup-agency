@@ -530,7 +530,7 @@ border-radius: 20px;
 }
 
 .service-brief-cta__inner {
-  background: linear-gradient(90deg, #b9a5ff, #9ec5ff);
+  background: linear-gradient(90deg, #408cff, #6338ff);
   border-radius: 40px;
   padding: 32px 40px;
   display: flex;
@@ -543,6 +543,7 @@ border-radius: 20px;
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 6px;
+  width: 70%;
 }
 
 .service-brief-cta__inner p {

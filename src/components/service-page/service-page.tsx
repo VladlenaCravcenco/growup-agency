@@ -87,7 +87,7 @@ export const ServicePage = component$<ServicePageProps>(({ data, projectsFromSan
           <p class="service-hero__description">{data.description}</p>
 
           <div class="service-hero__cta">
-            <a href="#brief" class="btn btn--primary">
+            <a href="/contact" class="btn btn--primary">
               {data.ctaPrimary}
             </a>
             <a href={data.ctaSecondaryLink} class="btn btn--ghost">
@@ -205,7 +205,7 @@ export const ServicePage = component$<ServicePageProps>(({ data, projectsFromSan
             <h2>{data.brief.title}</h2>
             <p>{data.brief.text}</p>
           </div>
-          <a href={data.brief.link} class="btn btn--light">
+          <a href="/contact" class="btn btn--light">
             {data.brief.button}
           </a>
         </div>
