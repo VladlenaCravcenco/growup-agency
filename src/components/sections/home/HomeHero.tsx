@@ -1,6 +1,6 @@
 // src/components/sections/home/HomeHero.tsx
 import { component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
-import { useHomePage } from '~/routes/[lang]/layout'; 
+import { useHomePage } from '~/routes/[lang]/layout';
 import '../../../styles/home.css';
 
 export const HomeHero = component$(() => {
@@ -30,11 +30,13 @@ export const HomeHero = component$(() => {
 
       <div class="hero__inner">
         <div class="hero__content">
-          
-          <p class="hero__subtitle">{hero.subtitle}</p>
-          <p class="hero__text">{hero.text}</p>
+
+
 
           <div class="hero__actions">
+            <p class="hero__subtitle">{hero.subtitle}</p>
+            <p class="hero__text">{hero.text}</p>
+
             <a href="/contact" class="btn btn--primary">
               {hero.ctaPrimary}
             </a>
