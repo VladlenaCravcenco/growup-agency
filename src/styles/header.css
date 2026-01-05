@@ -123,7 +123,7 @@ font-weight: 700;
 /* LANGUAGE DROPDOWN */
 .lang {
   position: relative;
-  display: none;
+  
 }
 
 .lang__button {
