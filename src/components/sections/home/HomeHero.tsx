@@ -30,9 +30,9 @@ export const HomeHero = component$(() => {
 
       <div class="hero__inner">
         <div class="hero__content">
-          <h1 class="visually-hidden">{hero.title}</h1>
-          <p class="visually-hidden">{hero.subtitle}</p>
-          <p class="visually-hidden">{hero.text}</p>
+          
+          <p class="hero__subtitle">{hero.subtitle}</p>
+          <p class="hero__text">{hero.text}</p>
 
           <div class="hero__actions">
             <a href="/contact" class="btn btn--primary">
