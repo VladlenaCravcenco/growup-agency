@@ -7,7 +7,7 @@
   pointer-events: none;
 
   /* 🔥 мягкая маска */
-  background-color:#f7f5ef;
+  background-color: #f7f5ef;
 }
 .hero {
   position: relative;
@@ -51,6 +51,8 @@
   display: grid;
   place-items: center;
   gap: 12px;
+  position: relative;
+  bottom: 100px;
 }
 @keyframes heroActionsIn {
   from {
@@ -297,8 +299,6 @@
 
 /* ====== FAQ ====== */
 
-
-
 .faq__list {
   margin-top: 20px;
   border-radius: var(--radius-lg);
@@ -348,8 +348,6 @@
 }
 
 /* ====== CTA ====== */
-
-
 
 .cta__inner {
   text-align: center;
@@ -444,12 +442,11 @@
 
 @media (max-width: 768px) {
   .hero {
- 
     top: -50px;
     height: 100vh;
   }
 
-.hero__inner {
+  .hero__inner {
     justify-content: flex-start; /* контент сверху */
     padding-bottom: 0;
     padding-top: 120px; /* чтобы заголовок не прилипал к верху */
@@ -481,9 +478,6 @@
     padding-bottom: 150px;
   }
 
-
-  
-
   .stats__inner {
     grid-template-columns: 1fr;
   }
@@ -495,7 +489,6 @@
 
   .clients__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  
   }
 
   .process__item {
