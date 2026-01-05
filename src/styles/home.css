@@ -453,6 +453,11 @@ margin: 0;
     justify-content: flex-start; /* контент сверху */
     padding-bottom: 0;
     padding-top: 120px; /* чтобы заголовок не прилипал к верху */
+    width: 100%;
+  }
+
+  .hero__content{
+    bottom: -250px;
   }
 
   .hero__actions {
