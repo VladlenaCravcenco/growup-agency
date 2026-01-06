@@ -3,9 +3,7 @@ import { Link, routeLoader$ } from '@builder.io/qwik-city';
 import '~/styles/projects.css';
 import { sanityClient } from '~/sanity/client';
 import { HomeCTA } from '~/components/sections/home/HomeCTA';
-/* -----------------------------
-   TYPES
------------------------------- */
+
 
 type SectionKind = 'goals' | 'solution' | 'results';
 
@@ -33,9 +31,6 @@ type ProjectPageData = {
   sections: ProjectSection[];
 };
 
-/* -----------------------------
-   Fallback-проект
------------------------------- */
 
 const DEMO_PROJECT: ProjectPageData = {
   slug: 'not-an-idol',
@@ -50,9 +45,6 @@ const DEMO_PROJECT: ProjectPageData = {
   sections: [],
 };
 
-/* -----------------------------
-   LOADER ИЗ SANITY
------------------------------- */
 
 export const useProject = routeLoader$<ProjectPageData | null>(async (ev: any) => {
   const { slug } = ev.params as { slug: string };
@@ -83,9 +75,7 @@ export const useProject = routeLoader$<ProjectPageData | null>(async (ev: any) =
   return project;
 });
 
-/* -----------------------------
-   КОМПОНЕНТ СТРАНИЦЫ
------------------------------- */
+
 
 export default component$(() => {
   const projectResource = useProject();
