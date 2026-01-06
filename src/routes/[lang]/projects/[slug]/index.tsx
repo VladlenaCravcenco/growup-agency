@@ -1,6 +1,6 @@
 import { component$ } from '@builder.io/qwik';
 import { Link, routeLoader$ } from '@builder.io/qwik-city';
-import '../../../styles/projects.css';
+import '~/styles/projects.css';
 import { sanityClient } from '~/sanity/client';
 import { HomeCTA } from '~/components/sections/home/HomeCTA';
 /* -----------------------------
