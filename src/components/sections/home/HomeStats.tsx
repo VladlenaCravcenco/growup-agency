@@ -2,10 +2,9 @@ import { component$ } from '@builder.io/qwik';
 import { useHomePage } from '~/routes/[lang]/layout';
 
 export const HomeStats = component$(() => {
-
   const { stats } = useHomePage().value;
-  console.log('STATS', stats);
-  if (!stats?.length) return null;
+
+  if (!stats?.length) return null; // чтобы не показывало пустой блок
 
   return (
     <section class="stats">
@@ -18,6 +17,5 @@ export const HomeStats = component$(() => {
         ))}
       </div>
     </section>
-
   );
 });

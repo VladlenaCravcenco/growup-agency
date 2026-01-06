@@ -1,46 +1,31 @@
-// src/routes/[lang]/layout.tsx
 import { component$, Slot } from '@builder.io/qwik';
 import { routeLoader$ } from '@builder.io/qwik-city';
 import { sanityClient } from '~/sanity/client';
 
 type Lang = 'ru' | 'en' | 'ro';
 type LString = { ru?: string; en?: string; ro?: string };
-
-const pick = (v?: LString, lang: Lang = 'ru') =>
-  v?.[lang] ?? v?.ru ?? '';
-
-export type HomeHeroVM = {
-  title: string;
-  subtitle: string;
-  text: string;
-  ctaPrimary: string;
-  ctaSecondary: string;
-};
-
-export type HomeStatItem = {
-  value: string;
-  label: string;
-};
+const pick = (v?: LString, lang: Lang = 'ru') => v?.[lang] ?? v?.ru ?? '';
 
 export type HomePageVM = {
-  hero: HomeHeroVM;
-  stats: HomeStatItem[];
+  hero: {
+    title: string;
+    subtitle: string;
+    text: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
+  };
+  stats: { value: string; label: string }[];
 };
 
 export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
   const lang = (params.lang as Lang) || 'ru';
 
-  const data = await sanityClient.fetch(
-    `*[_type=="homePage"][0]{
-      hero{
-        title, subtitle, text, ctaPrimary, ctaSecondary
-      },
-      stats[]{
-        value,
-        label
-      }
-    }`
-  );
+  const data = await sanityClient.fetch<any>(`
+    *[_type=="homePage"][0]{
+      hero{ title, subtitle, text, ctaPrimary, ctaSecondary },
+      stats[]{ value, label }
+    }
+  `);
 
   return {
     hero: {
