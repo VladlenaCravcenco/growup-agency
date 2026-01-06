@@ -16,7 +16,7 @@ export const HomeServices = component$(() => {
   return (
     <section class="services" id="services">
       <div class="services__head">
-        <h2 class="services__title">{servicesTitle}</h2>
+        <h2 class="section-title">{servicesTitle}</h2>
         <p class="section-subtitle">{servicesSubtitle}</p>
       </div>
       <div class="services__grid">
