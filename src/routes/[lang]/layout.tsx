@@ -5,7 +5,9 @@ import { sanityClient } from '~/sanity/client';
 
 type Lang = 'ru' | 'en' | 'ro';
 type LString = { ru?: string; en?: string; ro?: string };
-const pick = (v?: LString, lang: Lang = 'ru') => v?.[lang] ?? v?.ru ?? '';
+
+const pick = (v?: LString, lang: Lang = 'ru') =>
+  v?.[lang] ?? v?.ru ?? '';
 
 export type HomeHeroVM = {
   title: string;
@@ -26,14 +28,17 @@ export type HomePageVM = {
 };
 
 export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
-  const lang = ((params.lang as Lang) || 'ru');
+  const lang = (params.lang as Lang) || 'ru';
 
-  const data = await sanityClient.fetch<any>(
+  const data = await sanityClient.fetch(
     `*[_type=="homePage"][0]{
       hero{
         title, subtitle, text, ctaPrimary, ctaSecondary
       },
-      stats[]{ value, label }
+      stats[]{
+        value,
+        label
+      }
     }`
   );
 
@@ -45,7 +50,6 @@ export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
       ctaPrimary: pick(data?.hero?.ctaPrimary, lang),
       ctaSecondary: pick(data?.hero?.ctaSecondary, lang),
     },
-
     stats: (data?.stats ?? []).map((s: any) => ({
       value: s?.value ?? '',
       label: pick(s?.label, lang),
