@@ -50,25 +50,24 @@ export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
 
   const data = await sanityClient.fetch<any>(`
     *[_type=="homePage"][0]{
-      hero{ title, subtitle, text, ctaPrimary, ctaSecondary },
-      stats[]{ value, label },
+    hero{ title, subtitle, text, ctaPrimary, ctaSecondary },
+    stats[]{ value, label },
 
-      servicesTitle,
-      servicesSubtitle,
-      
-      services[]{
-        tag,
-        link,
-        title,
-        
-        bullets[]{ text }
-      },
-      servicesCta
+    servicesTitle,
+    servicesSubtitle,
 
-        clientsTitle,
-        clientsTop[]{ alt, href, "src": logo.asset->url },
-        clientsBottom[]{ alt, href, "src": logo.asset->url }
-    }
+    services[]{
+      tag,
+      link,
+      title,
+      bullets[]{ text }
+    },
+    servicesCta,
+
+    clientsTitle,
+    clientsTop[]{ alt, href, "src": logo.asset->url },
+    clientsBottom[]{ alt, href, "src": logo.asset->url }
+  }
   `);
 
   return {
