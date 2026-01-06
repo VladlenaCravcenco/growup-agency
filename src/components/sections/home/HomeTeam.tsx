@@ -1,7 +1,7 @@
 import { component$ } from '@builder.io/qwik';
 import { useLocation } from '@builder.io/qwik-city';
 import { useHomePage } from '~/routes/[lang]/layout';
-import '../../../styles/home.css';
+import '~/styles/home.css';
 
 type Locale = 'ru' | 'en' | 'ro';
 const LOCALES: Locale[] = ['ru', 'en', 'ro'];
