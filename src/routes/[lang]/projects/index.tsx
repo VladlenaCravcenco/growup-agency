@@ -1,10 +1,10 @@
 import { component$, useSignal } from '@builder.io/qwik';
 import { Link, routeLoader$ } from '@builder.io/qwik-city';
-import '../../styles/projects.css';
+import '~/styles/projects.css';
 import { sanityClient } from '~/sanity/client';
-import { HomeClients } from '../../components/sections/home/HomeClients'
+import { HomeClients } from '../../../components/sections/home/HomeClients'
 
-import { HomeCTA } from '../../components/sections/home/HomeCTA'
+import { HomeCTA } from '../../../components/sections/home/HomeCTA'
 
 export type CategoryId = 'ads' | 'smm' | 'branding' | 'web';
 
