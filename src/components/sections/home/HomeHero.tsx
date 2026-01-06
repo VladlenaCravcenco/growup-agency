@@ -33,16 +33,21 @@ export const HomeHero = component$(() => {
 
 
 
-          <div class="hero__actions">
-            <p class="hero__subtitle">{hero.subtitle}</p>
-            <p class="hero__text">{hero.text}</p>
+          <div class="hero__text-content">
+            <div>
+              <p class="hero__subtitle">{hero.subtitle}</p>
+              <p class="hero__text">{hero.text}</p>
+            </div>
 
-            <a href="/contact" class="btn btn--primary">
+            <div class="hero__actions">
+              <a href="/contact" class="btn btn--primary">
               {hero.ctaPrimary}
             </a>
             <a href="/projects" class="btn btn--ghost">
               {hero.ctaSecondary}
             </a>
+            </div>
+            
           </div>
         </div>
       </div>
