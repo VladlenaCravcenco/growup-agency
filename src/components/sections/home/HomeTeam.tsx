@@ -1,59 +1,68 @@
 import { component$ } from '@builder.io/qwik';
+import { useLocation } from '@builder.io/qwik-city';
+import { useHomePage } from '~/routes/[lang]/layout';
+import '../../../styles/team.css';
 
-type TeamMember = {
-  name: string;
-  role: string;
-  photo: string;
-};
-
-const TEAM: TeamMember[] = [
-  {
-    name: 'Aliona Rusu',
-    role: 'Founder & Performance Lead',
-    photo: '/media/team/aliona.jpg',
-  },
-  {
-    name: 'Vladlena Cravcenco',
-    role: 'Web & Product Designer',
-    photo: '/media/team/vladlena.jpg',
-  },
-  {
-    name: 'Victoria',
-    role: 'SMM / Content',
-    photo: '/media/team/victoria.jpg',
-  },
-  // добавишь остальных, как нужно
-];
+type Locale = 'ru' | 'en' | 'ro';
+const LOCALES: Locale[] = ['ru', 'en', 'ro'];
 
 export const HomeTeam = component$(() => {
-  return (
-    <section class="home-section team" id="team">
-      <div class="home-container">
-        <header class="team__header">
-          <p class="section-label">Команда</p>
-          <h2 class="section-title">Люди, которые ведут ваш рост</h2>
-          <p class="section-subtitle">
-            Небольшая команда, которая глубоко вникает в продукт, а не
-            перекидывает задачи между отделами.
-          </p>
-        </header>
+  const {
+    teamEyebrow,
+    teamTitle,
+    teamSubtitle,
+    team,
+  } = useHomePage().value;
 
-        <div class="team-grid">
-          {TEAM.map((person) => (
-            <article class="team-card" key={person.name}>
-              <div class="team-card__photo-wrap">
+  const loc = useLocation();
+  const raw = loc.params.lang as string | undefined;
+  const lang: Locale = raw && LOCALES.includes(raw as Locale) ? (raw as Locale) : 'ru';
+
+  const withLang = (path?: string) => {
+    if (!path) return undefined;
+
+    const normalized = path.startsWith('/') ? path : `/${path}`;
+    const replaced = normalized.replace(/^\/(ru|en|ro)(\/|$)/, `/${lang}$2`);
+    if (replaced === normalized) return `/${lang}${normalized}`;
+    return replaced;
+  };
+
+  return (
+    <section class="team" id="team">
+      <div class="team__head">
+        {teamEyebrow ? <div class="team__eyebrow">{teamEyebrow}</div> : null}
+
+        <h2 class="section-title section-title--center">{teamTitle}</h2>
+
+        {teamSubtitle ? (
+          <p class="section-subtitle section-subtitle--center">{teamSubtitle}</p>
+        ) : null}
+      </div>
+
+      <div class="team__grid">
+        {(team ?? []).map((m) => {
+          const href = withLang(m.link);
+          const Tag: any = href ? 'a' : 'div';
+
+          return (
+            <Tag class="team__card" href={href} key={m.name}>
+              <div class="team__photo-wrap">
                 <img
-                  src={person.photo}
-                  alt={person.name}
-                  class="team-card__photo"
+                  class="team__photo"
+                  src={m.photo}
+                  alt={m.name}
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
-              <h3 class="team-card__name">{person.name}</h3>
-              <p class="team-card__role">{person.role}</p>
-            </article>
-          ))}
-        </div>
+
+              <div class="team__meta">
+                <div class="team__name">{m.name}</div>
+                <div class="team__role">{m.role}</div>
+              </div>
+            </Tag>
+          );
+        })}
       </div>
     </section>
   );

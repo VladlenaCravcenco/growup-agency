@@ -7,6 +7,13 @@ type Lang = 'ru' | 'en' | 'ro';
 type LString = { ru?: string; en?: string; ro?: string };
 const pick = (v?: LString, lang: Lang = 'ru') => v?.[lang] ?? v?.ru ?? '';
 
+export type TeamMember = {
+  photo: string;
+  name: string;
+  role: string;
+  link?: string;
+};
+
 export type ClientLogo = {
   src: string;
   alt: string;
@@ -43,6 +50,11 @@ export type HomePageVM = {
   clientsTitle: string;
   clientsTop: ClientLogo[];
   clientsBottom: ClientLogo[];
+
+  teamEyebrow: string;
+  teamTitle: string;
+  teamSubtitle: string;
+  team: TeamMember[];
 };
 
 export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
@@ -67,6 +79,16 @@ export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
     clientsTitle,
     clientsTop[]{ alt, href, "src": logo.asset->url },
     clientsBottom[]{ alt, href, "src": logo.asset->url }
+
+    teamEyebrow,
+    teamTitle,
+    teamSubtitle,
+    team[]{
+    name,
+    role,
+    link,
+    "photo": photo.asset->url
+},
   }
   `);
 
@@ -109,7 +131,16 @@ export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
       href: c?.href || undefined,
     })),
 
+    teamEyebrow: pick(data?.teamEyebrow, lang),
+    teamTitle: pick(data?.teamTitle, lang),
+    teamSubtitle: pick(data?.teamSubtitle, lang),
 
+    team: (data?.team ?? []).map((m: any) => ({
+      photo: m?.photo ?? '',
+      name: m?.name ?? '',
+      role: pick(m?.role, lang),
+      link: m?.link || undefined,
+    })),
 
   };
 });
