@@ -1,8 +1,28 @@
 import { component$, useVisibleTask$ } from '@builder.io/qwik';
+import { useLocation } from '@builder.io/qwik-city';
 import { useHomePage } from '~/routes/[lang]/layout';
 import '../../../styles/clients.css';
 
+type Locale = 'ru' | 'en' | 'ro';
+
+const withLang = (href: string | undefined, lang: Locale) => {
+  if (!href) return undefined;
+
+  // внешние ссылки не трогаем
+  if (/^https?:\/\//i.test(href)) return href;
+
+  const path = href.startsWith('/') ? href : `/${href}`;
+
+  // если язык уже есть — не дублируем
+  if (/^\/(ru|en|ro)(\/|$)/.test(path)) return path;
+
+  return `/${lang}${path}`;
+};
+
 export const HomeClients = component$(() => {
+  const { params } = useLocation();
+  const lang = (params.lang as Locale) || 'ru';
+
   const { clientsTitle, clientsTop, clientsBottom } = useHomePage().value;
 
   useVisibleTask$(() => {
@@ -42,9 +62,16 @@ export const HomeClients = component$(() => {
         <div class="clients__marquee clients__marquee--top">
           <div class="clients__track">
             {[...clientsTop, ...clientsTop, ...clientsTop, ...clientsTop].map((c, i) => {
-              const Tag: any = c.href ? 'a' : 'div';
+              const href = withLang(c.href, lang);
+              const Tag: any = href ? 'a' : 'div';
+
               return (
-                <Tag class="clients__item" key={c.src + i} href={c.href} aria-label={c.alt}>
+                <Tag
+                  class="clients__item"
+                  key={c.src + i}
+                  href={href}
+                  aria-label={c.alt}
+                >
                   <img src={c.src} alt={c.alt} loading="lazy" decoding="async" />
                 </Tag>
               );
@@ -55,9 +82,16 @@ export const HomeClients = component$(() => {
         <div class="clients__marquee clients__marquee--bottom">
           <div class="clients__track clients__track--reverse">
             {[...clientsBottom, ...clientsBottom, ...clientsBottom, ...clientsBottom].map((c, i) => {
-              const Tag: any = c.href ? 'a' : 'div';
+              const href = withLang(c.href, lang);
+              const Tag: any = href ? 'a' : 'div';
+
               return (
-                <Tag class="clients__item" key={c.src + i} href={c.href} aria-label={c.alt}>
+                <Tag
+                  class="clients__item"
+                  key={c.src + i}
+                  href={href}
+                  aria-label={c.alt}
+                >
                   <img src={c.src} alt={c.alt} loading="lazy" decoding="async" />
                 </Tag>
               );

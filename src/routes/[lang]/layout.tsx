@@ -65,9 +65,9 @@ export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
       },
       servicesCta
 
-      clientsTitle,
-    clientsTop[]{ src, alt, href },
-    clientsBottom[]{ src, alt, href }
+        clientsTitle,
+        clientsTop[]{ alt, href, "src": logo.asset->url },
+        clientsBottom[]{ alt, href, "src": logo.asset->url }
     }
   `);
 
@@ -110,7 +110,7 @@ export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
       href: c?.href || undefined,
     })),
 
-    
+
 
   };
 });
