@@ -16,7 +16,7 @@ export type HomeServiceItem = {
   tag: string;
   title: string;
   link: string;
-  servicesCta: string;
+
   bullets: HomeServiceBullet[];
 };
 
@@ -32,7 +32,8 @@ export type HomePageVM = {
 
   // ✅ добавили services
   services: HomeServiceItem[];
-  
+  servicesCta: string;
+
 };
 
 export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
@@ -48,9 +49,10 @@ export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
         tag,
         link,
         title,
-        servicesCta,
+        
         bullets[]{ text }
-      }
+      },
+      servicesCta
     }
   `);
 
@@ -73,12 +75,14 @@ export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
       tag: s?.tag ?? '',
       link: s?.link ?? '',
       title: pick(s?.title, lang),
-      servicesCta: pick(data?.servicesCta, lang),
+      
       bullets: (s?.bullets ?? []).map((b: any) => ({
         text: pick(b?.text, lang),
       })),
     })),
+    servicesCta: pick(data?.servicesCta, lang),
   };
+  
 });
 
 export default component$(() => <Slot />);

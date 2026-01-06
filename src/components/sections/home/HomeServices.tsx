@@ -1,87 +1,38 @@
-// src/routes/[lang]/layout.tsx
-import { component$, Slot } from '@builder.io/qwik';
-import { routeLoader$ } from '@builder.io/qwik-city';
-import { sanityClient } from '~/sanity/client';
+import { component$ } from '@builder.io/qwik';
+import { useLocation } from '@builder.io/qwik-city';
+import { useHomePage } from '~/routes/[lang]/layout';
 
-type Lang = 'ru' | 'en' | 'ro';
-type LString = { ru?: string; en?: string; ro?: string };
-const pick = (v?: LString, lang: Lang = 'ru') => v?.[lang] ?? v?.ru ?? '';
+export const HomeServices = component$(() => {
+  const loc = useLocation();
+  const lang = (loc.params.lang as 'ru' | 'en' | 'ro') || 'ru';
 
-// ✅ типы для Services
-export type HomeServiceBullet = {
-  text: string;
-};
+  const { services, servicesCta } = useHomePage().value;
 
-export type HomeServiceItem = {
-  tag: string;
-  title: string;
-  link: string;
-  bullets: HomeServiceBullet[];
-};
-
-export type HomePageVM = {
-  hero: {
-    title: string;
-    subtitle: string;
-    text: string;
-    ctaPrimary: string;
-    ctaSecondary: string;
+  const withLang = (path: string) => {
+    const p = path.startsWith('/') ? path : `/${path}`;
+    return /^\/(ru|en|ro)(\/|$)/.test(p) ? p : `/${lang}${p}`;
   };
-  stats: { value: string; label: string }[];
 
-  // ✅ услуги
-  services: HomeServiceItem[];
+  return (
+    <section class="services" id="services">
+      <div class="services__grid">
+        {services.map((s) => (
+          <article class="services__card" key={s.title}>
+            <div class="services__tag">{s.tag}</div>
+            <h3 class="services__title">{s.title}</h3>
 
-  // ✅ ОДНА кнопка на весь блок
-  servicesCta: string;
-};
+            <ul class="services__list">
+              {s.bullets.map((b) => (
+                <li class="services__item" key={b.text}>{b.text}</li>
+              ))}
+            </ul>
 
-export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
-  const lang = (params.lang as Lang) || 'ru';
-
-  const data = await sanityClient.fetch<any>(`
-    *[_type=="homePage"][0]{
-      hero{ title, subtitle, text, ctaPrimary, ctaSecondary },
-      stats[]{ value, label },
-
-      services[]{
-        tag,
-        link,
-        title,
-        bullets[]{ text }
-      },
-
-      // ✅ ВОТ ТУТ (на уровне страницы)
-      servicesCta
-    }
-  `);
-
-  return {
-    hero: {
-      title: pick(data?.hero?.title, lang),
-      subtitle: pick(data?.hero?.subtitle, lang),
-      text: pick(data?.hero?.text, lang),
-      ctaPrimary: pick(data?.hero?.ctaPrimary, lang),
-      ctaSecondary: pick(data?.hero?.ctaSecondary, lang),
-    },
-
-    stats: (data?.stats ?? []).map((s: any) => ({
-      value: s?.value ?? '',
-      label: pick(s?.label, lang),
-    })),
-
-    services: (data?.services ?? []).map((s: any) => ({
-      tag: s?.tag ?? '',
-      link: s?.link ?? '',
-      title: pick(s?.title, lang),
-      bullets: (s?.bullets ?? []).map((b: any) => ({
-        text: pick(b?.text, lang),
-      })),
-    })),
-
-    // ✅ одна строка — один текст кнопки
-    servicesCta: pick(data?.servicesCta, lang),
-  };
+            <a href={withLang(s.link)} class="services__link">
+              {servicesCta}
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
 });
-
-export default component$(() => <Slot />);
