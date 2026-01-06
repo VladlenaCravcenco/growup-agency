@@ -61,7 +61,7 @@ export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
   const lang = (params.lang as Lang) || 'ru';
 
   const data = await sanityClient.fetch<any>(`
-    *[_type=="homePage"][0]{
+  *[_type=="homePage"][0]{
     hero{ title, subtitle, text, ctaPrimary, ctaSecondary },
     stats[]{ value, label },
 
@@ -78,19 +78,19 @@ export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
 
     clientsTitle,
     clientsTop[]{ alt, href, "src": logo.asset->url },
-    clientsBottom[]{ alt, href, "src": logo.asset->url }
+    clientsBottom[]{ alt, href, "src": logo.asset->url },
 
     teamEyebrow,
     teamTitle,
     teamSubtitle,
     team[]{
-    name,
-    role,
-    link,
-    "photo": photo.asset->url
-},
+      name,
+      role,
+      link,
+      "photo": photo.asset->url
+    }
   }
-  `);
+`);
 
   return {
     hero: {
