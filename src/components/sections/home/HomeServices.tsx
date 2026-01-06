@@ -6,7 +6,7 @@ export const HomeServices = component$(() => {
   const loc = useLocation();
   const lang = (loc.params.lang as 'ru' | 'en' | 'ro') || 'ru';
 
-  const { services, servicesCta } = useHomePage().value;
+  const { services, servicesCta, servicesTitle, servicesSubtitle } = useHomePage().value;
 
   const withLang = (path: string) => {
     const p = path.startsWith('/') ? path : `/${path}`;
@@ -15,6 +15,10 @@ export const HomeServices = component$(() => {
 
   return (
     <section class="services" id="services">
+      <div class="services__head">
+        <h2 class="services__title">{servicesTitle}</h2>
+        <p class="section-subtitle">{servicesSubtitle}</p>
+      </div>
       <div class="services__grid">
         {services.map((s) => (
           <article class="services__card" key={s.title}>

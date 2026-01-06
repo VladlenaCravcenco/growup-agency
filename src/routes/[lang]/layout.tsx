@@ -7,7 +7,7 @@ type Lang = 'ru' | 'en' | 'ro';
 type LString = { ru?: string; en?: string; ro?: string };
 const pick = (v?: LString, lang: Lang = 'ru') => v?.[lang] ?? v?.ru ?? '';
 
-// ✅ типы для Services
+
 export type HomeServiceBullet = {
   text: string;
 };
@@ -30,7 +30,9 @@ export type HomePageVM = {
   };
   stats: { value: string; label: string }[];
 
-  // ✅ добавили services
+
+  servicesTitle: string;
+  servicesSubtitle: string;
   services: HomeServiceItem[];
   servicesCta: string;
 
@@ -44,7 +46,9 @@ export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
       hero{ title, subtitle, text, ctaPrimary, ctaSecondary },
       stats[]{ value, label },
 
-      // ✅ добавили services
+      servicesTitle,
+      servicesSubtitle,
+      
       services[]{
         tag,
         link,
@@ -70,19 +74,21 @@ export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
       label: pick(s?.label, lang),
     })),
 
-    // ✅ маппинг services
+    servicesTitle: pick(data?.servicesTitle, lang),
+    servicesSubtitle: pick(data?.servicesSubtitle, lang),
+    
     services: (data?.services ?? []).map((s: any) => ({
       tag: s?.tag ?? '',
       link: s?.link ?? '',
       title: pick(s?.title, lang),
-      
+
       bullets: (s?.bullets ?? []).map((b: any) => ({
         text: pick(b?.text, lang),
       })),
     })),
     servicesCta: pick(data?.servicesCta, lang),
   };
-  
+
 });
 
 export default component$(() => <Slot />);
