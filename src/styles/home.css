@@ -52,7 +52,7 @@
   place-items: center;
   gap: 12px;
   position: absolute;
-  bottom: 20px;
+  bottom: 100px;
   left: 20px;
   right: 20px;
 }
@@ -452,6 +452,10 @@
   .hero {
     top: -20px;
     height: 100vh;
+  }
+
+  .hero__content{
+    bottom: 20px;
   }
 
   .hero__inner {

@@ -1,54 +1,15 @@
 import { component$ } from '@builder.io/qwik';
+import { useHomePage } from '~/routes/[lang]/layout';
 
 export const HomeServices = component$(() => {
-  const services = [
-    {
-      tag: 'Performance',
-      title: 'Платная реклама',
-      link: '/services/performance-ads',
-      bullets: [
-        'Стратегия и медиаплан',
-        'Запуск и оптимизация кампаний',
-        'Масштабирование прибыльных связок',
-      ],
-    },
-    {
-      tag: 'Social Media',
-      title: 'SMM',
-      link: '/services/social-media-marketing',
-      bullets: [
-        'Контент-стратегия и визуал',
-        'Ведение аккаунтов и сторис',
-        'Рекламные интеграции и спецпроекты',
-      ],
-    },
-    {
-      tag: 'Branding & Creative',
-      title: 'Дизайн',
-      link: '/services/design',
-      bullets: [
-        'Айдентика и соцсети',
-        'Креативы для рекламы',
-        'Брендбуки и Логобуки',
-      ],
-    },
-    {
-      tag: 'web',
-      title: 'Web development',
-      link: '/services/web',
-      bullets: [
-        'корпоративный сайт',
-        'seo',
-        'Лендинги и посадочные страницы',
-      ],
-    },
-  ];
-
+  const { services } = useHomePage().value;
 
   return (
     <section class="services" id="services">
       <div class="services__head">
-        <h2 class="section-title">Что мы делаем для роста вашего бизнеса</h2>
+        <h2 class="section-title">
+          Что мы делаем для роста вашего бизнеса
+        </h2>
         <p class="section-subtitle">
           Собираем работающий маркетинг из платной рекламы, соцсетей и дизайна — без воды и лишних движений.
         </p>
@@ -59,15 +20,17 @@ export const HomeServices = component$(() => {
           <article class="services__card" key={service.title}>
             <div class="services__tag">{service.tag}</div>
             <h3 class="services__title">{service.title}</h3>
+
             <ul class="services__list">
               {service.bullets.map((item) => (
-                <li class="services__item" key={item}>
-                  {item}
+                <li class="services__item" key={item.text}>
+                  {item.text}
                 </li>
               ))}
             </ul>
+
             <a href={service.link} class="services__link">
-              Подробнее о формате работы
+              {service.cta}
             </a>
           </article>
         ))}
