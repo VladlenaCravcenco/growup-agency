@@ -7,6 +7,11 @@ type Lang = 'ru' | 'en' | 'ro';
 type LString = { ru?: string; en?: string; ro?: string };
 const pick = (v?: LString, lang: Lang = 'ru') => v?.[lang] ?? v?.ru ?? '';
 
+export type ClientLogo = {
+  src: string;
+  alt: string;
+  href?: string
+};
 
 export type HomeServiceBullet = {
   text: string;
@@ -35,7 +40,9 @@ export type HomePageVM = {
   servicesSubtitle: string;
   services: HomeServiceItem[];
   servicesCta: string;
-
+  clientsTitle: string;
+  clientsTop: ClientLogo[];
+  clientsBottom: ClientLogo[];
 };
 
 export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
@@ -57,6 +64,10 @@ export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
         bullets[]{ text }
       },
       servicesCta
+
+      clientsTitle,
+    clientsTop[]{ src, alt, href },
+    clientsBottom[]{ src, alt, href }
     }
   `);
 
@@ -76,7 +87,7 @@ export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
 
     servicesTitle: pick(data?.servicesTitle, lang),
     servicesSubtitle: pick(data?.servicesSubtitle, lang),
-    
+
     services: (data?.services ?? []).map((s: any) => ({
       tag: s?.tag ?? '',
       link: s?.link ?? '',
@@ -87,8 +98,21 @@ export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
       })),
     })),
     servicesCta: pick(data?.servicesCta, lang),
-  };
+    clientsTitle: pick(data?.clientsTitle, lang),
+    clientsTop: (data?.clientsTop ?? []).map((c: any) => ({
+      src: c?.src ?? '',
+      alt: c?.alt ?? '',
+      href: c?.href || undefined,
+    })),
+    clientsBottom: (data?.clientsBottom ?? []).map((c: any) => ({
+      src: c?.src ?? '',
+      alt: c?.alt ?? '',
+      href: c?.href || undefined,
+    })),
 
+    
+
+  };
 });
 
 export default component$(() => <Slot />);
