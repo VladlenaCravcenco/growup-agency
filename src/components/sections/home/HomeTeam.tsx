@@ -39,16 +39,16 @@ export const HomeTeam = component$(() => {
         ) : null}
       </div>
 
-      <div class="team__grid">
+      <div class="team-grid">
         {(team ?? []).map((m) => {
           const href = withLang(m.link);
           const Tag: any = href ? 'a' : 'div';
 
           return (
-            <Tag class="team__card" href={href} key={m.name}>
-              <div class="team__photo-wrap">
+            <Tag class="team-card" href={href} key={m.name}>
+              <div class="team-card__photo-wrap">
                 <img
-                  class="team__photo"
+                  class="team-card__photo"
                   src={m.photo}
                   alt={m.name}
                   loading="lazy"
@@ -57,8 +57,8 @@ export const HomeTeam = component$(() => {
               </div>
 
               <div class="team__meta">
-                <div class="team__name">{m.name}</div>
-                <div class="team__role">{m.role}</div>
+                <div class="team-card__name">{m.name}</div>
+                <div class="team-card__role">{m.role}</div>
               </div>
             </Tag>
           );
