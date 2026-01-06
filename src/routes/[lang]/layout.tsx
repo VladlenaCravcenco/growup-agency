@@ -16,7 +16,7 @@ export type HomeServiceItem = {
   tag: string;
   title: string;
   link: string;
-  cta: string; // ✅ ДОБАВИТЬ
+  servicesCta: string;
   bullets: HomeServiceBullet[];
 };
 
@@ -48,7 +48,7 @@ export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
         tag,
         link,
         title,
-        cta,
+        servicesCta,
         bullets[]{ text }
       }
     }
@@ -73,7 +73,7 @@ export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
       tag: s?.tag ?? '',
       link: s?.link ?? '',
       title: pick(s?.title, lang),
-      cta: pick(s?.cta, lang),
+      servicesCta: pick(data?.servicesCta, lang),
       bullets: (s?.bullets ?? []).map((b: any) => ({
         text: pick(b?.text, lang),
       })),
