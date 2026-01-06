@@ -7,7 +7,7 @@ export const HomeStats = component$(() => {
   return (
     <section class="stats">
       <div class="stats__inner">
-        {stats.map((item) => (
+        {(stats ?? []).map((item) => (
           <div class="stats__card" key={`${item.value}-${item.label}`}>
             <div class="stats__value">{item.value}</div>
             <div class="stats__label">{item.label}</div>
