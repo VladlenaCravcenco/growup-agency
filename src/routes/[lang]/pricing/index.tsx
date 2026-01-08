@@ -1,9 +1,9 @@
 import { component$, useSignal, QRL } from '@builder.io/qwik';
-import { PricingFormat } from '../../components/sections/pricing/PricingFormat';
-import { HomeFaqCta } from '../../components/sections/home/HomeFaqCta';
+import { PricingFormat } from '../../../components/sections/pricing/PricingFormat';
+import { HomeFaqCta } from '../../../components/sections/home/HomeFaqCta';
 
 
-import '../../styles/pricing.css';
+  import '~/styles/pricing.css';
 
 type Tier = {
   id: string;

@@ -3,6 +3,8 @@ import { component$, Slot } from '@builder.io/qwik';
 import { routeLoader$ } from '@builder.io/qwik-city';
 import { sanityClient } from '~/sanity/client';
 
+
+
 type Lang = 'ru' | 'en' | 'ro';
 type LString = { ru?: string; en?: string; ro?: string };
 const pick = (v?: LString, lang: Lang = 'ru') => v?.[lang] ?? v?.ru ?? '';

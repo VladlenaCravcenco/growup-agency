@@ -1,9 +1,60 @@
 import { component$, useSignal, $ } from '@builder.io/qwik';
 import { Link, useLocation } from '@builder.io/qwik-city';
-import '../../styles/header.css';
+import '~/styles/header.css';
 
 type Locale = 'ru' | 'en' | 'ro';
 const LOCALES: Locale[] = ['ru', 'en', 'ro'];
+
+const I18N: Record<Locale, {
+  services: string;
+  pricing: string;
+  consult: string;
+  portfolio: string;
+  contacts: string;
+  getProposal: string;
+
+  paidAds: string;
+  smm: string;
+  design: string;
+  web: string;
+}> = {
+  ru: {
+    services: 'Услуги',
+    pricing: 'Цены',
+    consult: 'Консультация',
+    portfolio: 'Портфолио',
+    contacts: 'Контакты',
+    getProposal: 'Получить предложение',
+    paidAds: 'Платная реклама',
+    smm: 'SMM / соцсети',
+    design: 'Дизайн и креатив',
+    web: 'Web-разработка',
+  },
+  en: {
+    services: 'Services',
+    pricing: 'Pricing',
+    consult: 'Consultation',
+    portfolio: 'Portfolio',
+    contacts: 'Contacts',
+    getProposal: 'Get a proposal',
+    paidAds: 'Paid advertising',
+    smm: 'SMM / Social media',
+    design: 'Design & Creative',
+    web: 'Web development',
+  },
+  ro: {
+    services: 'Servicii',
+    pricing: 'Prețuri',
+    consult: 'Consultație',
+    portfolio: 'Portofoliu',
+    contacts: 'Contacte',
+    getProposal: 'Cere o ofertă',
+    paidAds: 'Publicitate plătită',
+    smm: 'SMM / Social media',
+    design: 'Design & creație',
+    web: 'Dezvoltare web',
+  },
+};
 
 export const Header = component$(() => {
   const loc = useLocation();
@@ -17,67 +68,69 @@ export const Header = component$(() => {
   const closeMenu$ = $(() => (isMenuOpen.value = false));
   const toggleServices$ = $(() => (isServicesOpen.value = !isServicesOpen.value));
 
-  // ✅ безопасно определяем текущий язык
+  // ✅ текущий язык
   const raw = loc.params.lang as string | undefined;
   const lang: Locale = raw && LOCALES.includes(raw as Locale) ? (raw as Locale) : 'ru';
+  const t = I18N[lang];
 
-  // ✅ текущий путь БЕЗ префикса языка (/ru, /en, /ro)
+  // ✅ текущий путь БЕЗ префикса языка
   const pathWithoutLang =
     loc.url.pathname.replace(/^\/(ru|en|ro)(?=\/|$)/, '') || '/';
 
   const search = loc.url.search || '';
   const hash = loc.url.hash || '';
 
-  // ✅ ссылка на текущую страницу в другом языке
+  // ✅ на ту же страницу, но с другим языком
   const switchTo = (next: Locale) => `/${next}${pathWithoutLang}${search}${hash}`;
 
-  // ✅ быстрый хелпер для внутренних ссылок (чтобы не писать руками `/${lang}`)
+  // ✅ helper для внутренних ссылок с языком
   const href = (path: string) => `/${lang}${path.startsWith('/') ? '' : '/'}${path}`;
+
+  // ✅ якоря на главной (важно: всегда ведём на /{lang}/#anchor)
+  const home = `/${lang}`;
+  const homeAnchor = (id: string) => `${home}#${id}`;
 
   return (
     <header class="header">
       <div class="header__inner">
         {/* LOGO */}
-        <Link href={`/${lang}`} class="header__logo">
+        <Link href={home} class="header__logo">
           Grow Up
         </Link>
 
-        {/* DESKTOP NAVIGATION */}
+        {/* DESKTOP NAV */}
         <nav class="header__nav header__nav--desktop">
           <div class="header__nav-item header__nav-item--services">
-            {/* ✅ якорь на главной */}
-            <Link href={`/${lang}#services`} class="header__link">
-              Услуги
+            <Link href={homeAnchor('services')} class="header__link">
+              {t.services}
             </Link>
 
-            {/* dropdown услуг */}
             <div class="header__dropdown">
               <Link href={href('/services/performance-ads')} class="header__dropdown-link">
-                Платная реклама
+                {t.paidAds}
               </Link>
               <Link href={href('/services/social-media-marketing')} class="header__dropdown-link">
-                SMM / соцсети
+                {t.smm}
               </Link>
               <Link href={href('/services/design')} class="header__dropdown-link">
-                Дизайн и креатив
+                {t.design}
               </Link>
               <Link href={href('/services/web')} class="header__dropdown-link">
-                Web-разработка
+                {t.web}
               </Link>
             </div>
           </div>
 
-          {/* Остальные пункты */}
-          <Link href={href('/pricing')} class="header__link">Цены</Link>
-          <Link href={`/${lang}#consult`} class="header__link">Консультация</Link>
-          <Link href={href('/projects')} class="header__link">Портфолио</Link>
-          <Link href={href('/contact')} class="header__link">Контакты</Link>
+          <Link href={href('/pricing')} class="header__link">{t.pricing}</Link>
+          <Link href={homeAnchor('consult')} class="header__link">{t.consult}</Link>
+          <Link href={href('/projects')} class="header__link">{t.portfolio}</Link>
+          <Link href={href('/contact')} class="header__link">{t.contacts}</Link>
 
           <Link href={href('/contact')} class="hero-btn">
-            Получить предложение
+            {t.getProposal}
           </Link>
 
-          {/* DESKTOP LANGUAGE SWITCHER */}
+          {/* LANG */}
           <div class="lang">
             <button class="lang__button" onClick$={toggleLang$} type="button">
               {lang.toUpperCase()} ▾
@@ -100,60 +153,55 @@ export const Header = component$(() => {
           </div>
         </nav>
 
-        {/* BURGER BUTTON */}
-        <button class="header__burger" onClick$={toggleMenu$} type="button">
-          <span></span>
-          <span></span>
-          <span></span>
+        {/* BURGER */}
+        <button class="header__burger" onClick$={toggleMenu$} type="button" aria-label="Menu">
+          <span></span><span></span><span></span>
         </button>
       </div>
 
       {/* MOBILE MENU */}
       <nav class={`header__nav-mobile ${isMenuOpen.value ? 'header__nav-mobile--open' : ''}`}>
-        <button class="header__nav-mobile-close" onClick$={closeMenu$} type="button">
+        <button class="header__nav-mobile-close" onClick$={closeMenu$} type="button" aria-label="Close">
           ✕
         </button>
 
-        {/* Услуги с тоглом */}
         <div class="header__nav-item">
           <button
             class="header__link header__link--toggle"
             onClick$={toggleServices$}
             type="button"
           >
-            Услуги
+            {t.services}
             <span class="header__link-arrow">{isServicesOpen.value ? '▴' : '▾'}</span>
           </button>
 
           {isServicesOpen.value && (
             <div class="header__dropdown--mobile">
               <Link href={href('/services/performance-ads')} class="header__dropdown-link" onClick$={closeMenu$}>
-                Платная реклама
+                {t.paidAds}
               </Link>
               <Link href={href('/services/social-media-marketing')} class="header__dropdown-link" onClick$={closeMenu$}>
-                SMM / соцсети
+                {t.smm}
               </Link>
               <Link href={href('/services/design')} class="header__dropdown-link" onClick$={closeMenu$}>
-                Дизайн и креатив
+                {t.design}
               </Link>
               <Link href={href('/services/web')} class="header__dropdown-link" onClick$={closeMenu$}>
-                Web-разработка
+                {t.web}
               </Link>
             </div>
           )}
         </div>
 
-        {/* Остальные пункты */}
-        <Link href={href('/pricing')} class="header__link" onClick$={closeMenu$}>Цены</Link>
-        <Link href={`/${lang}#consult`} class="header__link" onClick$={closeMenu$}>Консультация</Link>
-        <Link href={href('/projects')} class="header__link" onClick$={closeMenu$}>Портфолио</Link>
-        <Link href={href('/contact')} class="header__link" onClick$={closeMenu$}>Контакты</Link>
+        <Link href={href('/pricing')} class="header__link" onClick$={closeMenu$}>{t.pricing}</Link>
+        <Link href={homeAnchor('consult')} class="header__link" onClick$={closeMenu$}>{t.consult}</Link>
+        <Link href={href('/projects')} class="header__link" onClick$={closeMenu$}>{t.portfolio}</Link>
+        <Link href={href('/contact')} class="header__link" onClick$={closeMenu$}>{t.contacts}</Link>
 
         <Link href={href('/contact')} class="hero-btn" onClick$={closeMenu$}>
-          Получить предложение
+          {t.getProposal}
         </Link>
 
-        {/* MOBILE LANGUAGE SWITCHER */}
         <div class="header__mobile-langs">
           <div class="lang">
             <button class="lang__button" onClick$={toggleLang$} type="button">

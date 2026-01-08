@@ -1,5 +1,5 @@
 import { component$, useSignal, $ } from '@builder.io/qwik';
-import '../../styles/contact.css';
+import '~/styles/contact.css';
 
 const WEBHOOK_URL =
   'https://hook.eu1.make.com/2aqkgzjmg8c4lkew52heipg2qi144kl8';
