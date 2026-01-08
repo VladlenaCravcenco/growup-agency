@@ -1,6 +1,11 @@
-import { component$, useStore, $ } from '@builder.io/qwik';
+import { component$, useStore, $, useComputed$ } from '@builder.io/qwik';
+import { useHomePage } from '~/routes/[lang]/layout';
 
 export const HomeCTA = component$(() => {
+  const { ctaForm } = useHomePage().value;
+
+  const t = useComputed$(() => ctaForm);
+
   const form = useStore({
     name: '',
     phone: '',
@@ -11,7 +16,6 @@ export const HomeCTA = component$(() => {
 
   const handleSubmit = $(async (event: Event) => {
     event.preventDefault();
-    console.log('SUBMIT WORKS');
 
     const target = event.target as HTMLFormElement;
     const formData = new FormData(target);
@@ -20,17 +24,14 @@ export const HomeCTA = component$(() => {
     const phone = String(formData.get('phone') ?? '').trim();
     const email = String(formData.get('email') ?? '').trim();
 
-    // простая валидация: имя + хотя бы один способ связи
     if (!name || (!phone && !email)) {
-      form.error = 'Введите имя и хотя бы телефон или email';
+      form.error = t.value.errorRequired;
       form.sent = false;
       return;
     }
 
     let page = '';
-    if (typeof window !== 'undefined') {
-      page = window.location.pathname;
-    }
+    if (typeof window !== 'undefined') page = window.location.pathname;
 
     try {
       form.error = '';
@@ -43,26 +44,20 @@ export const HomeCTA = component$(() => {
       });
 
       const data = await res.json().catch(() => null);
-      console.log('Consultation response:', { status: res.status, data });
 
-      // ожидаем формат { ok: true } или { ok: false, error: '...' }
       if (!res.ok || !data?.ok) {
-        form.error =
-          data?.error ||
-          'Ошибка при отправке. Попробуйте ещё раз или напишите нам напрямую.';
+        form.error = data?.error || t.value.errorSend;
         form.sent = false;
         return;
       }
 
-      // всё прошло успешно
       form.sent = true;
       form.name = '';
       form.phone = '';
       form.email = '';
       target.reset();
-    } catch (e) {
-      console.error('Consultation fetch error:', e);
-      form.error = 'Сервер недоступен. Попробуйте ещё раз позже.';
+    } catch {
+      form.error = t.value.errorServer;
       form.sent = false;
     }
   });
@@ -70,69 +65,52 @@ export const HomeCTA = component$(() => {
   return (
     <section class="cta" id="consult">
       <div class="cta__inner">
-        <h2 class="section-title section-title--center">
-          Бесплатная консультация
-        </h2>
-        <p class="section-subtitle section-subtitle--center">
-          Заполните форму, и мы предложим стратегию под ваши задачи и бюджет.
-        </p>
+        <h2 class="section-title section-title--center">{t.value.title}</h2>
 
-        <form
-          class="cta__form"
-          preventdefault:submit
-          onSubmit$={handleSubmit}
-        >
+        <p class="section-subtitle section-subtitle--center">{t.value.subtitle}</p>
+
+        <form class="cta__form" preventdefault:submit onSubmit$={handleSubmit}>
           <div class="cta__fields">
             <input
               class="cta__input"
               type="text"
               name="name"
-              placeholder="Как вас зовут?"
+              placeholder={t.value.placeholderName}
               value={form.name}
-              onInput$={(e) =>
-                (form.name = (e.target as HTMLInputElement).value)
-              }
+              onInput$={(e) => (form.name = (e.target as HTMLInputElement).value)}
               required
             />
+
             <input
               class="cta__input"
               type="text"
               name="phone"
-              placeholder="+373 (__) ___-___ (телефон)"
+              placeholder={t.value.placeholderPhone}
               value={form.phone}
-              onInput$={(e) =>
-                (form.phone = (e.target as HTMLInputElement).value)
-              }
+              onInput$={(e) => (form.phone = (e.target as HTMLInputElement).value)}
             />
+
             <input
               class="cta__input"
               type="email"
               name="email"
-              placeholder="name@company.com (email)"
+              placeholder={t.value.placeholderEmail}
               value={form.email}
-              onInput$={(e) =>
-                (form.email = (e.target as HTMLInputElement).value)
-              }
+              onInput$={(e) => (form.email = (e.target as HTMLInputElement).value)}
             />
           </div>
 
           <button class="btn btn--primary" type="submit">
-            Отправить
+            {t.value.buttonText}
           </button>
         </form>
 
-        <p class="cta__note">
-          Мы свяжемся с вами в течение 24 часов в рабочие дни.
-        </p>
+        <p class="cta__note">{t.value.note}</p>
 
-        {form.error && (
-          <p class="cta__message cta__message--error">{form.error}</p>
-        )}
+        {form.error && <p class="cta__message cta__message--error">{form.error}</p>}
 
         {form.sent && !form.error && (
-          <p class="cta__message cta__message--success">
-            Заявка отправлена. Спасибо! Мы скоро с вами свяжемся.
-          </p>
+          <p class="cta__message cta__message--success">{t.value.success}</p>
         )}
       </div>
     </section>

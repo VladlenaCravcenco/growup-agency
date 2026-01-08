@@ -7,6 +7,28 @@ type Lang = 'ru' | 'en' | 'ro';
 type LString = { ru?: string; en?: string; ro?: string };
 const pick = (v?: LString, lang: Lang = 'ru') => v?.[lang] ?? v?.ru ?? '';
 
+export type FaqItemVM = {
+  question: string;
+  answer: string;
+};
+
+export type CtaFormVM = {
+  title: string;
+  subtitle: string;
+
+  placeholderName: string;
+  placeholderPhone: string;
+  placeholderEmail: string;
+
+  buttonText: string;
+  note: string;
+
+  errorRequired: string;
+  errorServer: string;
+  errorSend: string;
+  success: string;
+};
+
 export type HomeProcessStep = {
   title: string;
   text: string;
@@ -63,6 +85,10 @@ export type HomePageVM = {
 
   processTitle: string;
   processSteps: HomeProcessStep[];
+
+  faqTitle: string;
+  faqItems: FaqItemVM[];
+  ctaForm: CtaFormVM;
 };
 
 export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
@@ -99,6 +125,22 @@ export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
     },
       processTitle,
       processSteps[]{ title, text },
+
+      faqTitle,
+faqItems[]{ question, answer },
+ctaForm{
+  title,
+  subtitle,
+  placeholderName,
+  placeholderPhone,
+  placeholderEmail,
+  buttonText,
+  note,
+  errorRequired,
+  errorServer,
+  errorSend,
+  success
+},
   }
 `);
 
@@ -157,6 +199,29 @@ export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
       title: pick(s?.title, lang),
       text: pick(s?.text, lang),
     })),
+
+    faqTitle: pick(data?.faqTitle, lang),
+faqItems: (data?.faqItems ?? []).map((f: any) => ({
+  question: pick(f?.question, lang),
+  answer: pick(f?.answer, lang),
+})),
+
+ctaForm: {
+  title: pick(data?.ctaForm?.title, lang),
+  subtitle: pick(data?.ctaForm?.subtitle, lang),
+
+  placeholderName: pick(data?.ctaForm?.placeholderName, lang),
+  placeholderPhone: pick(data?.ctaForm?.placeholderPhone, lang),
+  placeholderEmail: pick(data?.ctaForm?.placeholderEmail, lang),
+
+  buttonText: pick(data?.ctaForm?.buttonText, lang),
+  note: pick(data?.ctaForm?.note, lang),
+
+  errorRequired: pick(data?.ctaForm?.errorRequired, lang) || 'Введите имя и хотя бы телефон или email',
+  errorServer: pick(data?.ctaForm?.errorServer, lang) || 'Сервер недоступен. Попробуйте ещё раз позже.',
+  errorSend: pick(data?.ctaForm?.errorSend, lang) || 'Ошибка при отправке. Попробуйте ещё раз или напишите нам напрямую.',
+  success: pick(data?.ctaForm?.success, lang) || 'Заявка отправлена. Спасибо! Мы скоро с вами свяжемся.',
+},
 
   };
 });
