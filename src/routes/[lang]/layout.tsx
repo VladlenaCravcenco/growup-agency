@@ -95,11 +95,10 @@ export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
       name,
       role,
       link,
-      "photo": photo.asset->url,
-
+      "photo": photo.asset->url
+    },
       processTitle,
       processSteps[]{ title, text },
-    }
   }
 `);
 
