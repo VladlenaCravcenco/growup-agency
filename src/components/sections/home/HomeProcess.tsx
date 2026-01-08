@@ -1,5 +1,6 @@
 import { component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 import { useHomePage } from '~/routes/[lang]/layout';
+import '../../../styles/home.css';
 
 export const HomeProcess = component$(() => {
   const { processTitle, processSteps } = useHomePage().value;
