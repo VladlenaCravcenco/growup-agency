@@ -7,6 +7,11 @@ type Lang = 'ru' | 'en' | 'ro';
 type LString = { ru?: string; en?: string; ro?: string };
 const pick = (v?: LString, lang: Lang = 'ru') => v?.[lang] ?? v?.ru ?? '';
 
+export type HomeProcessStep = {
+  title: string;
+  text: string;
+};
+
 export type TeamMember = {
   photo: string;
   name: string;
@@ -55,6 +60,9 @@ export type HomePageVM = {
   teamTitle: string;
   teamSubtitle: string;
   team: TeamMember[];
+
+  processTitle: string;
+  processSteps: HomeProcessStep[];
 };
 
 export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
@@ -87,7 +95,10 @@ export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
       name,
       role,
       link,
-      "photo": photo.asset->url
+      "photo": photo.asset->url,
+
+      processTitle,
+      processSteps[]{ title, text },
     }
   }
 `);
@@ -140,6 +151,12 @@ export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
       name: m?.name ?? '',
       role: pick(m?.role, lang),
       link: m?.link || undefined,
+    })),
+
+    processTitle: pick(data?.processTitle, lang),
+    processSteps: (data?.processSteps ?? []).map((s: any) => ({
+      title: pick(s?.title, lang),
+      text: pick(s?.text, lang),
     })),
 
   };

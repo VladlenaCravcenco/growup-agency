@@ -261,7 +261,6 @@
 }
 
 /* ====== PROCESS ====== */
-
 .process {
   padding: 60px 0;
 }
@@ -272,26 +271,66 @@
   gap: 24px;
 }
 
+/* Таймлайн-линия */
 .process__list {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  /* отступ слева под линию/точки */
+  padding-left: 28px;
+}
+
+/* сама вертикальная линия */
+.process__list::before {
+  content: "";
+  position: absolute;
+  left: 13px;         /* центр линии */
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 999px;
 }
 
 .process__item {
+  position: relative;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: 18px;
+
   padding: 20px 22px;
   border-radius: var(--radius-md);
   background: var(--color-bg-alt);
   box-shadow: var(--shadow-soft);
+
+  /* “спокойное” состояние по умолчанию */
+  opacity: 0.72;
+  transform: translateY(6px);
+  transition: opacity 220ms ease, transform 220ms ease, box-shadow 220ms ease, background 220ms ease;
 }
 
+/* точка на линии напротив карточки */
+.process__item::before {
+  content: "";
+  position: absolute;
+  left: -28px;         /* попадаем в padding-left листа */
+  top: 26px;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.22);
+  transform: translateX(8px);
+  transition: transform 220ms ease, background 220ms ease, box-shadow 220ms ease;
+}
+
+/* номер */
 .process__number {
   font-weight: 600;
   font-size: 22px;
   color: var(--color-accent);
+  transition: transform 220ms ease, opacity 220ms ease;
 }
 
 .process__title {
@@ -303,6 +342,39 @@
   margin: 0;
   font-size: 14px;
   color: var(--color-text-muted);
+}
+
+/* АКТИВНЫЙ ШАГ */
+.process__item.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  box-shadow: var(--shadow-soft);
+}
+
+/* активная точка: “светится” и чуть выезжает */
+.process__item.is-active::before {
+  background: var(--color-accent);
+  box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.04);
+  transform: translateX(8px) scale(1.05);
+}
+
+/* номер активного шага чуть “живее” */
+.process__item.is-active .process__number {
+  transform: translateY(-1px);
+}
+
+/* мобилка */
+@media (max-width: 640px) {
+  .process__list {
+    padding-left: 22px;
+  }
+  .process__list::before {
+    left: 10px;
+  }
+  .process__item::before {
+    left: -22px;
+    top: 22px;
+  }
 }
 
 /* ====== FAQ ====== */
