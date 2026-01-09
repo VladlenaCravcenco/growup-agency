@@ -12,6 +12,26 @@ const pick = (v?: LString | LText, lang: Lang = 'ru') =>
 
 export type CategoryId = 'ads' | 'smm' | 'branding' | 'web';
 
+/* =========================
+   PRICING FORMAT (Формат работы)
+========================= */
+export type PricingFormatStepVM = {
+  badge: string;
+  title: string;
+  text: string;
+  bullets: string[];
+};
+
+export type PricingFormatVM = {
+  label: string;
+  title: string;
+  subtitle: string;
+  steps: PricingFormatStepVM[];
+};
+
+/* =========================
+   PRICING CATEGORIES
+========================= */
 export type PricingTierVM = {
   id: string;
   name: string;
@@ -31,6 +51,9 @@ export type PricingCategoryVM = {
 
 export type PricingPageVM = {
   categories: PricingCategoryVM[];
+
+  // ✅ формат работы
+  formatBlock: PricingFormatVM;
 
   discussBtn: string;
   giftAria: string;
@@ -64,6 +87,19 @@ export const usePricingPage = routeLoader$<PricingPageVM>(async ({ params }) => 
         }
       },
 
+      
+      formatBlock{
+        label,
+        title,
+        subtitle,
+        steps[]{
+          badge,
+          title,
+          text,
+          bullets[]
+        }
+      },
+
       discussBtn,
       giftAria,
 
@@ -83,8 +119,9 @@ export const usePricingPage = routeLoader$<PricingPageVM>(async ({ params }) => 
       heading: pick(c?.heading, lang),
       title: pick(c?.title, lang),
       subtitle: pick(c?.subtitle, lang),
-      tiers: (c?.tiers ?? []).map((t: any) => ({
-        id: t?._key ?? crypto.randomUUID(),
+      tiers: (c?.tiers ?? []).map((t: any, idx: number) => ({
+        // ✅ на сервере crypto может быть не тем, поэтому просто fallback
+        id: t?._key ?? `${c?.id ?? 'cat'}-${idx}`,
         name: pick(t?.name, lang),
         price: pick(t?.price, lang),
         oldPrice: t?.oldPrice ? pick(t?.oldPrice, lang) : undefined,
@@ -92,6 +129,19 @@ export const usePricingPage = routeLoader$<PricingPageVM>(async ({ params }) => 
         features: (t?.features ?? []).map((f: any) => pick(f?.text, lang)),
       })),
     })),
+
+    // ✅ format block VM
+    formatBlock: {
+      label: pick(data?.formatBlock?.label, lang),
+      title: pick(data?.formatBlock?.title, lang),
+      subtitle: pick(data?.formatBlock?.subtitle, lang),
+      steps: (data?.formatBlock?.steps ?? []).map((s: any, i: number) => ({
+        badge: s?.badge ?? `${String(i + 1).padStart(2, '0')}`,
+        title: pick(s?.title, lang),
+        text: pick(s?.text, lang),
+        bullets: (s?.bullets ?? []).map((b: any) => pick(b, lang)),
+      })),
+    },
 
     discussBtn: pick(data?.discussBtn, lang),
     giftAria: pick(data?.giftAria, lang),
