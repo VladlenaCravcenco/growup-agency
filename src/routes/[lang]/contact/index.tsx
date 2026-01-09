@@ -480,11 +480,11 @@ export default component$(() => {
                   name="service"
                   required
                   class="contact-form__select"
-                  defaultValue=""
                 >
-                  <option value="" disabled>
+                  <option value="" selected disabled>
                     {t.servicePlaceholder}
                   </option>
+
                   {t.services.map((o: any) => (
                     <option key={o.value} value={o.value}>
                       {o.label}
@@ -503,11 +503,11 @@ export default component$(() => {
                   name="budget"
                   required
                   class="contact-form__select"
-                  defaultValue=""
                 >
-                  <option value="" disabled>
+                  <option value="" selected disabled>
                     {t.budgetPlaceholder}
                   </option>
+
                   {t.budgets.map((o: any) => (
                     <option key={o.value} value={o.value}>
                       {o.label}
@@ -550,8 +550,16 @@ export default component$(() => {
                 <label class="contact-form__label" for="startWhen">
                   {t.startWhenLabel}
                 </label>
-                <select id="startWhen" name="startWhen" class="contact-form__select" defaultValue="">
-                  <option value="">{t.startWhenPlaceholder}</option>
+                <select
+                  id="startWhen"
+                  name="startWhen"
+                  class="contact-form__select"
+                  value=""
+                >
+                  <option value="">
+                    {t.startWhenPlaceholder}
+                  </option>
+
                   {t.startWhen.map((o: any) => (
                     <option key={o.value} value={o.value}>
                       {o.label}
