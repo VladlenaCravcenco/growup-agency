@@ -259,26 +259,7 @@ export default component$(() => {
     const formData = new FormData(form);
 
     const name = String(formData.get('name') ?? '').trim();
-    const countryCodeRaw = String(formData.get('countryCode') ?? '').trim();
-    const phoneRaw = String(formData.get('phone') ?? '').trim();
-
-    const phoneDigits = phoneRaw.replace(/\D/g, '');
-
-    const countryCode =
-      countryCodeRaw === 'other' || !countryCodeRaw
-        ? ''
-        : countryCodeRaw;
-
-    const phone = countryCode
-      ? `${countryCode} ${phoneDigits}`
-      : phoneDigits;
-
-    // базовая валидация
-    if (phoneDigits.length < 7) {
-      error.value = t.phoneError;
-      sending.value = false;
-      return;
-    }
+    const phone = String(formData.get('phone') ?? '').trim();
     const email = String(formData.get('email') ?? '').trim();
     const niche = String(formData.get('niche') ?? '').trim();
     const service = String(formData.get('service') ?? '').trim();
@@ -326,8 +307,6 @@ export default component$(() => {
 
           name,
           phone,
-          phoneDigits,
-          countryCode,
           email,
           niche,
           service,
@@ -446,48 +425,19 @@ export default component$(() => {
                 />
               </div>
 
-              {/* Телефон */}
+              {/* телефон */}
               <div class="contact-form__field">
                 <label class="contact-form__label" for="phone">
-                  {t.phoneLabel}*
+                  {t.phoneLabel}
                 </label>
-
-                <div class="contact-form__phone">
-                  <select
-                    id="countryCode"
-                    name="countryCode"
-                    class="contact-form__select contact-form__select--code"
-                  >
-                    <option value="+373">🇲🇩 +373</option>
-                    <option value="+40">🇷🇴 +40</option>
-                    <option value="+380">🇺🇦 +380</option>
-                    <option value="+7">🇷🇺 +7</option>
-                    <option value="+49">🇩🇪 +49</option>
-                    <option value="+33">🇫🇷 +33</option>
-                    <option value="+39">🇮🇹 +39</option>
-                    <option value="+34">🇪🇸 +34</option>
-                    <option value="+44">🇬🇧 +44</option>
-                    <option value="+1">🇺🇸 +1</option>
-                    <option value="other">{t.otherCountry}</option>
-                  </select>
-
-                  <input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    required
-                    class="contact-form__input contact-form__input--phone"
-                    inputMode="tel"
-                    autocomplete="tel"
-                    placeholder={t.phonePlaceholder}
-                    onInput$={(e) => {
-                      const input = e.target as HTMLInputElement;
-                      input.value = input.value.replace(/[^\d]/g, '').slice(0, 15);
-                    }}
-                  />
-                </div>
-
-                <p class="contact-form__hint">{t.phoneHint}</p>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  required
+                  class="contact-form__input"
+                  placeholder={t.phonePlaceholder}
+                />
               </div>
 
               {/* Email */}
@@ -530,11 +480,11 @@ export default component$(() => {
                   name="service"
                   required
                   class="contact-form__select"
+                  defaultValue=""
                 >
-                  <option value="" selected disabled>
+                  <option value="" disabled>
                     {t.servicePlaceholder}
                   </option>
-
                   {t.services.map((o: any) => (
                     <option key={o.value} value={o.value}>
                       {o.label}
@@ -553,11 +503,11 @@ export default component$(() => {
                   name="budget"
                   required
                   class="contact-form__select"
+                  defaultValue=""
                 >
-                  <option value="" selected disabled>
+                  <option value="" disabled>
                     {t.budgetPlaceholder}
                   </option>
-
                   {t.budgets.map((o: any) => (
                     <option key={o.value} value={o.value}>
                       {o.label}
@@ -600,16 +550,8 @@ export default component$(() => {
                 <label class="contact-form__label" for="startWhen">
                   {t.startWhenLabel}
                 </label>
-                <select
-                  id="startWhen"
-                  name="startWhen"
-                  class="contact-form__select"
-                  value=""
-                >
-                  <option value="">
-                    {t.startWhenPlaceholder}
-                  </option>
-
+                <select id="startWhen" name="startWhen" class="contact-form__select" defaultValue="">
+                  <option value="">{t.startWhenPlaceholder}</option>
                   {t.startWhen.map((o: any) => (
                     <option key={o.value} value={o.value}>
                       {o.label}
