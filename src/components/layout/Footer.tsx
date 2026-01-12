@@ -1,5 +1,5 @@
 import { component$ } from '@builder.io/qwik';
-import { Link, useLocation } from '@builder.io/qwik-city';
+import { useLocation } from '@builder.io/qwik-city';
 import '../../styles/footer.css';
 
 type Lang = 'ru' | 'en' | 'ro';
