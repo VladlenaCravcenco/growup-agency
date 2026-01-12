@@ -50,11 +50,12 @@ export const Footer = component$(() => {
   const loc = useLocation();
   const year = new Date().getFullYear();
 
-  const lang = (loc.params.lang as Lang) || 'ru';
+  const raw = loc.params.lang;
+  const lang: Lang = raw === 'ru' || raw === 'en' || raw === 'ro' ? raw : 'ru';
   const t = TEXT[lang];
 
   const homePath = `/${lang}`;
-const homeAnchor = (id: string) => `${homePath}#${id}`;
+  const homeAnchor = (id: string) => `${homePath}#${id}`;
 
   return (
     <footer class="footer">
