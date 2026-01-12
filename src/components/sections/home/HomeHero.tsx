@@ -1,11 +1,14 @@
 // src/components/sections/home/HomeHero.tsx
 import { component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
+import { useLocation } from '@builder.io/qwik-city';
 import { useHomePage } from '~/routes/[lang]/layout';
 import '../../../styles/home.css';
 
 export const HomeHero = component$(() => {
   const ready = useSignal(false);
   const { hero } = useHomePage().value;
+  const loc = useLocation();
+  const lang = (loc.params.lang as string) || 'ru';
 
   useVisibleTask$(() => {
     if (!customElements.get('spline-viewer')) {
@@ -40,10 +43,10 @@ export const HomeHero = component$(() => {
             </div>
 
             <div class="hero__actions">
-              <a href="/contact" class="btn btn--primary">
+              <a href={`/${lang}/contact`} class="btn btn--primary">
               {hero.ctaPrimary}
             </a>
-            <a href="/projects" class="btn btn--ghost">
+            <a href={`/${lang}/projects`} class="btn btn--ghost">
               {hero.ctaSecondary}
             </a>
             </div>
