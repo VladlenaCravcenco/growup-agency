@@ -1,6 +1,6 @@
 import { component$ } from '@builder.io/qwik';
 import { useLocation } from '@builder.io/qwik-city';
-import '../../styles/footer.css';
+import '~/styles/footer.css';
 
 type Lang = 'ru' | 'en' | 'ro';
 
@@ -46,12 +46,13 @@ const TEXT: Record<Lang, any> = {
   },
 };
 
+
 export const Footer = component$(() => {
   const loc = useLocation();
   const year = new Date().getFullYear();
 
-  const raw = loc.params.lang;
-  const lang: Lang = raw === 'ru' || raw === 'en' || raw === 'ro' ? raw : 'ru';
+  const raw = loc.params.lang as string | undefined;
+  const lang: Lang = raw === 'ru' || raw === 'en' || raw === 'ro' ? (raw as Lang) : 'ru';
   const t = TEXT[lang];
 
   const homePath = `/${lang}`;
