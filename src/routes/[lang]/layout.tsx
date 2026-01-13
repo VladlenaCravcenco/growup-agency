@@ -3,8 +3,6 @@ import { component$, Slot } from '@builder.io/qwik';
 import { routeLoader$ } from '@builder.io/qwik-city';
 import { sanityClient } from '~/sanity/client';
 
-
-
 type Lang = 'ru' | 'en' | 'ro';
 type LString = { ru?: string; en?: string; ro?: string };
 const pick = (v?: LString, lang: Lang = 'ru') => v?.[lang] ?? v?.ru ?? '';
@@ -46,7 +44,7 @@ export type TeamMember = {
 export type ClientLogo = {
   src: string;
   alt: string;
-  href?: string
+  href?: string;
 };
 
 export type HomeServiceBullet = {
@@ -57,7 +55,6 @@ export type HomeServiceItem = {
   tag: string;
   title: string;
   link: string;
-
   bullets: HomeServiceBullet[];
 };
 
@@ -71,11 +68,11 @@ export type HomePageVM = {
   };
   stats: { value: string; label: string }[];
 
-
   servicesTitle: string;
   servicesSubtitle: string;
   services: HomeServiceItem[];
   servicesCta: string;
+
   clientsTitle: string;
   clientsTop: ClientLogo[];
   clientsBottom: ClientLogo[];
@@ -90,61 +87,65 @@ export type HomePageVM = {
 
   faqTitle: string;
   faqItems: FaqItemVM[];
+
   ctaForm: CtaFormVM;
 };
 
+// ✅ HOME PAGE loader (как у тебя)
 export const useHomePage = routeLoader$<HomePageVM>(async ({ params }) => {
   const lang = (params.lang as Lang) || 'ru';
 
   const data = await sanityClient.fetch<any>(`
-  *[_type=="homePage"][0]{
-    hero{ title, subtitle, text, ctaPrimary, ctaSecondary },
-    stats[]{ value, label },
+    *[_type=="homePage"][0]{
+      hero{ title, subtitle, text, ctaPrimary, ctaSecondary },
+      stats[]{ value, label },
 
-    servicesTitle,
-    servicesSubtitle,
+      servicesTitle,
+      servicesSubtitle,
 
-    services[]{
-      tag,
-      link,
-      title,
-      bullets[]{ text }
-    },
-    servicesCta,
+      services[]{
+        tag,
+        link,
+        title,
+        bullets[]{ text }
+      },
+      servicesCta,
 
-    clientsTitle,
-    clientsTop[]{ alt, href, "src": logo.asset->url },
-    clientsBottom[]{ alt, href, "src": logo.asset->url },
+      clientsTitle,
+      clientsTop[]{ alt, href, "src": logo.asset->url },
+      clientsBottom[]{ alt, href, "src": logo.asset->url },
 
-    teamEyebrow,
-    teamTitle,
-    teamSubtitle,
-    team[]{
-      name,
-      role,
-      link,
-      "photo": photo.asset->url
-    },
+      teamEyebrow,
+      teamTitle,
+      teamSubtitle,
+      team[]{
+        name,
+        role,
+        link,
+        "photo": photo.asset->url
+      },
+
       processTitle,
       processSteps[]{ title, text },
 
       faqTitle,
-faqItems[]{ question, answer },
-ctaForm{
-  title,
-  subtitle,
-  placeholderName,
-  placeholderPhone,
-  placeholderEmail,
-  buttonText,
-  note,
-  errorRequired,
-  errorServer,
-  errorSend,
-  success
-},
-  }
-`);
+      faqItems[]{ question, answer },
+
+      ctaForm{
+        title,
+        subtitle,
+        placeholderName,
+        placeholderPhone,
+        placeholderEmail,
+        buttonText,
+        note,
+        errorRequired,
+        errorServer,
+        errorSend,
+        success
+      },
+    }
+  `);
 
   return {
     hero: {
@@ -167,12 +168,13 @@ ctaForm{
       tag: s?.tag ?? '',
       link: s?.link ?? '',
       title: pick(s?.title, lang),
-
       bullets: (s?.bullets ?? []).map((b: any) => ({
         text: pick(b?.text, lang),
       })),
     })),
+
     servicesCta: pick(data?.servicesCta, lang),
+
     clientsTitle: pick(data?.clientsTitle, lang),
     clientsTop: (data?.clientsTop ?? []).map((c: any) => ({
       src: c?.src ?? '',
@@ -203,29 +205,79 @@ ctaForm{
     })),
 
     faqTitle: pick(data?.faqTitle, lang),
-faqItems: (data?.faqItems ?? []).map((f: any) => ({
-  question: pick(f?.question, lang),
-  answer: pick(f?.answer, lang),
-})),
+    faqItems: (data?.faqItems ?? []).map((f: any) => ({
+      question: pick(f?.question, lang),
+      answer: pick(f?.answer, lang),
+    })),
 
-ctaForm: {
-  title: pick(data?.ctaForm?.title, lang),
-  subtitle: pick(data?.ctaForm?.subtitle, lang),
+    ctaForm: {
+      title: pick(data?.ctaForm?.title, lang),
+      subtitle: pick(data?.ctaForm?.subtitle, lang),
 
-  placeholderName: pick(data?.ctaForm?.placeholderName, lang),
-  placeholderPhone: pick(data?.ctaForm?.placeholderPhone, lang),
-  placeholderEmail: pick(data?.ctaForm?.placeholderEmail, lang),
+      placeholderName: pick(data?.ctaForm?.placeholderName, lang),
+      placeholderPhone: pick(data?.ctaForm?.placeholderPhone, lang),
+      placeholderEmail: pick(data?.ctaForm?.placeholderEmail, lang),
 
-  buttonText: pick(data?.ctaForm?.buttonText, lang),
-  note: pick(data?.ctaForm?.note, lang),
+      buttonText: pick(data?.ctaForm?.buttonText, lang),
+      note: pick(data?.ctaForm?.note, lang),
 
-  errorRequired: pick(data?.ctaForm?.errorRequired, lang) || 'Введите имя и хотя бы телефон или email',
-  errorServer: pick(data?.ctaForm?.errorServer, lang) || 'Сервер недоступен. Попробуйте ещё раз позже.',
-  errorSend: pick(data?.ctaForm?.errorSend, lang) || 'Ошибка при отправке. Попробуйте ещё раз или напишите нам напрямую.',
-  success: pick(data?.ctaForm?.success, lang) || 'Заявка отправлена. Спасибо! Мы скоро с вами свяжемся.',
-},
-
+      errorRequired:
+        pick(data?.ctaForm?.errorRequired, lang) ||
+        'Введите имя и хотя бы телефон или email',
+      errorServer:
+        pick(data?.ctaForm?.errorServer, lang) ||
+        'Сервер недоступен. Попробуйте ещё раз позже.',
+      errorSend:
+        pick(data?.ctaForm?.errorSend, lang) ||
+        'Ошибка при отправке. Попробуйте ещё раз или напишите нам напрямую.',
+      success:
+        pick(data?.ctaForm?.success, lang) ||
+        'Заявка отправлена. Спасибо! Мы скоро с вами свяжемся.',
+    },
   };
 });
+
+// ✅ Карточки услуг из service (как homeServiceItem)
+export type SanityServiceCard = {
+  slug: string;
+  tag: string;
+  title: string;
+  link: string;
+  servicesCta?: string;
+  bullets: { text: string }[];
+};
+
+export const useServicesFromSanity = routeLoader$<SanityServiceCard[]>(
+  async ({ params }) => {
+    const lang = (params.lang as Lang) || 'ru';
+
+    const items = await sanityClient.fetch<any[]>(
+      `*[_type=="service" && defined(slug.current)]
+        | order(_createdAt desc)[0...30]{
+          "slug": slug.current,
+
+          "tag": homeTag,
+          "title": coalesce(homeTitle[$lang], homeTitle.ru, ""),
+          "link":  coalesce(homeLink, ""),
+
+          "servicesCta": coalesce(homeServicesCta[$lang], homeServicesCta.ru, ""),
+
+          "bullets": (homeBullets[]{
+            "text": coalesce(text[$lang], text.ru, "")
+          })
+        }`,
+      { lang }
+    );
+
+    return (items ?? []).map((s) => ({
+      slug: s?.slug ?? '',
+      tag: s?.tag ?? '',
+      title: s?.title ?? '',
+      link: s?.link ?? '',
+      servicesCta: s?.servicesCta ?? '',
+      bullets: Array.isArray(s?.bullets) ? s.bullets : [],
+    }));
+  }
+);
 
 export default component$(() => <Slot />);
