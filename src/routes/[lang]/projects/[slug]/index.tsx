@@ -1,9 +1,10 @@
 import { component$ } from '@builder.io/qwik';
-import { Link, routeLoader$ } from '@builder.io/qwik-city';
+import { Link, routeLoader$, useLocation } from '@builder.io/qwik-city';
 import '~/styles/projects.css';
 import { sanityClient } from '~/sanity/client';
 import { HomeCTA } from '~/components/sections/home/HomeCTA';
 
+type Lang = 'ru' | 'en' | 'ro';
 
 type SectionKind = 'goals' | 'solution' | 'results';
 
@@ -24,105 +25,166 @@ type ProjectPageData = {
   heroTitle: string;
   heroSubtitle?: string;
   task?: string;
+
   client?: string;
-  categories?: string;
+  categories?: string[]; // ✅ ключи категорий
   period?: string;
+
   cover?: string;
   sections: ProjectSection[];
 };
 
+const UI = {
+  ru: {
+    back: '← Все проекты',
+    taskLabel: 'задача',
+    metaClient: 'Клиент',
+    metaCategory: 'Категория',
+    metaPeriod: 'Период',
 
-const DEMO_PROJECT: ProjectPageData = {
-  slug: 'not-an-idol',
-  heroTitle: 'Полный  тура по Германии за три недели кампаний',
-  heroSubtitle:
-    'Кейс музыкальной группы Not an idol: тур по шести городам Германии с акцентом на русскоязычную и румыноязычную аудиторию.',
-  task: 'Продать все билеты на тур в шести городах Германии за ограниченный срок, работая с новой аудиторией.',
-  client: 'Not an idol',
-  categories: 'Стратегия, креатив, performance-маркетинг',
-  period: '30 дней',
-  cover: '',
-  sections: [],
-};
+    goalsFallback: 'Маркетинговая задача и цели',
+    solutionFallback: 'Стратегия и реализация кампании',
+    resultsFallback: 'Результаты и выводы',
+  },
+  en: {
+    back: '← All projects',
+    taskLabel: 'task',
+    metaClient: 'Client',
+    metaCategory: 'Category',
+    metaPeriod: 'Period',
 
+    goalsFallback: 'Marketing goals & KPIs',
+    solutionFallback: 'Strategy & execution',
+    resultsFallback: 'Results & insights',
+  },
+  ro: {
+    back: '← Toate proiectele',
+    taskLabel: 'sarcină',
+    metaClient: 'Client',
+    metaCategory: 'Categorie',
+    metaPeriod: 'Perioadă',
 
-export const useProject = routeLoader$<ProjectPageData | null>(async (ev: any) => {
-  const { slug } = ev.params as { slug: string };
+    goalsFallback: 'Obiective și KPI-uri',
+    solutionFallback: 'Strategie și implementare',
+    resultsFallback: 'Rezultate și concluzii',
+  },
+} as const;
 
+const CAT_LABEL = {
+  ru: { ads: 'Платная реклама', smm: 'SMM', branding: 'Брендинг', web: 'Web-разработка' },
+  en: { ads: 'Paid ads', smm: 'SMM', branding: 'Branding', web: 'Web development' },
+  ro: { ads: 'Publicitate plătită', smm: 'SMM', branding: 'Branding', web: 'Dezvoltare web' },
+} as const;
+
+export const useProject = routeLoader$<ProjectPageData | null>(async ({ params }) => {
+  const lang = (params.lang as Lang) || 'ru';
+  const slug = params.slug;
+
+  // ВАЖНО:
+  // это работает только если в Sanity ты поменяла схемы на localeString/localeText
+  // (title, heroSubtitle, task, period, sections.title/text, gallery.alt)
   const project = await sanityClient.fetch<ProjectPageData | null>(
     `*[_type == "project" && slug.current == $slug][0]{
       "slug": slug.current,
-      "heroTitle": title,
-      heroSubtitle,
-      task,
+
+      "heroTitle": coalesce(title[$lang], title.ru, ""),
+      "heroSubtitle": coalesce(heroSubtitle[$lang], heroSubtitle.ru, ""),
+      "task": coalesce(task[$lang], task.ru, ""),
+
       client,
-      role,
-      period,
+      "categories": coalesce(categories, []),
+
+      "period": coalesce(period[$lang], period.ru, ""),
+
       "cover": cover.asset->url,
-      sections[]{
+
+      "sections": sections[]{
         kind,
-        title,
-        text,
-        gallery[]{
+        "title": coalesce(title[$lang], title.ru, ""),
+        "text": coalesce(text[$lang], text.ru, ""),
+        "gallery": gallery[]{
           "url": asset->url,
-          alt
+          "alt": coalesce(alt[$lang], alt.ru, alt)
         }
       }
     }`,
-    { slug }
+    { slug, lang }
   );
 
   return project;
 });
 
-
-
 export default component$(() => {
+  const loc = useLocation();
+  const lang = (loc.params.lang as Lang) || 'ru';
+  const t = UI[lang];
+
   const projectResource = useProject();
-  const data = projectResource.value ?? DEMO_PROJECT;
+  const data = projectResource.value;
+
+  // если проект ещё не найден/не заполнен — показываем минимально, без падения
+  if (!data) {
+    return (
+      <main class="page page--project">
+        <section class="project">
+          <div class="project__inner">
+            <Link href={`/${lang}/projects`} class="project__back-link">
+              {t.back}
+            </Link>
+            <div class="project-layout">
+              <p>Project not found</p>
+            </div>
+          </div>
+        </section>
+        <HomeCTA />
+      </main>
+    );
+  }
 
   const sections: ProjectSection[] = data.sections ?? [];
+  const categoriesText =
+    (data.categories ?? [])
+      .map((c) => (CAT_LABEL[lang] as any)[c] || c)
+      .join(', ') || '';
 
   return (
     <main class="page page--project">
       <section class="project">
         <div class="project__inner">
-          <Link href="/projects" class="project__back-link">
-            ← Все проекты
+          {/* ✅ ссылка назад зависит от языка */}
+          <Link href={`/${lang}/projects`} class="project__back-link">
+            {t.back}
           </Link>
 
-          {/* HERO: исходные данные */}
+          {/* HERO */}
           <header class="project-hero">
             <div class="project-hero__text">
-              {/* Заголовок кейса */}
               <h1 class="project-hero__title">{data.heroTitle}</h1>
 
-              {/* Подзаголовок */}
               {data.heroSubtitle && (
                 <p class="project-hero__subtitle">{data.heroSubtitle}</p>
               )}
 
-              {/* Блок "задача" */}
               {data.task && (
                 <div class="project-hero__task">
-                  <span class="project-hero__task-label">задача</span>
+                  <span class="project-hero__task-label">{t.taskLabel}</span>
                   <p class="project-hero__task-text">{data.task}</p>
                 </div>
               )}
 
-              {/* Мета-информация: 3 колонки */}
+              {/* ✅ meta-лейблы переводятся */}
               <dl class="project-hero__meta">
                 <div>
-                  <dt>Клиент</dt>
-                  <dd>{data.client}</dd>
+                  <dt>{t.metaClient}</dt>
+                  <dd>{data.client || ''}</dd>
                 </div>
                 <div>
-                  <dt>Категория</dt>
-                  <dd>{data.categories}</dd>
+                  <dt>{t.metaCategory}</dt>
+                  <dd>{categoriesText}</dd>
                 </div>
                 <div>
-                  <dt>Период</dt>
-                  <dd>{data.period}</dd>
+                  <dt>{t.metaPeriod}</dt>
+                  <dd>{data.period || ''}</dd>
                 </div>
               </dl>
             </div>
@@ -141,14 +203,13 @@ export default component$(() => {
             </div>
           </header>
 
-          {/* Блоки: Цели / Реализация / Результаты */}
+          {/* СЕКЦИИ */}
           <div class="project-layout">
             {sections.map((section: ProjectSection, index: number) => {
               const gallery = section.gallery ?? [];
               const sideImage = gallery[0];
               const extraImages = gallery.slice(1);
 
-              // -------- ЦЕЛИ / KPI: только текст, на всю ширину --------
               if (section.kind === 'goals') {
                 return (
                   <section
@@ -157,7 +218,7 @@ export default component$(() => {
                   >
                     <div class="project-section__text project-section__text--full">
                       <h2 class="project-section__title">
-                        {section.title ?? 'Маркетинговая задача и цели'}
+                        {section.title || t.goalsFallback}
                       </h2>
                       <p class="project-section__body">{section.text}</p>
                     </div>
@@ -165,7 +226,6 @@ export default component$(() => {
                 );
               }
 
-              // -------- РЕАЛИЗАЦИЯ: фото слева, текст справа, доп. фото снизу --------
               if (section.kind === 'solution') {
                 return (
                   <section
@@ -186,7 +246,7 @@ export default component$(() => {
 
                       <div class="project-section__text">
                         <h2 class="project-section__title">
-                          {section.title ?? 'Стратегия и реализация кампании'}
+                          {section.title || t.solutionFallback}
                         </h2>
                         <p class="project-section__body">{section.text}</p>
                       </div>
@@ -213,7 +273,6 @@ export default component$(() => {
                 );
               }
 
-              // -------- РЕЗУЛЬТАТЫ: текст слева, фото справа, доп. фото снизу --------
               if (section.kind === 'results') {
                 return (
                   <section
@@ -223,7 +282,7 @@ export default component$(() => {
                     <div class="project-section__content">
                       <div class="project-section__text">
                         <h2 class="project-section__title">
-                          {section.title ?? 'Результаты и выводы'}
+                          {section.title || t.resultsFallback}
                         </h2>
                         <p class="project-section__body">{section.text}</p>
                       </div>
