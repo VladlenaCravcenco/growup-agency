@@ -35,7 +35,7 @@ export default component$(() => {
 
   return (
     <main class="page page--pricing">
-      <PricingFormat />
+
 
       <section class="pricing">
         <div class="pricing__inner">
@@ -115,7 +115,7 @@ export default component$(() => {
           </div>
         </div>
       </section>
-
+      <PricingFormat />
       <HomeFaqCta />
 
       {showTypeModal.value && (
