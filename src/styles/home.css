@@ -213,6 +213,7 @@
 /* ========== TEAM ========== */
 
 .team {
+  display: none;
   padding: 80px 0 72px;
 }
 
