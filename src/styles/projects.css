@@ -265,7 +265,7 @@
   line-height: 1.2;
   font-weight: 700;
   margin: 0;
-  text-transform: lowercase; /* если хочешь эффект как на макете "заголовок" */
+ 
 }
 
 .project-hero__subtitle {
@@ -505,6 +505,7 @@
   border-radius: 32px;
   background: #dedcd7;
 }
+
 
 /* Доп. галерея под блоком */
 .project-section__gallery--below {
