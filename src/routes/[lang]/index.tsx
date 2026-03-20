@@ -11,6 +11,7 @@ import { HomeFaqCta } from '../../components/sections/home/HomeFaqCta';
 import '../../styles/home.css';
 
 export default component$(() => {
+  
   return (
     <>
       <HomeHero />

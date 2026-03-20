@@ -5,6 +5,17 @@ import { sanityClient } from '~/sanity/client';
 
 import { HomeClients } from '../../../components/sections/home/HomeClients';
 import { HomeCTA } from '../../../components/sections/home/HomeCTA';
+import { type DocumentHead } from '@builder.io/qwik-city';
+
+export const head: DocumentHead = ({ params }) => {
+  const lang = (params.lang as Lang) || 'ru';
+  const titles: Record<Lang, string> = {
+    ru: 'Проекты — GrowUp Agency',
+    en: 'Projects — GrowUp Agency',
+    ro: 'Proiecte — GrowUp Agency',
+  };
+  return { title: titles[lang] ?? 'GrowUp Agency' };
+};
 
 export type CategoryId = 'ads' | 'smm' | 'branding' | 'web';
 type Lang = 'ru' | 'en' | 'ro';
