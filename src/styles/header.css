@@ -1,8 +1,17 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: rgba(247, 245, 239, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
 
 .header__inner {
   max-width: 1300px;
   margin: 0 auto;
-  padding: 20px 24px;
+  padding: 16px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,160 +19,172 @@
 
 /* Лого */
 .header__logo {
-  font-size: 20px;
-  font-weight: 700;
-  color: #1e2a3a;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #111;
   text-decoration: none;
 }
 
 /* Навигация */
 .header__nav--desktop {
   display: flex;
-  gap: 28px;
+  gap: 32px;
   align-items: center;
 }
 
-/* общий контейнер для пункта меню */
 .header__nav-item {
   position: relative;
   align-items: center;
 }
 
-/* выпадающее меню услуг */
+/* Ссылки */
+.header__link {
+  text-decoration: none;
+  color: #444;
+  font-size: 14px;
+  transition: color 0.15s;
+}
+
+.header__link:hover {
+  color: #111;
+}
+
+/* CTA кнопка */
+.hero-btn {
+  padding: 10px 18px;
+  background: #111;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.hero-btn:hover {
+  opacity: 0.82;
+}
+
+/* Дропдаун услуг */
 .header__dropdown {
   position: absolute;
-  top: 120%;
+  top: calc(100% + 12px);
   left: 0;
-  min-width: max-content;
-  padding: 10px 20px;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  min-width: 200px;
+  padding: 8px;
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.07);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
   opacity: 0;
   pointer-events: none;
-  transform: translateY(8px);
-  transition:
-    opacity 0.18s ease,
-    transform 0.18s ease;
+  transform: translateY(6px);
+  transition: opacity 0.16s ease, transform 0.16s ease;
   z-index: 100;
 }
-/* Кнопка-строка (как обычный пункт меню) */
-.header__link--toggle {
-  width: 100%;
-  padding: 16px 0;
-  font-size: 22px;
-  color: #1e293b;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: none;
-  background: transparent;
-}
 
-/* Стрелка справа */
-.header__link-arrow {
-  font-size: 14px;
-  margin-left: 8px;
-}
-
-/* Мобильный список услуг */
-.header__dropdown--mobile {
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-  gap: 14px;
-}
-
-.header__dropdown--mobile .header__dropdown-link {
-  font-size: 18px;
-  color: #2563eb;
-}
-
-/* ссылки внутри дропдауна */
-.header__dropdown-link {
-  display: block;
-  padding: 10px 0;
-  font-size: 14px;
-  text-decoration: none;
-  color: #1e2a3a;
-  white-space: nowrap;
-}
-
-.header__dropdown-link:hover {
-  background: #f3f3f8;
-}
-
-/* показываем дропдаун только при hover на пункт "Услуги" */
 .header__nav-item--services:hover .header__dropdown {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
 }
 
-/* на мобильных hover всё равно не работает, поэтому просто скрываем дропдаун */
-@media (max-width: 768px) {
-  .header__nav-item--services .header__dropdown {
-    display: none;
-  }
-}
-
-.header__link {
+.header__dropdown-link {
+  display: block;
+  padding: 9px 12px;
+  font-size: 13.5px;
   text-decoration: none;
-  color: #1e2a3a;
-  font-size: 16px;
-}
-.hero-btn{
-padding: 14px;
-background-color: #2563eb;
-color: #f3f3f3;
-border-radius: 15px;
-font-weight: 700;
+  color: #333;
+  border-radius: 8px;
+  white-space: nowrap;
+  transition: background 0.12s;
 }
 
-/* LANGUAGE DROPDOWN */
+.header__dropdown-link:hover {
+  background: #f5f4f0;
+}
+
+/* ── LANGUAGE SWITCHER ── */
 .lang {
   position: relative;
-  
 }
 
 .lang__button {
   background: transparent;
-  border: 1px solid #1e2a3a;
-  padding: 6px 12px;
-  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.14);
+  padding: 6px 11px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #444;
+  transition: border-color 0.15s, background 0.15s;
+  font-family: inherit;
+}
+
+.lang__button:hover {
+  border-color: rgba(0,0,0,0.28);
+  background: rgba(0,0,0,0.03);
 }
 
 .lang__dropdown {
   position: absolute;
-  top: 120%;
+  top: calc(100% + 8px);
   right: 0;
-  background: #fbf8f3;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
   display: flex;
-  z-index: 100;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 200;
+  min-width: 72px;
+  animation: langIn 0.15s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+@keyframes langIn {
+  from { opacity: 0; transform: translateY(4px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
 }
 
 .lang__item {
-  padding: 10px 12px;
-  font-size: 14px;
+  padding: 9px 16px;
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #333;
+  text-align: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.1s;
   text-decoration: none;
-  color: #1e2a3a;
+  display: block;
 }
 
 .lang__item:hover {
-  background: #f3f3f3;
+  background: #f5f4f0;
 }
+
+.lang__item + .lang__item {
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+/* ── BURGER ── */
 .header__burger {
   display: none;
 }
+
 .header__nav-mobile {
   display: none;
 }
 
-/* MOBILE */
+/* ── MOBILE ── */
 @media (max-width: 768px) {
   .header__nav--desktop {
     display: none;
@@ -172,38 +193,36 @@ font-weight: 700;
   .header__burger {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    width: 28px;
-    height: 22px;
+    gap: 5px;
+    width: 24px;
     background: transparent;
     border: none;
     cursor: pointer;
+    padding: 0;
   }
 
   .header__burger span {
     width: 100%;
-    height: 3px;
-    background: #1e2a3a;
+    height: 2px;
+    background: #111;
     border-radius: 2px;
+    transition: opacity 0.15s;
   }
-
-  /* MOBILE MENU */
 
   .header__nav-mobile {
     position: fixed;
     top: 0;
     right: -100%;
     width: 100%;
-    height: 100vh;
-    background: #fbf8f3;
-    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
-    padding: 40px 24px;
-    display: grid;
+    height: 100dvh;
+    background: #f7f5ef;
+    padding: 60px 28px 40px;
+    display: flex;
     flex-direction: column;
-    gap: 24px;
-    transition: right 0.3s ease;
+    gap: 6px;
+    transition: right 0.3s cubic-bezier(0.16,1,0.3,1);
     z-index: 999;
-    align-content: end;
+    overflow-y: auto;
   }
 
   .header__nav-mobile--open {
@@ -212,33 +231,84 @@ font-weight: 700;
 
   .header__nav-mobile-close {
     position: absolute;
-    top: 20px;
+    top: 18px;
     right: 20px;
     background: transparent;
     border: none;
-    font-size: 28px;
-    line-height: 1;
-    color: #1e2a3a;
+    font-size: 22px;
+    color: #111;
     cursor: pointer;
     padding: 6px;
+    line-height: 1;
+    opacity: 0.5;
   }
 
   .header__nav-mobile-close:hover {
+    opacity: 1;
+  }
+
+  .header__link {
+    font-size: 20px;
+    font-weight: 500;
+    color: #111;
+    padding: 10px 0;
+    display: block;
+    letter-spacing: -0.02em;
+  }
+
+  .header__link--toggle {
+    width: 100%;
+    font-size: 20px;
+    color: #111;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    background: transparent;
+    padding: 10px 0;
+    font-family: inherit;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    cursor: pointer;
+  }
+
+  .header__link-arrow {
+    font-size: 13px;
+    opacity: 0.5;
+    margin-left: 8px;
+  }
+
+  .header__dropdown--mobile {
+    display: flex;
+    flex-direction: column;
+    margin: 4px 0 10px 12px;
+    gap: 2px;
+  }
+
+  .header__dropdown--mobile .header__dropdown-link {
+    font-size: 15px;
+    color: #2845f5;
+    padding: 7px 0;
+    border-radius: 0;
+  }
+
+  .header__dropdown--mobile .header__dropdown-link:hover {
+    background: transparent;
     opacity: 0.7;
   }
 
-  .header__mobile-link {
-    font-size: 20px;
-    text-decoration: none;
-    color: #1e2a3a;
-    padding: 8px 0;
+  .hero-btn {
+    margin-top: 12px;
+    text-align: center;
+    padding: 14px 18px;
+    font-size: 15px;
   }
 
-  /* LANG IN MOBILE */
+  /* LANG мобилка */
   .header__mobile-langs {
     margin-top: auto;
     padding-top: 20px;
-    border-top: 1px solid #e2ddd7;
+    border-top: 1px solid rgba(0,0,0,0.08);
   }
 
   .lang {
@@ -248,19 +318,30 @@ font-weight: 700;
   .lang__button {
     width: 100%;
     text-align: left;
-    font-size: 16px;
+    font-size: 14px;
     padding: 10px 14px;
+    border-radius: 10px;
   }
 
   .lang__dropdown--mobile {
-    width: 100%;
-    margin-top: 6px;
     position: relative;
-    border: 1px solid #ddd;
+    top: auto;
+    margin-top: 6px;
+    box-shadow: none;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 10px;
+    animation: none;
   }
 
   .lang__item {
     padding: 12px 16px;
-    font-size: 16px;
+    font-size: 14px;
+    text-align: left;
+  }
+
+  @media (max-width: 768px) {
+    .header__nav-item--services .header__dropdown {
+      display: none;
+    }
   }
 }

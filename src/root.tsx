@@ -2,6 +2,9 @@ import { component$ } from "@builder.io/qwik";
 import { isDev } from "@builder.io/qwik";
 import { QwikCityProvider, RouterOutlet } from "@builder.io/qwik-city";
 import { RouterHead } from "./components/router-head/router-head";
+import { CookieBanner } from "./components/layout/CookieBanner"; 
+import './styles/cookie-banner.css';
+
 
 export default component$(() => {
   const META_PIXEL_ID = "1601489467655242";
@@ -45,6 +48,7 @@ export default component$(() => {
         </noscript>
 
         <RouterOutlet />
+         <CookieBanner />
       </body>
     </QwikCityProvider>
   );

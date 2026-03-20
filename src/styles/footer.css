@@ -184,3 +184,10 @@
     margin-top: 20px;
   }
 }
+
+.footer__cookie-link {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
