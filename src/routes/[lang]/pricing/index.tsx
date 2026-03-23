@@ -1,5 +1,6 @@
 // src/routes/[lang]/pricing/index.tsx
 import { component$, useSignal, QRL } from '@builder.io/qwik';
+import { useLocation, useNavigate } from '@builder.io/qwik-city';
 import { PricingFormat } from '~/components/sections/pricing/PricingFormat';
 import { HomeFaqCta } from '~/components/sections/home/HomeFaqCta';
 import { usePricingPage, type PricingPageVM, type CategoryId } from './layout';
@@ -7,10 +8,22 @@ import '~/styles/pricing.css';
 
 export default component$(() => {
   const data = usePricingPage().value;
+  const loc = useLocation();
+  const nav = useNavigate();
 
   const categories = data.categories ?? [];
-  const activeCategory = useSignal<CategoryId>((categories[0]?.id ?? 'ads') as CategoryId);
+
+  // Read initial tab from URL ?tab=branding, fallback to first category
+  const initialTab = () => {
+    const param = loc.url.searchParams.get('tab') as CategoryId | null;
+    if (param && categories.find((c) => c.id === param)) return param;
+    return (categories[0]?.id ?? 'ads') as CategoryId;
+  };
+
+  const activeCategory = useSignal<CategoryId>(initialTab());
   const showTypeModal = useSignal(false);
+
+  // Sync URL when tab changes — inlined in onClick$ below
 
   const currentCategory = () =>
     categories.find((c) => c.id === activeCategory.value) ?? categories[0];
@@ -35,8 +48,6 @@ export default component$(() => {
 
   return (
     <main class="page page--pricing">
-
-
       <section class="pricing">
         <div class="pricing__inner">
           <div class="pricing-tabs">
@@ -47,7 +58,12 @@ export default component$(() => {
                   'pricing-tabs__btn': true,
                   'pricing-tabs__btn--active': activeCategory.value === c.id,
                 }}
-                onClick$={() => (activeCategory.value = c.id)}
+                onClick$={() => {
+                  activeCategory.value = c.id as CategoryId;
+                  const url = new URL(loc.url.href);
+                  url.searchParams.set('tab', c.id);
+                  nav(url.pathname + url.search, { replaceState: true });
+                }}
                 type="button"
               >
                 {c.heading}
