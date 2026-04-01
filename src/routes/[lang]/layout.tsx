@@ -247,37 +247,6 @@ export type SanityServiceCard = {
   bullets: { text: string }[];
 };
 
-export const useServicesFromSanity = routeLoader$<SanityServiceCard[]>(
-  async ({ params }) => {
-    const lang = (params.lang as Lang) || 'ru';
 
-    const items = await sanityClient.fetch<any[]>(
-      `*[_type=="service" && defined(slug.current)]
-        | order(_createdAt desc)[0...30]{
-          "slug": slug.current,
-
-          "tag": homeTag,
-          "title": coalesce(homeTitle[$lang], homeTitle.ru, ""),
-          "link":  coalesce(homeLink, ""),
-
-          "servicesCta": coalesce(homeServicesCta[$lang], homeServicesCta.ru, ""),
-
-          "bullets": (homeBullets[]{
-            "text": coalesce(text[$lang], text.ru, "")
-          })
-        }`,
-      { lang }
-    );
-
-    return (items ?? []).map((s) => ({
-      slug: s?.slug ?? '',
-      tag: s?.tag ?? '',
-      title: s?.title ?? '',
-      link: s?.link ?? '',
-      servicesCta: s?.servicesCta ?? '',
-      bullets: Array.isArray(s?.bullets) ? s.bullets : [],
-    }));
-  }
-);
 
 export default component$(() => <Slot />);
