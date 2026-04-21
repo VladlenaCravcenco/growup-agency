@@ -3,7 +3,13 @@ import { isDev } from "@builder.io/qwik";
 import { QwikCityProvider, RouterOutlet } from "@builder.io/qwik-city";
 import { RouterHead } from "./components/router-head/router-head";
 import { CookieBanner } from "./components/layout/CookieBanner"; 
+import { inject } from '@vercel/analytics';
 import './styles/cookie-banner.css';
+
+// Initialize Vercel Web Analytics
+inject({
+  mode: isDev ? 'development' : 'production',
+});
 
 
 export default component$(() => {
